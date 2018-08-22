@@ -1,0 +1,54 @@
+version: '3.1'
+
+networks:
+  egc-studio-network:
+    driver: bridge
+
+services:
+  haproxy:
+    build: ./haproxy
+    links:
+      - client
+      - server
+    ports:
+      - "8080:80"
+    networks:
+      - egc-studio-network
+  db:
+    build: ./db
+    volumes:
+      - ./db/mongodb:/var/lib/mongodb
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGODB_USERNAME=${MONGODB_USERNAME}
+      - MONGODB_PASSWORD=${MONGODB_PASSWORD}
+      - MONGODB_DATABASE=${MONGODB_DATABASE}
+      - MONGODB_ROOT_USERNAME=${MONGODB_ROOT_USERNAME}
+      - MONGODB_ROOT_PASSWORD=${MONGODB_ROOT_PASSWORD}
+    networks:
+      - egc-studio-network
+
+  server:
+    build:
+      context: ./server
+      args:
+        app_env: ${APP_ENV}
+    container_name: egc_studio_server
+    volumes:
+      - ./server:/var/www/server
+    links:
+      - db
+    networks:
+      - egc-studio-network
+
+  client:
+    build:
+      context: ./client
+      args:
+        app_env: ${APP_ENV}
+    container_name: egc_studio_client
+    volumes:
+      - ./client/src:/client/src
+    networks:
+      - egc-studio-network
