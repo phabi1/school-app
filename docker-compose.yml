@@ -27,7 +27,7 @@ services:
       - MONGODB_ROOT_USERNAME=${MONGODB_ROOT_USERNAME}
       - MONGODB_ROOT_PASSWORD=${MONGODB_ROOT_PASSWORD}
     networks:
-      - schoolnetwork
+      - app-network
 
   server:
     build:
@@ -40,7 +40,7 @@ services:
     links:
       - db
     networks:
-      - schoolnetwork
+      - app-network
 
   client:
     build:
@@ -51,4 +51,4 @@ services:
     volumes:
       - ./client/src:/client/src
     networks:
-      - schoolnetwork
+      - app-network
