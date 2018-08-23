@@ -12,12 +12,18 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "glue": "^5.0.0",
     "hapi": "^17.5.3",
+    "hapi-auth-jwt2": "^8.1.0",
+    "hapi-mongoose": "^2.0.0",
+    "hapi-router": "^4.0.0",
     "mongoose": "^5.2.9",
     "nconf": "^0.10.0"
   },
   "devDependencies": {
+    "@types/glue": "^5.0.3",
     "@types/hapi": "^17.0.18",
+    "@types/hapi-auth-jwt2": "^8.0.1",
     "@types/mongoose": "^5.2.6",
     "@types/nconf": "^0.0.37"
   }
