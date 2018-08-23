@@ -17,5 +17,4 @@ COPY . .
 
 EXPOSE 3000
 
-#CMD ["pm2","start", "pm2process.json", "--no-daemon"]
 CMD ["npm", "start"]
