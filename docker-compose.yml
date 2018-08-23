@@ -36,7 +36,7 @@ services:
         app_env: ${APP_ENV}
     container_name: server
     volumes:
-      - ./server:/var/www/server
+      - ./server/src:/server/src
     links:
       - db
     networks:
