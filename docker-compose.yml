@@ -1,7 +1,7 @@
 version: '3.1'
 
 networks:
-  egc-studio-network:
+  app-network:
     driver: bridge
 
 services:
@@ -13,7 +13,7 @@ services:
     ports:
       - "8080:80"
     networks:
-      - egc-studio-network
+      - app-network
   db:
     build: ./db
     volumes:
@@ -27,28 +27,28 @@ services:
       - MONGODB_ROOT_USERNAME=${MONGODB_ROOT_USERNAME}
       - MONGODB_ROOT_PASSWORD=${MONGODB_ROOT_PASSWORD}
     networks:
-      - egc-studio-network
+      - schoolnetwork
 
   server:
     build:
       context: ./server
       args:
         app_env: ${APP_ENV}
-    container_name: egc_studio_server
+    container_name: server
     volumes:
       - ./server:/var/www/server
     links:
       - db
     networks:
-      - egc-studio-network
+      - schoolnetwork
 
   client:
     build:
       context: ./client
       args:
         app_env: ${APP_ENV}
-    container_name: egc_studio_client
+    container_name: client
     volumes:
       - ./client/src:/client/src
     networks:
-      - egc-studio-network
+      - schoolnetwork
