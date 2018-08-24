@@ -1,0 +1,18 @@
+<form [formGroup]="form" (ngSubmit)="generate()" fxLayout="column" fxLayoutAlign="start start">
+  <div fxLayout="row" fxLayoutGap="16px">
+    <mat-form-field>
+      <mat-select placeholder="Month" formControlName="month" required>
+        <mat-option *ngFor="let month of monthOptions" [value]="month.data">
+          {{month.label}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Year" formControlName="year" required>
+    </mat-form-field>
+  </div>
+  <mat-form-field>
+    <input matInput placeholder="Out days" formControlName="outDays">
+  </mat-form-field>
+  <button mat-raised-button [disabled]="form.invalid">Generate</button>
+</form>
