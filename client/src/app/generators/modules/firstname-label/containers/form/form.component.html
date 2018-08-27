@@ -1,1 +1,13 @@
-<button mat-raised-button (click)="generate()">Generate</button>
+<form fxLayout="column" fxLayoutAlign="start start" [formGroup]="form" (ngSubmit)="generate()">
+  <mat-radio-group formControlName="layout">
+    <mat-radio-button *ngFor="let l of layouts" [value]="l.data">{{ l.label }}</mat-radio-button>
+  </mat-radio-group>
+  <mat-form-field>
+    <mat-select placeholder="Alignment" formControlName="align">
+      <mat-option *ngFor="let align of alignments" [value]="align">
+        {{ align}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <button mat-raised-button color="accent">Generate</button>
+</form>

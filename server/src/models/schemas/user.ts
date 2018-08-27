@@ -1,5 +1,5 @@
-import { Schema, SchemaTypes } from "mongoose";
 import * as Crypto from "crypto";
+import { Schema, SchemaTypes } from "mongoose";
 import { IUserDocument } from "../user";
 
 export const userSchema = new Schema({

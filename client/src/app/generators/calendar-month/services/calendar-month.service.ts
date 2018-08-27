@@ -13,13 +13,26 @@ export class CalendarMonthService {
   public generate(data: {
     month: number,
     year: number,
+    outDays: string
   }) {
 
     _.assign(pdfMake, { vfs: pdfFonts.pdfMake.vfs });
+    _.assign(pdfMake, {
+      fonts: {
+        Roboto: {
+          normal: 'Roboto-Regular.ttf'
+        },
+        ScriptCol: {
+          normal: 'SCRIPTCO.TTF'
+        }
+      }
+    });
 
     const styles: any = {
       number: {
-        fontSize: 74,
+        fontSize: 92,
+        margin: [0, 20, 0, 0],
+        font: 'ScriptCol',
         alignment: 'center',
       },
       day: {
@@ -28,10 +41,8 @@ export class CalendarMonthService {
       }
     };
 
-    styles.out_number = { ...styles.number, color: 'red' };
-    styles.out_day = { ...styles.day, color: 'red' };
-    styles.in_number = { ...styles.number, color: 'green' };
-    styles.in_day = { ...styles.day, color: 'green' };
+    styles.out = { color: 'red' };
+    styles.in = { color: 'green' };
 
     const maxColumns = 4;
 
@@ -42,9 +53,21 @@ export class CalendarMonthService {
     const nbDays = date.daysInMonth();
     const outDays = [0, 3, 6];
 
+    const f = [];
+    const segments = data.outDays.split(',');
+    segments.forEach((s) => {
+      // tslint:disable-next-line:prefer-const
+      let [start, end] = s.split('-');
+      end = end || start;
+      // tslint:disable-next-line:radix
+      for (let t = parseInt(start); t <= parseInt(end); t++) {
+        f.push(t);
+      }
+    });
+
     const widths = [];
     for (let index = 0; index < maxColumns; index++) {
-      widths.push('*');
+      widths.push(170);
     }
 
     const body = [];
@@ -59,13 +82,16 @@ export class CalendarMonthService {
 
       date = date.date(day + 1);
 
-      const dayName = date.format('dddd');
+      const dayName = date.format('dddd').toUpperCase();
 
-      const isOutDay = outDays.includes(date.day());
+      let isOutDay = outDays.includes(date.day());
+      if (f.includes(date.dates())) {
+        isOutDay = true;
+      }
 
       const stack = [
-        { text: day + 1, verticalAlign: 'center', style: isOutDay ? 'out_number' : 'in_number' },
-        { text: dayName, style: isOutDay ? 'out_day' : 'in_day' }
+        { text: dayName, style: 'day' },
+        { text: day + 1, verticalAlign: 'center', style: ['number', isOutDay ? 'out' : 'in'] },
       ];
 
       row.push({ stack, verticalAlign: 'center' });

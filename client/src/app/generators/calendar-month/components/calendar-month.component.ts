@@ -32,7 +32,8 @@ export class CalendarMonthComponent implements OnInit {
 
     this.calendarMonthService.generate({
       month: values.month,
-      year: values.year
+      year: values.year,
+      outDays: values.outDays,
     });
   }
 
