@@ -9,6 +9,8 @@ export interface IUserDocument extends Document {
   name: string;
   email: string;
   pass: string;
+  salt: string;
+  comparePassword(password: string): boolean;
 }
 
 export interface IUserModel extends Model<IUserDocument> { }

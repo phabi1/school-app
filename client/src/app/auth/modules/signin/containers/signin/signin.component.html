@@ -1,0 +1,13 @@
+<div>
+  <h1>Sign in</h1>
+  <form fxLayout="column" fxLayoutAlign="start start" [formGroup]="form" (ngSubmit)="signin()">
+    <mat-form-field>
+      <input matInput formControlName="email" placeholder="Email" required>
+    </mat-form-field>
+    <mat-form-field>
+      <input type="password" matInput formControlName="password" placeholder="Password" required>
+    </mat-form-field>
+    <button *ngIf="!(processing$ | async)" mat-raised-button color="accent" [disabled]="form.invalid">Signin</button>
+    <mat-spinner *ngIf="processing$ | async" diameter="32" color="accent"></mat-spinner>
+  </form>
+</div>

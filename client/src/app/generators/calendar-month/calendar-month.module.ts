@@ -3,9 +3,9 @@ import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule, MatFormFieldModule, MatInputModule, MatSelectModule } from '@angular/material';
-import { CalendarMonthComponent } from './calendar-month.component';
 import { CalendarMonthRoutingModule } from './calendar-month.routing';
-import { CalendarMonthService } from './calendar-month.service';
+import { CalendarMonthComponent } from './components/calendar-month.component';
+import { CalendarMonthService } from './services/calendar-month.service';
 
 @NgModule({
   imports: [

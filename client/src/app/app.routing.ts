@@ -3,7 +3,21 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'generators', loadChildren: './generators/generators.routing#GeneratorRoutingModule'
+    path: '',
+    redirectTo: '/home',
+    pathMatch: 'full',
+  },
+  {
+    path: 'home',
+    loadChildren: './home/home.module#HomeModule'
+  },
+  {
+    path: 'auth',
+    loadChildren: './auth/auth.routing#AuthRoutingModule'
+  },
+  {
+    path: 'generators',
+    loadChildren: './generators/generators.routing#GeneratorRoutingModule'
   }
 ];
 

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { CalendarMonthComponent } from './calendar-month.component';
+import { CalendarMonthComponent } from './components/calendar-month.component';
 
 const routes: Routes = [
   { path: '', component: CalendarMonthComponent }
