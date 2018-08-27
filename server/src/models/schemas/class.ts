@@ -15,8 +15,19 @@ const studentSchema = new Schema({
         default: 'UNKNOW'
     },
     level: {
-      type: SchemaTypes.ObjectId,
-      ref: "Level"
+        type: SchemaTypes.ObjectId,
+        ref: "Level"
+    }
+});
+
+const groupSchema = new Schema({
+    name: {
+        type: SchemaTypes.String,
+        required: true,
+    },
+    level: {
+        type: SchemaTypes.ObjectId,
+        ref: "Level"
     }
 });
 
@@ -26,6 +37,9 @@ export const classSchema = new Schema({
             type: SchemaTypes.ObjectId,
             ref: "Level"
         }
+    ],
+    groups: [
+        groupSchema,
     ],
     students: [
         studentSchema
