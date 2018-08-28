@@ -35,3 +35,7 @@ export function sortByFirstname (a: Student, b: Student) {
     return 0;
   }
 }
+
+export function <formatFirstname (firstname: string) {
+  return firstname;
+}

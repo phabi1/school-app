@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { PdfCreatorService, writeTextRotate } from '../../../../core/services/pdf-creator.service';
-import { sortByFirstname, StudentsService } from '../../../../core/services/students.service';
+import { sortByFirstname, StudentsService, formatFirstname } from '../../../../core/services/students.service';
 
 @Injectable()
 export class AttendanceGridService {
@@ -48,7 +48,7 @@ export class AttendanceGridService {
 
         students.forEach((student) => {
           const row = [];
-          row.push({ text: student.firstname, margin: [2, 5], fontSize: 10});
+          row.push({ text: formatFirstname(student.firstname), margin: [2, 5], fontSize: 10});
 
           for (let index = 0; index < maxColumns; index++) {
             row.push('');
