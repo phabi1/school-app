@@ -6,12 +6,14 @@ import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { Student } from '../../../../classes/modules/students/models/student.model';
 import { StudentsService } from '../../../../core/services/students.service';
+import { PdfCreatorService } from '../../../../core/services/pdf-creator.service';
 
 @Injectable()
 export class FirstnameLabelService {
 
   constructor(
-    private studentsService: StudentsService,
+    private _pdfCreator: PdfCreatorService,
+    private _studentsService: StudentsService,
   ) { }
 
   generate(options?: {
@@ -29,24 +31,28 @@ export class FirstnameLabelService {
   }
 
   private getStudents(): Observable<Student[]> {
-    return this.studentsService.getStudents().pipe(
+    return this._studentsService.getStudents().pipe(
       map((students) => [...students, ...students])
     );
   }
 
   private selectLayout(layout: string, students: any[], options: any) {
+    let definition: any;
     switch (layout) {
       case 'layout1':
-        return this.renderLayout1(students, options);
+        definition = this.renderLayout1(students, options);
+        break;
       case 'layout2':
-        return this.renderLayout2(students, options);
-
+        definition = this.renderLayout2(students, options);
+        break;
       default:
         break;
     }
+
+    return this._pdfCreator.create(definition).open();
   }
 
-  private renderLayout1(students: any[], options: { align: string }) {
+  private renderLayout1(students: any[], options: { align: string }): any {
 
     const maxColumns = 2;
 
@@ -100,11 +106,10 @@ export class FirstnameLabelService {
         }
       ]
     };
-
-    pdfMake.createPdf(docDefinitions).open();
+    return docDefinitions;
   }
 
-  private renderLayout2(students: any[], options: { align: string }) {
+  private renderLayout2(students: any[], options: { align: string }): any {
     const maxColumns = 3;
 
     const body = [];
@@ -161,11 +166,12 @@ export class FirstnameLabelService {
             dontBreakRows: true,
             widths,
             body
-          }
+          },
+          // layout: 'noBorders'
         }
       ]
     };
 
-    pdfMake.createPdf(docDefinitions).open();
+    return docDefinitions;
   }
 }

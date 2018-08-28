@@ -17,11 +17,15 @@ const routes: Routes = [
   },
   {
     path: 'auth',
-    loadChildren: './auth/auth.routing#AuthRoutingModule'
+    loadChildren: './auth/auth.routing#AuthRoutingModule',
+  },
+  {
+    path: 'tools',
+    loadChildren: './apps/tools/tools.module#ToolsModule',
   },
   {
     path: 'generators',
-    loadChildren: './generators/generators.routing#GeneratorRoutingModule'
+    loadChildren: './generators/generators.routing#GeneratorRoutingModule',
   }
 ];
 

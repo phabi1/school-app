@@ -6,6 +6,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../../environments/environment';
 import * as fromStore from './reducers';
 import { AuthStoreModule } from 'ngrx-auth-store';
+import * as fromProfile from './reducers/profile.reducer';
+import { ProfileEffects } from './effects/profile.effects';
 
 @NgModule({
   imports: [
@@ -16,6 +18,8 @@ import { AuthStoreModule } from 'ngrx-auth-store';
       signInUrl: '/auth/signin'
     }),
     StoreDevtoolsModule.instrument({ logOnly: !environment.production }),
+    StoreModule.forFeature('profile', fromProfile.reducer),
+    EffectsModule.forFeature([ProfileEffects]),
   ],
   declarations: []
 })

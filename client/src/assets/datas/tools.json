@@ -1,0 +1,20 @@
+{
+  "tools": [
+    {
+      "title": "Etiquette prénom",
+      "url": "/generators/firstname-label"
+    },
+    {
+      "title": "Grille de présence",
+      "url": "/generators/attendance-grid"
+    },
+    {
+      "title": "Grille d'évaluation",
+      "url": "/generators/evaluate-grid"
+    },
+    {
+      "title": "Jours du mois",
+      "url": "/generators/calendar-month"
+    }
+  ]
+}

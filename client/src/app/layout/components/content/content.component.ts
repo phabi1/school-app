@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
-  selector: 'app-content',
-  templateUrl: './content.component.html',
-  styleUrls: ['./content.component.scss']
+    selector     : 'content',
+    templateUrl  : './content.component.html',
+    styleUrls    : ['./content.component.scss'],
+    encapsulation: ViewEncapsulation.None
 })
-export class ContentComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+export class ContentComponent
+{
+    /**
+     * Constructor
+     */
+    constructor()
+    {
+    }
 }

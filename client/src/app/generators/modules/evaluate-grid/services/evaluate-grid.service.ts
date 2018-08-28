@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
-import * as _ from 'lodash';
-import * as pdfMake from 'pdfmake/build/pdfmake';
-import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { StudentsService } from '../../../../core/services/students.service';
+import { PdfCreatorService } from '../../../../core/services/pdf-creator.service';
+import { StudentsService, sortByFirstname } from '../../../../core/services/students.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,25 +10,24 @@ import { StudentsService } from '../../../../core/services/students.service';
 export class EvaluateGridService {
 
   constructor(
-    private studentsService: StudentsService
+    private _pdfCreator: PdfCreatorService,
+    private _studentsService: StudentsService
   ) { }
 
   public generate(): Observable<boolean> {
 
-    _.assign(pdfMake, { vfs: pdfFonts.pdfMake.vfs });
-
-    return this.studentsService.getStudents()
+    return this._studentsService.getStudents()
       .pipe(
         map((students) => {
 
-          students = students.sort((a, b) => {
-            if (a.firstname < b.firstname) {
-              return -1;
-            } else if (a.firstname > b.firstname) {
-              return 1;
-            } else {
-              return 0;
+          students = students.sort(sortByFirstname);
+
+          const levels = {};
+          students.forEach((student) => {
+            if (!levels[student.level]) {
+              levels[student.level] = { students: [] };
             }
+            levels[student.level].students.push(student);
           });
 
           const maxColumns = 10;
@@ -40,7 +37,8 @@ export class EvaluateGridService {
             widths.push(20);
           }
 
-          const body = [];
+          const content = [];
+
 
           const header = [
             ''
@@ -48,36 +46,47 @@ export class EvaluateGridService {
           for (let j = 0; j < maxColumns; j++) {
             header.push('');
           }
-          body.push(header);
 
+          for (const key in levels) {
+            if (levels.hasOwnProperty(key)) {
+              const level = levels[key];
 
-          for (const student of students) {
-            const row: any[] = [
-              { text: student.firstname, margin: [0, 5] }
-            ];
-            for (let j = 0; j < maxColumns; j++) {
-              row.push('');
+              const body = [];
+
+              body.push(header);
+
+              for (const student of level.students) {
+                const row: any[] = [
+                  { text: student.firstname, margin: [0, 5] }
+                ];
+                for (let j = 0; j < maxColumns; j++) {
+                  row.push('');
+                }
+                body.push(row);
+              }
+
+              content.push([
+                { text: 'Grille d\'évaluation' },
+                {
+                  table: {
+                    headerRows: 1,
+                    heights: (index) => index === 0 ? 50 : 'auto',
+                    widths,
+                    body,
+                  },
+                  pageBreak: 'after'
+                }
+              ]);
             }
-            body.push(row);
           }
 
           const docDefinitions: any = {
             pageSize: 'A4',
             pageOrientation: 'portrait',
-            content: [
-              { text: 'Grille d\'évaluation' },
-              {
-                table: {
-                  headerRows: 1,
-                  heights: (index) => index === 0 ? 50 : 'auto',
-                  widths,
-                  body
-                }
-              }
-            ]
+            content,
           };
 
-          pdfMake.createPdf(docDefinitions).open();
+          this._pdfCreator.create(docDefinitions).open();
 
           return true;
         })

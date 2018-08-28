@@ -1,0 +1,6 @@
+<mat-nav-list>
+  <a mat-list-item *ngFor="let tool of tools" [routerLink]="tool.url">
+    <h3 matLine>{{ tool.title }}</h3>
+    <div matLine class="secondary-text">{{ tool.description }}</div>
+  </a>
+</mat-nav-list>
