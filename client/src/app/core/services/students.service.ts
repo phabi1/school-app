@@ -26,7 +26,7 @@ export class StudentsService {
   }
 }
 
-export function sortByFirstname (a: Student, b: Student) {
+export function sortByFirstname(a: Student, b: Student): number {
   if (a.firstname < b.firstname) {
     return -1;
   } else if (a.firstname > b.firstname) {
@@ -36,6 +36,8 @@ export function sortByFirstname (a: Student, b: Student) {
   }
 }
 
-export function <formatFirstname (firstname: string) {
-  return firstname;
+export function formatFirstname(str: string): string {
+  return str.replace(/\w\S*/g, function (txt) {
+    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+  });
 }

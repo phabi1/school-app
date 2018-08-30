@@ -1,6 +1,21 @@
-<mat-nav-list>
-  <a mat-list-item *ngFor="let tool of tools" [routerLink]="tool.url">
-    <h3 matLine>{{ tool.title }}</h3>
-    <div matLine class="secondary-text">{{ tool.description }}</div>
-  </a>
-</mat-nav-list>
+<div class="page-layout carded fullwidth" fusePerfectScrollbar>
+  <div class="top-bg accent"></div>
+  <div class="center">
+    <div class="header accent p-24" fxLayout="row" fxLayoutAlign="start center">
+      <h2 class="m-0">Outils</h2>
+    </div>
+    <div class="content-card">
+      <div class="toolbar px-24 py-8">
+        Sélectionner un outil
+      </div>
+      <div class="content p-24">
+        <mat-nav-list>
+          <a mat-list-item *ngFor="let tool of tools" [routerLink]="tool.url">
+            <h3 matLine>{{ tool.title }}</h3>
+            <div matLine class="secondary-text">{{ tool.description }}</div>
+          </a>
+        </mat-nav-list>
+      </div>
+    </div>
+  </div>
+</div>

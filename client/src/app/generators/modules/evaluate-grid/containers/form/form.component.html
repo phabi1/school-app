@@ -1,3 +1,14 @@
-<div class="page-layout fullwidth p-24" fusePerfectScrollbar>
-  <button mat-raised-button (click)="generate()">Generate</button>
+<div class="page-layout carded fullwidth" fusePerfectScrollbar>
+  <div class="top-bg accent"></div>
+  <div class="center">
+    <div class="header accent p-24" fxLayout="row" fxLayoutAlign="start center">
+      <h2 class="m-0">Grille d'évaluation</h2>
+    </div>
+    <div class="content-card">
+      <div class="toolbar px-24 py-8"></div>
+      <div class="content p-24">
+        <button mat-raised-button color="accent" (click)="generate()">Generate</button>
+      </div>
+    </div>
+  </div>
 </div>

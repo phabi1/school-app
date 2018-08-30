@@ -16,7 +16,7 @@ export class AttendanceGridService {
       map((students) => {
 
         const days = ['lundi', 'mardi', 'jeudi', 'vendredi'];
-        const types = ['centre', 'présence', 'cantine', 'gouter', 'centre'];
+        const types = ['présence', 'cantine', 'gouter'];
 
         const maxColumns = days.length * types.length;
 
@@ -24,7 +24,7 @@ export class AttendanceGridService {
 
         const widths: any[] = ['*'];
         for (let index = 0; index < maxColumns; index++) {
-          widths.push(10);
+          widths.push(20);
         }
 
         const body = [];
