@@ -2,13 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-
-export interface Student {
-  id: string;
-  firstname: string;
-  lastname: string;
-  level: string;
-}
+import { Student } from '../models/student.model';
+import { ClassService } from './class.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,13 +11,11 @@ export interface Student {
 export class StudentsService {
 
   constructor(
-    private httpClient: HttpClient,
+    private _classService: ClassService,
   ) { }
 
   getStudents(): Observable<Student[]> {
-    return this.httpClient.get<any>('/assets/datas/class.json').pipe(
-      map(res => res.students)
-    );
+    return this._classService.getStudents();
   }
 }
 

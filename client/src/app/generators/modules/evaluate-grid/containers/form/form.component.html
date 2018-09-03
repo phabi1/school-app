@@ -7,7 +7,12 @@
     <div class="content-card">
       <div class="toolbar px-24 py-8"></div>
       <div class="content p-24">
-        <button mat-raised-button color="accent" (click)="generate()">Generate</button>
+        <form [formGroup]="form" (ngSubmit)="generate()" fxLayout="column" fxLayoutAlign="start start">
+          <mat-radio-group class="pb-8" formControlName="layout">
+            <mat-radio-button *ngFor="let layout of layoutOptions$ | async" [value]="layout.data">{{ layout.label }}</mat-radio-button>
+          </mat-radio-group>
+          <button mat-raised-button color="accent">Generate</button>
+        </form>
       </div>
     </div>
   </div>

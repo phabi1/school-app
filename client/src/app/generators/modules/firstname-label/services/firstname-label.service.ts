@@ -7,43 +7,63 @@ import { map, tap } from 'rxjs/operators';
 import { Student } from '../../../../classes/modules/students/models/student.model';
 import { StudentsService } from '../../../../core/services/students.service';
 import { PdfCreatorService } from '../../../../core/services/pdf-creator.service';
+import { ClassService } from '../../../../core/services/class.service';
+import { Level } from '../../../../core/models/level.model';
 
 @Injectable()
 export class FirstnameLabelService {
 
   constructor(
+    private _classService: ClassService,
     private _pdfCreator: PdfCreatorService,
     private _studentsService: StudentsService,
   ) { }
 
+  getLevels(): Observable<Level[]> {
+    return this._classService.getLevels();
+  }
+
   generate(options?: {
+    students: string[],
     layout: string,
     align?: 'center' | 'left' | 'right',
   }): Observable<boolean> {
 
-    _.assign(pdfMake, { vfs: pdfFonts.pdfMake.vfs });
-
-    return this.getStudents().pipe(
+    return this.getNames(options.students).pipe(
       tap((students) => {
         this.selectLayout(options.layout, students, options);
       }),
       map(() => true));
   }
 
-  private getStudents(): Observable<Student[]> {
+  private getNames(students: string[]): Observable<string[]> {
     return this._studentsService.getStudents().pipe(
-      map((students) => [...students, ...students])
+      map((res) => {
+
+        const allow = students.length === 0;
+
+        const names = [];
+        res.forEach((el) => {
+          if (allow || students.includes(el.id)) {
+            names.push(el.firstname);
+            if (el.shortname) {
+              names.push(el.shortname);
+            }
+          }
+        });
+        return names;
+      })
     );
   }
 
-  private selectLayout(layout: string, students: any[], options: any) {
+  private selectLayout(layout: string, names: string[], options: any) {
     let definition: any;
     switch (layout) {
       case 'layout1':
-        definition = this.renderLayout1(students, options);
+        definition = this.renderLayout1(names, options);
         break;
       case 'layout2':
-        definition = this.renderLayout2(students, options);
+        definition = this.renderLayout2(names, options);
         break;
       default:
         break;
@@ -52,28 +72,28 @@ export class FirstnameLabelService {
     return this._pdfCreator.create(definition).open();
   }
 
-  private renderLayout1(students: any[], options: { align: string }): any {
+  private renderLayout1(names: string[], options: { align: string }): any {
 
     const maxColumns = 2;
 
     const body = [];
     let row = null;
-    for (let index = 0; index < students.length; index++) {
+    for (let index = 0; index < names.length; index++) {
 
       if (!row) {
         row = [];
       }
 
-      const student = students[index];
+      const name = names[index];
 
       let fontSize = 54;
       let margin = [0, 16];
-      if (student.firstname.length > 10) {
+      if (name.length > 10) {
         fontSize = 36;
         margin = [0, 25];
       }
 
-      row.push({ text: student.firstname.toUpperCase(), fontSize, margin, alignment: options.align });
+      row.push({ text: name.toUpperCase(), fontSize, margin, alignment: options.align });
 
       if ((index + 1) % maxColumns === 0) {
         body.push(row);
@@ -109,23 +129,23 @@ export class FirstnameLabelService {
     return docDefinitions;
   }
 
-  private renderLayout2(students: any[], options: { align: string }): any {
+  private renderLayout2(names: string[], options: { align: string }): any {
     const maxColumns = 3;
 
     const body = [];
     let row = null;
-    for (let index = 0; index < students.length; index++) {
+    for (let index = 0; index < names.length; index++) {
 
       if (!row) {
         row = [];
       }
 
-      const student = students[index];
+      const name = names[index];
 
       let fontSize = 40;
       let margin = [0, 18];
 
-      const length = student.firstname.length;
+      const length = name.length;
       if (length >= 10) {
         fontSize = 20;
         margin = [0, 36];
@@ -137,7 +157,7 @@ export class FirstnameLabelService {
         margin = [0, 24];
       }
 
-      row.push({ text: student.firstname.toUpperCase(), fontSize, margin, alignment: options.align });
+      row.push({ text: name.toUpperCase(), fontSize, margin, alignment: options.align });
 
       if ((index + 1) % maxColumns === 0) {
         body.push(row);
@@ -167,7 +187,7 @@ export class FirstnameLabelService {
             widths,
             body
           },
-          // layout: 'noBorders'
+          layout: 'noBorders'
         }
       ]
     };

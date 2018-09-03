@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { PdfCreatorService, writeTextRotate } from '../../../../core/services/pdf-creator.service';
 import { sortByFirstname, StudentsService, formatFirstname } from '../../../../core/services/students.service';
+import { Student } from '../../../../classes/modules/students/models/student.model';
 
 @Injectable()
 export class AttendanceGridService {
@@ -21,6 +22,14 @@ export class AttendanceGridService {
         const maxColumns = days.length * types.length;
 
         students = students.sort(sortByFirstname);
+
+        const levels: { [key: string]: Student[] } = {};
+        students.forEach((student) => {
+          if (!levels[student.level]) {
+            levels[student.level] = [];
+          }
+          levels[student.level].push(student);
+        });
 
         const widths: any[] = ['*'];
         for (let index = 0; index < maxColumns; index++) {
@@ -46,16 +55,31 @@ export class AttendanceGridService {
         body.push(header1);
         body.push(header2);
 
-        students.forEach((student) => {
-          const row = [];
-          row.push({ text: formatFirstname(student.firstname), margin: [2, 5], fontSize: 10});
+        let first = true;
+        for (const key in levels) {
+          if (levels.hasOwnProperty(key)) {
+            const items = levels[key];
+            items.forEach((student) => {
+              const row = [];
 
-          for (let index = 0; index < maxColumns; index++) {
-            row.push('');
+              row.push({ text: formatFirstname(student.firstname), margin: [2, 5], fontSize: 12 });
+
+              for (let index = 0; index < maxColumns; index++) {
+                row.push('');
+              }
+
+              body.push(row);
+            });
+            if (first) {
+              first = false;
+              const separator = [];
+              for (let index = 0; index < maxColumns + 1; index++) {
+                separator.push('');
+              }
+              body.push(separator);
+            }
           }
-
-          body.push(row);
-        });
+        }
 
         const docDefinition = {
           pageSize: 'A4',
@@ -71,19 +95,6 @@ export class AttendanceGridService {
               }
             }
           ],
-          styles: {
-            header: {
-              fontSize: 18,
-              bold: true,
-              margin: [0, 0, 0, 20],
-              alignment: 'center'
-            },
-            subheader: {
-              fontSize: 16,
-              bold: true,
-              margin: [0, 10, 0, 5]
-            },
-          },
         };
         this._pdfCreator.create(docDefinition).open();
       })

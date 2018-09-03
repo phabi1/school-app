@@ -28,6 +28,19 @@ export class PdfCreatorService {
   }
 
   public create(definition: any): pdfMake.TCreatedPdf {
+    definition.styles = {
+      header: {
+        fontSize: 18,
+        bold: true,
+        margin: [0, 0, 0, 20],
+        alignment: 'center'
+      },
+      subheader: {
+        fontSize: 16,
+        bold: true,
+        margin: [0, 10, 0, 5]
+      },
+    };
     return pdfMake.createPdf(definition);
   }
 }

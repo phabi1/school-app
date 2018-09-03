@@ -1,118 +1,154 @@
 {
+  "levels": [
+    {
+      "id": "PS",
+      "name": "Petite section"
+    },
+    {
+      "id": "MS",
+      "name": "Moyenne section"
+    }
+  ],
   "students": [
     {
       "id": "1",
-      "firstname": "varddan",
+      "firstname": "vardan",
       "lastname": "atachian",
-      "level": "PS"
+      "level": "PS",
+      "birthday": "10-11-2015"
     },
     {
       "id": "2",
-      "firstname": "mariame",
+      "firstname": "sonna",
       "lastname": "bah",
-      "level": "PS"
+      "level": "PS",
+      "birthday": "05-03-2015"
     },
     {
       "id": "3",
-      "firstname": "adam mohand",
+      "firstname": "adam",
       "lastname": "belbachir",
-      "level": "PS"
+      "level": "PS",
+      "birthday": "07-11-2015"
     },
     {
       "id": "4",
       "firstname": "enzo",
       "lastname": "carvalho-da silva",
-      "level": "PS"
+      "level": "PS",
+      "birthday": "23-04-2015"
     },
     {
       "id": "5",
       "firstname": "ines",
       "lastname": "dalo-bekanga",
-      "level": "PS"
+      "level": "PS",
+      "birthday": "09-06-2015"
     },
     {
       "id": "6",
       "firstname": "curtis",
       "lastname": "david",
-      "level": "PS"
+      "level": "PS",
+      "birthday": "20-08-2015"
     },
     {
       "id": "7",
       "firstname": "assa",
       "lastname": "gassama",
-      "level": "PS"
+      "level": "PS",
+      "birthday": "29-01-2015"
     },
     {
       "id": "8",
       "firstname": "emilia",
       "lastname": "lihet",
-      "level": "PS"
+      "level": "PS",
+      "birthday": "22-07-2015"
     },
     {
       "id": "9",
       "firstname": "mehola",
       "lastname": "ndungidi",
-      "level": "PS"
+      "level": "PS",
+      "birthday": "23-03-2015"
     },
     {
       "id": "10",
       "firstname": "lilia",
       "lastname": "salame al barche",
-      "level": "PS"
+      "level": "PS",
+      "birthday": "04-08-2015"
     },
     {
       "id": "11",
-      "firstname": "said",
+      "firstname": "mounir",
       "lastname": "sekhri",
-      "level": "PS"
+      "level": "PS",
+      "birthday": "19-02-2015"
     },
     {
       "id": "12",
       "firstname": "christian",
       "lastname": "takfor",
-      "level": "PS"
+      "level": "PS",
+      "birthday": "20-02-2015"
     },
     {
       "id": "13",
       "firstname": "fatima",
       "lastname": "touil",
-      "level": "PS"
-    }
-    , {
+      "level": "PS",
+      "birthday": "01-04-2015"
+    },
+    {
       "id": "14",
       "firstname": "taline",
       "lastname": "barco-dos santos",
-      "level": "MS"
+      "level": "MS",
+      "birthday": "08-12-2014"
     },
     {
       "id": "15",
       "firstname": "lyana",
       "lastname": "duarte",
-      "level": "MS"
+      "level": "MS",
+      "birthday": "28-03-2014"
     },
     {
       "id": "16",
       "firstname": "remon",
       "lastname": "gobran",
-      "level": "MS"
+      "level": "MS",
+      "birthday": "07-01-2014"
     },
     {
       "id": "17",
       "firstname": "antoni",
       "lastname": "matlosz",
-      "level": "MS"
+      "level": "MS",
+      "birthday": "05-03-2014"
     },
     {
       "id": "18",
       "firstname": "evan",
       "lastname": "moret",
-      "level": "MS"
+      "level": "MS",
+      "birthday": "29-03-2014"
     },
     {
       "id": "19",
       "firstname": "andrii",
       "lastname": "vaipan",
-      "level": "MS"
+      "level": "MS",
+      "birthday": "24-11-2014"
+    },
+    {
+      "id": "20",
+      "firstname": "kais",
+      "lastname": "kraiem",
+      "level": "MS",
+      "birthday": "07-05-2014"
     }
   ]
 }
