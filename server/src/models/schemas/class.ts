@@ -11,14 +11,14 @@ const studentSchema = new Schema({
     },
     sex: {
         type: SchemaTypes.String,
-        enum: ['MALE', 'FEMALE', 'UNKNOW'],
-        default: 'UNKNOW'
+        enum: ["MALE", "FEMALE", "UNKNOW"],
+        default: "UNKNOW",
     },
     level: {
         type: SchemaTypes.ObjectId,
-        ref: "Level"
-    }
-});
+        ref: "Level",
+    },
+}, { timestamps: true, toJSON: { virtuals: true } });
 
 const groupSchema = new Schema({
     name: {
@@ -27,21 +27,21 @@ const groupSchema = new Schema({
     },
     level: {
         type: SchemaTypes.ObjectId,
-        ref: "Level"
-    }
+        ref: "Level",
+    },
 });
 
 export const classSchema = new Schema({
     levels: [
         {
             type: SchemaTypes.ObjectId,
-            ref: "Level"
-        }
+            ref: "Level",
+        },
     ],
     groups: [
         groupSchema,
     ],
     students: [
-        studentSchema
-    ]
-});
+        studentSchema,
+    ],
+}, { timestamps: true, toJSON: { virtuals: true } });

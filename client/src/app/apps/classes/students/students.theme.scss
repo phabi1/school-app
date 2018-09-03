@@ -1,0 +1,13 @@
+@mixin classes-students-theme($theme) {
+  $foreground: map-get($theme, foreground);
+
+  app-classes-students-list {
+    border-right-color: map-get($foreground, divider);
+
+    app-classes-students-student-list {
+      mat-list-item {
+        border-bottom-color: map-get($foreground, divider);
+      }
+    }
+  }
+}

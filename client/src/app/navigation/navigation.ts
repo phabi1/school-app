@@ -2,18 +2,26 @@ import { FuseNavigation } from '@fuse/types';
 
 export const navigation: FuseNavigation[] = [
     {
-        id       : 'applications',
-        title    : 'Applications',
-        translate: 'NAV.APPLICATIONS',
+        id       : 'classe',
+        title    : 'Ma classe',
+        translate: 'navigation.myClass',
         type     : 'group',
         children : [
             {
+                id       : 'students',
+                title    : 'Elèves',
+                translate: 'navigation.myClass.students',
+                type     : 'item',
+                icon     : 'user',
+                url      : '/apps/classes/students',
+            },
+            {
                 id       : 'tools',
                 title    : 'Outils',
-                translate: 'NAV.TOOLS.TITLE',
+                translate: 'navigation.myClass.tools',
                 type     : 'item',
                 icon     : 'setting',
-                url      : '/tools',
+                url      : '/apps/classes/tools',
             }
         ]
     }

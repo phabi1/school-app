@@ -1,0 +1,42 @@
+<div fxLayout="row" fxLayoutAlign="space-between center">
+  <div class="p-24 pr-0">
+    {{ fullname }}
+  </div>
+  <div>
+    <button mat-icon-button>
+      <mat-icon [matMenuTriggerFor]="studentMenu">
+        more_vert
+      </mat-icon>
+    </button>
+    <mat-menu #studentMenu="matMenu">
+      <button mat-menu-item (click)="action.emit({action: 'update', item: student})">Update</button>
+    </mat-menu>
+  </div>
+</div>
+<div class="p-24">
+  <div fxLayout="row">
+    <div fxFlex class="info">
+      <div class="label">Prénom</div>
+      <div>{{ student.firstname }}</div>
+    </div>
+    <div fxFlex class="info">
+      <div class="label">Nom de famille</div>
+      <div>{{ student.lastname }}</div>
+    </div>
+  </div>
+  <div *ngIf="student.shortname" class="info">
+    <div class="label">Prénom court</div>
+    <div>{{ student.shortname }}</div>
+  </div>
+
+  <div *ngIf="student.birthday" class="info">
+    <div class="label">Date de naissance</div>
+    <div>{{ student.birthday }}</div>
+  </div>
+</div>
+<div *ngIf="student.notes">
+  <mat-divider></mat-divider>
+  <div class="p-24">
+    {{ student.notes }}
+  </div>
+</div>

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { IsLoggedGuard } from 'ngrx-auth-store';
 
 const routes: Routes = [
   {
@@ -8,24 +9,29 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'home',
-    loadChildren: './home/home.module#HomeModule'
+    path: 'apps',
+    loadChildren: './apps/apps.routing#AppsRoutingModule',
   },
   {
-    path: 'classes',
-    loadChildren: './classes/classes.routing#ClassesRoutingModule',
+    path: 'home',
+    loadChildren: './home/home.module#HomeModule'
   },
   {
     path: 'auth',
     loadChildren: './auth/auth.routing#AuthRoutingModule',
   },
   {
-    path: 'tools',
-    loadChildren: './apps/tools/tools.module#ToolsModule',
-  },
-  {
     path: 'generators',
     loadChildren: './generators/generators.routing#GeneratorRoutingModule',
+  },
+  {
+    path: '404',
+    loadChildren: './not-found/not-found.module#NotFoundModule'
+  },
+  {
+    path: '**',
+    redirectTo: '/404',
+    pathMatch: 'full'
   }
 ];
 

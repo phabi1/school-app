@@ -1,0 +1,18 @@
+<div class="page-layout carded left-sidebar inner-scroll">
+  <div class="top-bg accent"></div>
+  <fuse-sidebar class="sidebar" position="left" lockedOpen="gt-md">
+    <button mat-button (click)="addStudent()">Add student</button>
+  </fuse-sidebar>
+  <div class="center">
+    <div class="header accent" fxLayout="column" fxLayoutAlign="center space-between">
+      <h2 class="m-0">Elèves de la classe</h2>
+    </div>
+    <div class="content-card">
+      <div class="toolbar p-24"></div>
+      <div class="content" fxLayout="row">
+        <app-classes-students-list fusePerfectScrollbar fxFlex></app-classes-students-list>
+        <app-classes-students-details fusePerfectScrollbar fxFlex></app-classes-students-details>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+<ng-container *ngIf="currentStudent$ | async; else unselectedTemplate">
+  <app-classes-students-student-detail [student]="currentStudent$ | async" (action)="onAction($event)"></app-classes-students-student-detail>
+</ng-container>
+<ng-template #unselectedTemplate>
+  <mat-icon>people</mat-icon>
+  <div>
+    Unselected student
+  </div>
+</ng-template>
+

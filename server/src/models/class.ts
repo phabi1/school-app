@@ -1,15 +1,15 @@
-import { Document, Model, Types, model } from "mongoose";
-import { ILevelDocument } from "./level";
-import { ISchoolDocument } from "./school";
-import { IStudentDocument } from "./student";
-import { ITeacherDocument } from "./teacher";
+import { Document, Model, model, Types } from "mongoose";
+import { ILevelDocument, LevelModel } from "./level";
 import { classSchema } from "./schemas/class";
+import { ISchoolDocument } from "./school";
+import { IStudent } from "./student";
+import { ITeacherDocument } from "./teacher";
 
 export interface IClassDocument extends Document {
   start: Date;
   end: Date;
   teacher: Types.ObjectId | ITeacherDocument;
-  students: IStudentDocument[];
+  students: IStudent[];
   school: Types.ObjectId | ISchoolDocument;
   levels: Types.ObjectId[] | ILevelDocument[];
   hasMutipleLevel: boolean;
