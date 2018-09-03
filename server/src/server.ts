@@ -9,6 +9,27 @@ const manifest: Glue.Manifest = {
   register: {
     plugins: [
       {
+        plugin: "good",
+        options: {
+          ops: {
+            interval: 1000,
+          },
+          reporters: {
+            myConsoleReporter: [
+              {
+                module: "good-squeeze",
+                name: "Squeeze",
+                args: [{ log: "*", response: "*" }],
+              },
+              {
+                module: "good-console",
+              },
+              "stdout",
+            ],
+          },
+        },
+      },
+      {
         plugin: "./plugins/db",
         options: {
           uri: "mongodb://dev:dev@localhost:27017/school?authSource=admin",

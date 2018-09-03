@@ -1,7 +1,12 @@
-import { Document, Model } from "mongoose";
+import { Document, Types } from "mongoose";
+import { ILevelDocument } from "./level";
 
-export interface IStudentDocument extends Document {
-  name: string;
+export interface IStudent {
+  _id?: Types.ObjectId;
+  firstname: string;
+  lastname: string;
+  level: Types.ObjectId | ILevelDocument;
+  shortname?: string;
+  sex?: "MALE" | "FEMALE" | "UNKNOW";
+  birthday?: Date;
 }
-
-export interface IStudentModel extends Model<IStudentDocument> {}

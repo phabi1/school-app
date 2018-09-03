@@ -1,0 +1,41 @@
+@import "src/@fuse/scss/fuse";
+
+:host {
+  app-classes-students-list {
+    border-right: none;
+  }
+
+  .content-card {
+    @include media-breakpoint(xs) {
+
+      app-classes-students-list,
+      app-classes-students-details {
+        flex: 1 0 100%;
+      }
+
+      app-classes-students-details {
+        display: none !important;
+      }
+
+      &.current-mail-selected {
+        .toolbar {
+          padding-left: 16px !important;
+
+          .mail-selection {
+            display: none !important;
+          }
+        }
+
+        .content {
+          mail-list {
+            display: none !important;
+          }
+
+          mail-details {
+            display: flex !important;
+          }
+        }
+      }
+    }
+  }
+}

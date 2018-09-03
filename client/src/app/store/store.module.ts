@@ -3,11 +3,12 @@ import { NgModule } from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { environment } from '../../environments/environment';
-import * as fromStore from './reducers';
 import { AuthStoreModule } from 'ngrx-auth-store';
-import * as fromProfile from './reducers/profile.reducer';
+import { environment } from '../../environments/environment';
 import { ProfileEffects } from './effects/profile.effects';
+import { RouterEffects } from './effects/router.effects';
+import * as fromStore from './reducers';
+import * as fromProfile from './reducers/profile.reducer';
 
 @NgModule({
   imports: [
@@ -19,7 +20,7 @@ import { ProfileEffects } from './effects/profile.effects';
     }),
     StoreDevtoolsModule.instrument({ logOnly: !environment.production }),
     StoreModule.forFeature('profile', fromProfile.reducer),
-    EffectsModule.forFeature([ProfileEffects]),
+    EffectsModule.forFeature([ProfileEffects, RouterEffects]),
   ],
   declarations: []
 })
