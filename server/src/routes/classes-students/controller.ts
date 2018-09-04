@@ -3,7 +3,7 @@ import { Types } from "mongoose";
 import { RestControllerBase } from "../../core/controller/rest";
 import { models } from "../../models";
 import { IClassDocument } from "../../models/class";
-import { IStudent } from "../../models/student";
+import { IStudentDocument } from "../../models/student";
 
 export class StudentsController extends RestControllerBase {
 
@@ -14,11 +14,11 @@ export class StudentsController extends RestControllerBase {
 
   protected async createAction(payload: any) {
     const c = await this.ensureClass((this.req as any).params.classId);
-    const student: IStudent = {
+    const student = {
       firstname: payload.firstname,
       lastname: payload.lastname,
       level: new Types.ObjectId(payload.level),
-    };
+    } as IStudentDocument;
 
     if (payload.sex) {
       student.sex = payload.sex;
@@ -31,6 +31,18 @@ export class StudentsController extends RestControllerBase {
     c.students.push(student);
 
     await c.save();
+
+    return student;
+  }
+
+  protected async updateAction(id: string, data: any): Promise<IStudentDocument> {
+    const c = await this.ensureClass((this.req as any).params.classId);
+    const student = c.students.id(id);
+    if (!student) {
+      throw Boom.notFound();
+    }
+
+    await student.save();
 
     return student;
   }

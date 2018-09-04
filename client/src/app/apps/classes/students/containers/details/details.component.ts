@@ -27,7 +27,21 @@ export class DetailsComponent implements OnInit {
   }
 
   onAction(event: any): void {
-    this._dialog.open(UpdateComponent);
+    switch (event.type) {
+      case 'update':
+        this.updateStudent(event.item);
+        break;
+      case 'delete':
+        this.deleteStudent(event.item);
+    }
+  }
+
+  protected updateStudent(student: Student): void {
+    const dialogRef = this._dialog.open(UpdateComponent, { data: { student } });
+  }
+
+  protected deleteStudent(student: Student): void {
+
   }
 
 }

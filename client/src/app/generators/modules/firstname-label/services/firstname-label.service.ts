@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
 import * as _ from 'lodash';
-import * as pdfMake from 'pdfmake/build/pdfmake';
-import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
-import { StudentsService, Student } from '../../../../core/services/students.service';
+import { StudentsService } from '../../../../core/services/students.service';
 import { PdfCreatorService } from '../../../../core/services/pdf-creator.service';
 import { ClassService } from '../../../../core/services/class.service';
 import { Level } from '../../../../core/models/level.model';

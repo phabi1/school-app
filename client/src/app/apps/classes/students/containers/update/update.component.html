@@ -1,3 +1,29 @@
-<p>
-  update works!
-</p>
+<form [formGroup]="form" fxLayout="column" (ngSubmit)="update()">
+  <mat-form-field>
+    <mat-select placeholder="Level" formControlName="level" required>
+      <mat-option *ngFor="let item of levelOptions$ | async" [value]="item.data">
+        {{item.label}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput formControlName="lastname" placeholder="Lastname" required>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput formControlName="firstname" placeholder="Firstname" required>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput formControlName="shortname" placeholder="Shortname">
+  </mat-form-field>
+  <mat-radio-group formControlName="sex">
+    <mat-radio-button value="MALE">Garçon</mat-radio-button>
+    <mat-radio-button value="FEMALE">Fille</mat-radio-button>
+  </mat-radio-group>
+  <mat-form-field>
+    <input matInput formControlName="birthday" placeholder="Birthday">
+  </mat-form-field>
+  <mat-form-field>
+    <textarea matInput formControlName="notes" placeholder="notes"></textarea>
+  </mat-form-field>
+  <button mat-raised-button color="accent" [disabled]="form.invalid">Save</button>
+</form>

@@ -13,6 +13,8 @@ export enum StudentActionTypes {
   AddStudents = '[Student] Add Students',
   UpsertStudents = '[Student] Upsert Students',
   UpdateStudent = '[Student] Update Student',
+  UpdateStudentSuccess = '[Student] Update Student Success',
+  UpdateStudentFailure = '[Student] Update Student Failure',
   UpdateStudents = '[Student] Update Students',
   DeleteStudent = '[Student] Delete Student',
   DeleteStudents = '[Student] Delete Students',
@@ -72,7 +74,17 @@ export class UpsertStudents implements Action {
 export class UpdateStudent implements Action {
   readonly type = StudentActionTypes.UpdateStudent;
 
+  constructor(public payload: { id: string, data: any }) { }
+}
+export class UpdateStudentSuccess implements Action {
+  readonly type = StudentActionTypes.UpdateStudentSuccess;
+
   constructor(public payload: { student: Update<Student> }) { }
+}
+export class UpdateStudentFailure implements Action {
+  readonly type = StudentActionTypes.UpdateStudentFailure;
+
+  constructor(public payload: { error: any }) { }
 }
 
 export class UpdateStudents implements Action {
@@ -113,6 +125,8 @@ export type StudentActions =
   | AddStudents
   | UpsertStudents
   | UpdateStudent
+  | UpdateStudentSuccess
+  | UpdateStudentFailure
   | UpdateStudents
   | DeleteStudent
   | DeleteStudents

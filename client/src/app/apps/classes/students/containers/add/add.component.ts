@@ -4,17 +4,18 @@ import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AddStudent } from '../../actions/student.actions';
+import { LevelOption } from '../../models/level-option.model';
 import { selectAll } from '../../selectors/level.selectors';
 
 @Component({
-  selector: 'app-add',
+  selector: 'app-classes-students-add',
   templateUrl: './add.component.html',
   styleUrls: ['./add.component.scss']
 })
 export class AddComponent implements OnInit {
 
   public form: FormGroup;
-  public levelOptions$: Observable<any[]>;
+  public levelOptions$: Observable<LevelOption[]>;
 
   constructor(
     private _formBuilder: FormBuilder,

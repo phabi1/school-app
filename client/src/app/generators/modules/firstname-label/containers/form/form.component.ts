@@ -61,7 +61,7 @@ export class FormComponent implements OnInit {
     options.levels = [];
 
     this.firstnameLabelService.generate({
-      students: ['1', '2', '11', '20'],
+      students: [],
       layout: values.layout,
       align: values.align,
     })

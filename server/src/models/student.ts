@@ -1,8 +1,7 @@
 import { Document, Types } from "mongoose";
 import { ILevelDocument } from "./level";
 
-export interface IStudent {
-  _id?: Types.ObjectId;
+export interface IStudentDocument extends Document {
   firstname: string;
   lastname: string;
   level: Types.ObjectId | ILevelDocument;

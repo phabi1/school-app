@@ -37,7 +37,7 @@ export function reducer(
       return adapter.upsertMany(action.payload.students, state);
     }
 
-    case StudentActionTypes.UpdateStudent: {
+    case StudentActionTypes.UpdateStudentSuccess: {
       return adapter.updateOne(action.payload.student, state);
     }
 
