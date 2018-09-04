@@ -1,13 +1,12 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Component, Inject, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MAT_DIALOG_DATA } from '@angular/material';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { GradeOption } from '../../models/grade-option.model';
-import { selectAll } from '../../selectors/level.selectors';
 import { UpdateStudent } from '../../actions/student.actions';
-import { Student } from '../../../../../core/models/student.model';
-import { MAT_DIALOG_DATA } from '@angular/material';
+import { GradeOption } from '../../models/grade-option.model';
+import { selectAll } from '../../selectors/grade.selectors';
 
 @Component({
   selector: 'app-classes-students-update',
