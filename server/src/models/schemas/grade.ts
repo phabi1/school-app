@@ -1,6 +1,6 @@
 import { Schema, SchemaTypes } from "mongoose";
 
-export const levelSchema = new Schema({
+export const gradeSchema = new Schema({
   title: {
     type: SchemaTypes.String,
     required: true,

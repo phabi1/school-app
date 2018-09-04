@@ -1,10 +1,10 @@
 import { Document, Types } from "mongoose";
-import { ILevelDocument } from "./level";
+import { IGradeDocument } from "./grade";
 
 export interface IStudentDocument extends Document {
   firstname: string;
   lastname: string;
-  level: Types.ObjectId | ILevelDocument;
+  grade: Types.ObjectId | IGradeDocument;
   shortname?: string;
   sex?: "MALE" | "FEMALE" | "UNKNOW";
   birthday?: Date;

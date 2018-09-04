@@ -5,16 +5,12 @@ import { IsLoggedGuard } from 'ngrx-auth-store';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/home',
+    redirectTo: '/apps',
     pathMatch: 'full',
   },
   {
     path: 'apps',
     loadChildren: './apps/apps.routing#AppsRoutingModule',
-  },
-  {
-    path: 'home',
-    loadChildren: './home/home.module#HomeModule'
   },
   {
     path: 'auth',

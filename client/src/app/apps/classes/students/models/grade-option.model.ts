@@ -1,4 +1,4 @@
-export interface LevelOption {
+export interface GradeOption {
   data: string;
   label: string;
 }

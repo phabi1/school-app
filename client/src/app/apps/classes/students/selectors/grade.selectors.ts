@@ -1,8 +1,8 @@
-import { adapter } from '../reducers/level.reducer';
+import { adapter } from '../reducers/grade.reducer';
 import { createSelector } from '@ngrx/store';
 import { getFeatureState } from './utils';
 
-export const getState = createSelector(getFeatureState, state => state.levels);
+export const getState = createSelector(getFeatureState, state => state.grades);
 
 export const getLoaded = createSelector(getState, state => state.loaded);
 

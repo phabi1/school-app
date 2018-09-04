@@ -1,7 +1,6 @@
-import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
-import { Student } from '../models/student.model';
+import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { StudentActions, StudentActionTypes } from '../actions/student.actions';
-import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { Student } from '../models/student.model';
 
 export interface State extends EntityState<Student> {
   loading: boolean;

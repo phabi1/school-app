@@ -4,8 +4,8 @@ import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AddStudent } from '../../actions/student.actions';
-import { LevelOption } from '../../models/level-option.model';
-import { selectAll } from '../../selectors/level.selectors';
+import { GradeOption } from '../../models/grade-option.model';
+import { selectAll } from '../../selectors/grade.selectors';
 
 @Component({
   selector: 'app-classes-students-add',
@@ -15,7 +15,7 @@ import { selectAll } from '../../selectors/level.selectors';
 export class AddComponent implements OnInit {
 
   public form: FormGroup;
-  public levelOptions$: Observable<LevelOption[]>;
+  public levelOptions$: Observable<GradeOption[]>;
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -33,7 +33,7 @@ export class AddComponent implements OnInit {
       lastname: [null, Validators.required],
       sex: ['MALE'],
       birthday: [null],
-      level: [null, Validators.required]
+      grade: [null, Validators.required]
     });
   }
 
@@ -43,6 +43,8 @@ export class AddComponent implements OnInit {
   add() {
     const values = this.form.value;
     const student = { ...values };
+    student.shortname = student.shortname || undefined;
+    student.birthday = student.birthday || undefined;
     this._store.dispatch(new AddStudent({ data: student }));
   }
 

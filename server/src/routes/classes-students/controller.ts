@@ -14,10 +14,11 @@ export class StudentsController extends RestControllerBase {
 
   protected async createAction(payload: any) {
     const c = await this.ensureClass((this.req as any).params.classId);
-    const student = {
+    const student: IStudentDocument = {
+      _id: new Types.ObjectId(),
       firstname: payload.firstname,
       lastname: payload.lastname,
-      level: new Types.ObjectId(payload.level),
+      grade: new Types.ObjectId(payload.grade),
     } as IStudentDocument;
 
     if (payload.sex) {
@@ -32,7 +33,7 @@ export class StudentsController extends RestControllerBase {
 
     await c.save();
 
-    return student;
+    return c.students.id(student._id);
   }
 
   protected async updateAction(id: string, data: any): Promise<IStudentDocument> {

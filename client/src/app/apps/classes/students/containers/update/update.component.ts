@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { LevelOption } from '../../models/level-option.model';
+import { GradeOption } from '../../models/grade-option.model';
 import { selectAll } from '../../selectors/level.selectors';
 import { UpdateStudent } from '../../actions/student.actions';
 import { Student } from '../../../../../core/models/student.model';
@@ -17,7 +17,7 @@ import { MAT_DIALOG_DATA } from '@angular/material';
 export class UpdateComponent implements OnInit {
 
   public form: FormGroup;
-  public levelOptions$: Observable<LevelOption[]>;
+  public levelOptions$: Observable<GradeOption[]>;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,

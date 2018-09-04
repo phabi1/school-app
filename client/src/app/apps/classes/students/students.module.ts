@@ -1,4 +1,5 @@
 import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -17,6 +18,8 @@ import {
 import { FuseSidebarModule } from '@fuse/components';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AddComponent } from './containers/add/add.component';
 import { AppComponent } from './containers/app/app.component';
 import { DetailsComponent } from './containers/details/details.component';
@@ -30,7 +33,11 @@ import { StudentListComponent } from './components/student-list/student-list.com
 import { StudentItemComponent } from './components/student-item/student-item.component';
 import { StudentDetailComponent } from './components/student-detail/student-detail.component';
 import { UpdateComponent } from './containers/update/update.component';
-import { LevelEffects } from './effects/level.effects';
+import { GradeEffects } from './effects/grade.effects';
+
+export function translateLoaderFactory (httpClient: HttpClient): TranslateLoader {
+  return new TranslateHttpLoader(httpClient, '/assets/i18/classes-students/');
+}
 
 @NgModule({
   imports: [
@@ -38,6 +45,13 @@ import { LevelEffects } from './effects/level.effects';
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
+    TranslateModule.forChild({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: translateLoaderFactory,
+        deps: [HttpClient]
+      }
+    }),
     MatButtonModule,
     MatTableModule,
     MatDialogModule,
@@ -51,7 +65,7 @@ import { LevelEffects } from './effects/level.effects';
     StudentsRoutingModule,
     FuseSidebarModule,
     StoreModule.forFeature('students', reducers),
-    EffectsModule.forFeature([StudentsEffects, LevelEffects]),
+    EffectsModule.forFeature([StudentsEffects, GradeEffects]),
   ],
   entryComponents: [
     AddComponent,

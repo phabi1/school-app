@@ -14,9 +14,9 @@ const studentSchema = new Schema({
         enum: ["MALE", "FEMALE", "UNKNOW"],
         default: "UNKNOW",
     },
-    level: {
+    grade: {
         type: SchemaTypes.ObjectId,
-        ref: "Level",
+        ref: "Grade",
     },
 }, { timestamps: true, toJSON: { virtuals: true } });
 
@@ -25,17 +25,13 @@ const groupSchema = new Schema({
         type: SchemaTypes.String,
         required: true,
     },
-    level: {
-        type: SchemaTypes.ObjectId,
-        ref: "Level",
-    },
 });
 
 export const classSchema = new Schema({
-    levels: [
+    grades: [
         {
             type: SchemaTypes.ObjectId,
-            ref: "Level",
+            ref: "Grade",
         },
     ],
     groups: [

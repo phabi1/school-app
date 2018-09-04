@@ -11,6 +11,7 @@ import { navigation } from 'app/navigation/navigation';
 import * as moment from 'moment';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { NavigationUpdatorService } from './navigation/services/updator.service';
 
 @Component({
   selector: 'app',
@@ -33,7 +34,8 @@ export class AppComponent implements OnInit, OnDestroy {
     private _fuseSplashScreenService: FuseSplashScreenService,
     private _fuseTranslationLoaderService: FuseTranslationLoaderService,
     private _translateService: TranslateService,
-    private _platform: Platform
+    private _platform: Platform,
+    private _navigationUpdatorService: NavigationUpdatorService,
   ) {
     // Get default navigation
     this.navigation = navigation;
@@ -93,6 +95,8 @@ export class AppComponent implements OnInit, OnDestroy {
 
         this.document.body.classList.add(this.fuseConfig.colorTheme);
       });
+
+      this._navigationUpdatorService.registerAll();
   }
 
   ngOnDestroy(): void {
