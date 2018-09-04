@@ -36,14 +36,21 @@ export class StudentsController extends RestControllerBase {
     return c.students.id(student._id);
   }
 
-  protected async updateAction(id: string, data: any): Promise<IStudentDocument> {
+  protected async updateAction(id: string, payload: any): Promise<IStudentDocument> {
     const c = await this.ensureClass((this.req as any).params.classId);
     const student = c.students.id(id);
     if (!student) {
       throw Boom.notFound();
     }
 
-    await student.save();
+    for (const key in payload) {
+      if (payload.hasOwnProperty(key)) {
+        const value = payload[key];
+        student.set(key, value);
+      }
+    }
+
+    await c.save();
 
     return student;
   }

@@ -1,12 +1,20 @@
 @import "src/@fuse/scss/fuse";
 
 :host {
-  app-classes-students-list {
-    border-right: none;
+  width: 100%;
+
+  .center {
+    .header {
+      
+    }
   }
 
   .content-card {
     @include media-breakpoint(xs) {
+
+      app-classes-students-list {
+        border-right: none;
+      }
 
       app-classes-students-list,
       app-classes-students-details {

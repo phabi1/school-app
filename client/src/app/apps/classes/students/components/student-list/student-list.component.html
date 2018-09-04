@@ -1,5 +1,7 @@
-<mat-list>
-  <mat-list-item *ngFor="let item of items" (click)="itemClicked.emit(item)">
-    <app-classes-students-student-item [item]="item"></app-classes-students-student-item>
-  </mat-list-item>
-</mat-list>
+<div *ngIf="items.length === 0" fxLayout="column" fxLayoutAlign="center center" fxFlexFill>
+  <span class="no-messages-text hint-text">{{ 'classesStudents.list.messages.empty' | translate }}</span>
+</div>
+
+<div class="student-list">
+  <app-classes-students-student-item *ngFor="let item of items" [item]="item" [ngClass]="{'current-student':item?.id == currentItem?.id}" (click)="itemClicked.emit(item)"></app-classes-students-student-item>
+</div>

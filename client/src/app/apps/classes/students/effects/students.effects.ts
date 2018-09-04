@@ -42,8 +42,8 @@ export class StudentsEffects {
 
   @Effect()
   update$: Observable<UpdateStudentSuccess | UpdateStudentFailure> = this.actions$.pipe(
-    ofType(StudentActionTypes.AddStudent),
-    switchMap((action: UpdateStudent) => this._studentsService.updateStudent(this.classId, action.payload.data).pipe(
+    ofType(StudentActionTypes.UpdateStudent),
+    switchMap((action: UpdateStudent) => this._studentsService.updateStudent(this.classId, action.payload.id, action.payload.data).pipe(
       map((student) => new UpdateStudentSuccess({ student: { id: student.id, changes: student } })),
       catchError((err) => of(new UpdateStudentFailure({ error: err })))
     )),

@@ -31,7 +31,7 @@ export class StudentsService {
   }
 
   public updateStudent(classId: string, id: string, data: any): Observable<Student> {
-    return this._httpClient.post<any>('/api/classes/' + classId + '/students/' + id, data).pipe(
+    return this._httpClient.put<any>('/api/classes/' + classId + '/students/' + id, data).pipe(
       map((res) => res)
     );
   }

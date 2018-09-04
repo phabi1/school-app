@@ -5,6 +5,6 @@
   </div>
 </div>
 
-<div *ngIf="currentStudent$ | async">
+<div *ngIf="currentStudent$ | async" fxFlex>
   <app-classes-students-student-detail [student]="currentStudent$ | async" (action)="onAction($event)"></app-classes-students-student-detail>
 </div>
