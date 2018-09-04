@@ -11,3 +11,9 @@ declare module "hapi" {
   }
 
 }
+
+declare module "joi" {
+  export interface JoiObject {
+    objectId(): any
+  }
+}

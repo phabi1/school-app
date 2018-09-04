@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot } from '@angular/router';
 import { select, Store } from '@ngrx/store';
-import { Observable, of, forkJoin } from 'rxjs';
-import { catchError, map, take, tap, switchMap, filter } from 'rxjs/operators';
+import { forkJoin, Observable, of } from 'rxjs';
+import { catchError, filter, map, switchMap, take, tap } from 'rxjs/operators';
+import { LoadGrades } from '../actions/grade.actions';
 import { LoadStudents, SetCurrentStudent } from '../actions/student.actions';
+import { getLoaded as getLevelsLoaded } from '../selectors/grade.selectors';
 import { getLoaded as getStudentsLoaded } from '../selectors/student.selectors';
-import { getLoaded as getLevelsLoaded } from '../selectors/level.selectors';
-import { LoadLevels } from '../actions/level.actions';
 
 @Injectable()
 export class ResolveGuard implements CanActivate {
@@ -31,7 +31,7 @@ export class ResolveGuard implements CanActivate {
 
   private checkStore(): Observable<any> {
     return forkJoin(this.getLevels()).pipe(
-      filter(([levelsLoaded]) => !!levelsLoaded),
+      filter(([gradesLoaded]) => !!gradesLoaded),
       take(1),
       switchMap(() => this.getStudents()),
       take(1),
@@ -46,7 +46,7 @@ export class ResolveGuard implements CanActivate {
       select(getLevelsLoaded),
       filter((loaded) => {
         if (!loaded) {
-          this.store.dispatch(new LoadLevels());
+          this.store.dispatch(new LoadGrades());
         }
         return loaded;
       }),

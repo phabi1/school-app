@@ -4,7 +4,7 @@ import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AddStudent } from '../../actions/student.actions';
-import { selectAll } from '../../selectors/level.selectors';
+import { selectAll } from '../../selectors/grade.selectors';
 
 @Component({
   selector: 'app-add',
@@ -32,7 +32,7 @@ export class AddComponent implements OnInit {
       lastname: [null, Validators.required],
       sex: ['MALE'],
       birthday: [null],
-      level: [null, Validators.required]
+      grade: [null, Validators.required]
     });
   }
 
@@ -42,6 +42,8 @@ export class AddComponent implements OnInit {
   add() {
     const values = this.form.value;
     const student = { ...values };
+    student.shortname = student.shortname || undefined;
+    student.birthday = student.birthday || undefined;
     this._store.dispatch(new AddStudent({ data: student }));
   }
 

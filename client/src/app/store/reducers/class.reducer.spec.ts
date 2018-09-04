@@ -1,6 +1,6 @@
-import { reducer, initialState } from '../reducers/level.reducer';
+import { reducer, initialState } from './class.reducer';
 
-describe('Level Reducer', () => {
+describe('Class Reducer', () => {
   describe('unknown action', () => {
     it('should return the initial state', () => {
       const action = {} as any;

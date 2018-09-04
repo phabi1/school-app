@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Student } from '../models/student.model';
 import { map } from 'rxjs/operators';
-import { Level } from '../models/level.model';
+import { Grade } from '../models/grade.model';
 
 @Injectable()
 export class StudentsService {
@@ -12,9 +12,9 @@ export class StudentsService {
     private _httpClient: HttpClient
   ) { }
 
-  public getLevels(classId: string): Observable<Level[]> {
+  public getGrades(classId: string): Observable<Grade[]> {
     return this._httpClient.get<any>('/api/classes/' + classId).pipe(
-      map((res) => res.levels)
+      map((res) => res.grades)
     );
   }
 

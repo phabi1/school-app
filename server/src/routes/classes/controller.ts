@@ -7,7 +7,7 @@ export class ClassesController extends RestControllerBase {
 
   protected async getAction(id: string): Promise<IClassDocument> {
     try {
-      const c = await models.class.findById(id).populate("levels");
+      const c = await models.class.findById(id).populate("grades");
       if (!c) {
         throw Boom.notFound();
       }

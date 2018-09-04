@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
+import { Store, select } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
+import { getCurrentClassId } from '../../../../store/selectors/class.selectors';
 import {
   LoadStudentsFailure, LoadStudentsSuccess, StudentActionTypes, AddStudentSuccess, AddStudentFailure, AddStudent
 } from '../actions/student.actions';
@@ -31,8 +33,11 @@ export class StudentsEffects {
 
   constructor(
     private actions$: Actions,
+    private _store: Store<any>,
     private _studentsService: StudentsService
   ) {
-    this.classId = '5b83ee62ea40ef20c04183c2';
+    this._store.pipe(select(getCurrentClassId)).subscribe((currentClassId) => {
+      this.classId = currentClassId;
+    });
   }
 }

@@ -1,5 +1,6 @@
 import { ServerRoute } from "hapi";
 import { StudentsController } from "./controller";
+import { createValidator, updateValidator } from "./validators";
 
 const routes: ServerRoute[] = [
   {
@@ -14,6 +15,7 @@ const routes: ServerRoute[] = [
     method: "POST",
     options: {
       handler: (req, h) => new StudentsController().dispatch(req, h),
+      validate: createValidator,
     },
   },
   {
@@ -21,6 +23,7 @@ const routes: ServerRoute[] = [
     method: "PUT",
     options: {
       handler: (req, h) => new StudentsController().dispatch(req, h),
+      validate: updateValidator,
     },
   },
   {

@@ -1,10 +1,10 @@
-<ng-container *ngIf="currentStudent$ | async; else unselectedTemplate">
-  <app-classes-students-student-detail [student]="currentStudent$ | async" (action)="onAction($event)"></app-classes-students-student-detail>
-</ng-container>
-<ng-template #unselectedTemplate>
-  <mat-icon>people</mat-icon>
-  <div>
-    Unselected student
+<div *ngIf="!(currentStudent$ | async)" fxLayout="column" fxLayoutAlign="center center" fxFlex>
+  <mat-icon class="s-128 mb-16 select-message-icon hint-text">people</mat-icon>
+  <div class="select-message-text hint-text">
+    {{ 'classesStudents.details.messages.unselected' | translate }}
   </div>
-</ng-template>
+</div>
 
+<div *ngIf="currentStudent$ | async">
+  <app-classes-students-student-detail [student]="currentStudent$ | async" (action)="onAction($event)"></app-classes-students-student-detail>
+</div>

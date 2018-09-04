@@ -1,6 +1,6 @@
 <form [formGroup]="form" fxLayout="column" (ngSubmit)="add()">
   <mat-form-field>
-  <mat-select placeholder="Level" formControlName="level" required>
+  <mat-select placeholder="Level" formControlName="grade" required>
     <mat-option *ngFor="let item of levelOptions$ | async" [value]="item.data">
       {{item.label}}
     </mat-option>
