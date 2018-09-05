@@ -12,6 +12,7 @@ import * as moment from 'moment';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { NavigationUpdatorService } from './navigation/services/updator.service';
+import { DateAdapter } from '@angular/material';
 
 @Component({
   selector: 'app',
@@ -28,6 +29,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   constructor(
     @Inject(DOCUMENT) private document: any,
+    private _dateAdapter: DateAdapter<any>,
     private _fuseConfigService: FuseConfigService,
     private _fuseNavigationService: FuseNavigationService,
     private _fuseSidebarService: FuseSidebarService,
@@ -46,9 +48,6 @@ export class AppComponent implements OnInit, OnDestroy {
     // Set the main navigation as our current navigation
     this._fuseNavigationService.setCurrentNavigation('main');
 
-    // Add languages
-    this._translateService.addLangs(['en', 'tr']);
-
     // Set the default language
     this._translateService.setDefaultLang('en');
 
@@ -57,6 +56,8 @@ export class AppComponent implements OnInit, OnDestroy {
 
     // Use a language
     this._translateService.use('fr');
+
+    this._dateAdapter.setLocale('fr');
 
     // Add is-mobile class to the body if the platform is mobile
     if (this._platform.ANDROID || this._platform.IOS) {

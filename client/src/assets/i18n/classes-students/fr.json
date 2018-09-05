@@ -1,9 +1,44 @@
 {
 	"classesStudents": {
+		"add": {
+			"form": {
+				"fields": {
+					"birthday": {
+						"placeholder": "Date de naissance"
+					},
+					"firstname": {
+						"placeholder": "Prénom"
+					},
+					"lastname": {
+						"placeholder": "Nom de famille"
+					},
+					"sex": {
+						"boy": {
+							"label": "Garçon"
+						},
+						"girl": {
+							"label": "Fille"
+						}
+					},
+					"shortname": {
+						"placeholder": "Prénom"
+					}
+				}
+			}
+		},
+		"buttons": {
+			"add": ""
+		},
 		"details": {
 			"messages": {
 				"unselected": "Sélectionner un élève pour voir sa fiche"
 			}
-		}
+		},
+		"list": {
+			"messages": {
+				"empty": ""
+			}
+		},
+		"title": ""
 	}
 }

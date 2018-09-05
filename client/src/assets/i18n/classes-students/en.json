@@ -1,9 +1,44 @@
 {
 	"classesStudents": {
+		"add": {
+			"form": {
+				"fields": {
+					"birthday": {
+						"placeholder": ""
+					},
+					"firstname": {
+						"placeholder": ""
+					},
+					"lastname": {
+						"placeholder": ""
+					},
+					"sex": {
+						"boy": {
+							"label": ""
+						},
+						"girl": {
+							"label": ""
+						}
+					},
+					"shortname": {
+						"placeholder": ""
+					}
+				}
+			}
+		},
+		"buttons": {
+			"add": ""
+		},
 		"details": {
 			"messages": {
 				"unselected": ""
 			}
-		}
+		},
+		"list": {
+			"messages": {
+				"empty": ""
+			}
+		},
+		"title": ""
 	}
 }

@@ -1,4 +1,5 @@
 <form [formGroup]="form" fxLayout="column" (ngSubmit)="update()">
+  <app-classes-students-student-picture-picker [defaultUrl]="data.student.pictureUrl"></app-classes-students-student-picture-picker>
   <mat-form-field>
     <mat-select placeholder="Level" formControlName="grade" required>
       <mat-option *ngFor="let option of gradeOptions$ | async" [value]="option.data">
@@ -20,7 +21,9 @@
     <mat-radio-button value="FEMALE">Fille</mat-radio-button>
   </mat-radio-group>
   <mat-form-field>
-    <input matInput formControlName="birthday" placeholder="Birthday">
+    <input matInput formControlName="birthday" placeholder="Birthday" [matDatepicker]="birthdayPicker">
+    <mat-datepicker-toggle matSuffix [for]="birthdayPicker"></mat-datepicker-toggle>
+    <mat-datepicker #birthdayPicker></mat-datepicker>
   </mat-form-field>
   <mat-form-field>
     <textarea matInput formControlName="notes" placeholder="notes"></textarea>

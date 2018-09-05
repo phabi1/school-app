@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { select, Store } from '@ngrx/store';
+import { select, Store, ActionsSubject, Action } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { AddStudent } from '../../actions/student.actions';
+import { map, filter, first } from 'rxjs/operators';
+import { AddStudent, StudentActionTypes } from '../../actions/student.actions';
 import { GradeOption } from '../../models/grade-option.model';
 import { selectAll } from '../../selectors/grade.selectors';
+import { MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-classes-students-add',
@@ -18,6 +19,8 @@ export class AddComponent implements OnInit {
   public levelOptions$: Observable<GradeOption[]>;
 
   constructor(
+    private _actionsSubject: ActionsSubject,
+    private _dialogRef: MatDialogRef<AddComponent>,
     private _formBuilder: FormBuilder,
     private _store: Store<any>,
   ) {
@@ -28,6 +31,7 @@ export class AddComponent implements OnInit {
     );
 
     this.form = this._formBuilder.group({
+      pictureUrl: [null],
       firstname: [null, Validators.required],
       shortname: [null],
       lastname: [null, Validators.required],
@@ -40,12 +44,22 @@ export class AddComponent implements OnInit {
   ngOnInit() {
   }
 
+  onUrlChanged(event: string) {
+    this.form.get('pictureUrl').setValue(event);
+  }
+
   add() {
     const values = this.form.value;
     const student = { ...values };
     student.shortname = student.shortname || undefined;
     student.birthday = student.birthday || undefined;
     this._store.dispatch(new AddStudent({ data: student }));
+    this._actionsSubject.asObservable().pipe(
+      filter((action: Action) => action.type === StudentActionTypes.AddStudentSuccess),
+      first())
+      .subscribe(() => {
+        this._dialogRef.close();
+      });
   }
 
 }

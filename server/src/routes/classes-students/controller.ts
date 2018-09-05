@@ -1,9 +1,14 @@
 import Boom from "boom";
-import { Types } from "mongoose";
+import { ResponseToolkit } from "hapi";
+import * as Path from "path";
 import { RestControllerBase } from "../../core/controller/rest";
 import { models } from "../../models";
 import { IClassDocument } from "../../models/class";
 import { IStudentDocument } from "../../models/student";
+import { classService } from "../../services/class";
+import { fileService } from "../../services/file";
+import { uploader } from "../../services/uploader";
+import { UPLOAD_DIR } from "../../utils";
 
 export class StudentsController extends RestControllerBase {
 
@@ -14,43 +19,30 @@ export class StudentsController extends RestControllerBase {
 
   protected async createAction(payload: any) {
     const c = await this.ensureClass((this.req as any).params.classId);
-    const student: IStudentDocument = {
-      _id: new Types.ObjectId(),
-      firstname: payload.firstname,
-      lastname: payload.lastname,
-      grade: new Types.ObjectId(payload.grade),
-    } as IStudentDocument;
 
-    if (payload.sex) {
-      student.sex = payload.sex;
+    if (payload.pictureUrl) {
+      const newPath = fileService.move(payload.pictureUrl, Path.join("private", "students", "pictures"));
+      payload.pictureUrl = newPath;
     }
 
-    if (payload.birthday) {
-      student.birthday = payload.birthday;
-    }
+    const student = await classService.addStudentInClass(c, payload);
 
-    c.students.push(student);
-
-    await c.save();
-
-    return c.students.id(student._id);
+    return student;
   }
 
   protected async updateAction(id: string, payload: any): Promise<IStudentDocument> {
     const c = await this.ensureClass((this.req as any).params.classId);
-    const student = c.students.id(id);
+    let student = c.students.id(id);
     if (!student) {
       throw Boom.notFound();
     }
 
-    for (const key in payload) {
-      if (payload.hasOwnProperty(key)) {
-        const value = payload[key];
-        student.set(key, value);
-      }
+    if (payload.pictureUrl) {
+      const newPath = fileService.move(payload.pictureUrl, "private/students/pictures");
+      payload.pictureUrl = newPath;
     }
 
-    await c.save();
+    student = await classService.updateStudentInClass(c, student, payload);
 
     return student;
   }
@@ -66,5 +58,24 @@ export class StudentsController extends RestControllerBase {
       throw err;
     }
 
+  }
+
+  protected async getPictureAction() {
+    const pictureId = (this.req as any).params.pictureId;
+    if (!pictureId) {
+      throw Boom.notFound();
+    }
+    return (this.h as ResponseToolkit).file(Path.join(UPLOAD_DIR, "students", "pictures", pictureId));
+  }
+
+  protected async uploadPictureAction() {
+    try {
+      const data = (this.req as any).payload as any;
+      const file = data.file;
+      const fileDetails = await uploader(file, { dest: Path.join(UPLOAD_DIR) });
+      return fileDetails;
+    } catch (err) {
+      throw Boom.badRequest(err.message, err);
+    }
   }
 }

@@ -1,12 +1,13 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA } from '@angular/material';
-import { select, Store } from '@ngrx/store';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { select, Store, ActionsSubject, Action } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { UpdateStudent } from '../../actions/student.actions';
+import { map, filter, first } from 'rxjs/operators';
+import { UpdateStudent, StudentActionTypes } from '../../actions/student.actions';
 import { GradeOption } from '../../models/grade-option.model';
 import { selectAll } from '../../selectors/grade.selectors';
+import { difference } from 'utils/object';
 
 @Component({
   selector: 'app-classes-students-update',
@@ -19,7 +20,9 @@ export class UpdateComponent implements OnInit {
   public gradeOptions$: Observable<GradeOption[]>;
 
   constructor(
+    private _actionsSubject: ActionsSubject,
     @Inject(MAT_DIALOG_DATA) public data: any,
+    private _dialogRef: MatDialogRef<UpdateComponent>,
     private _formBuilder: FormBuilder,
     private _store: Store<any>
   ) {
@@ -47,8 +50,14 @@ export class UpdateComponent implements OnInit {
 
   update(): void {
     const values = this.form.value;
-    const data = {...values};
+    const data = difference(values, this.data.student);
     this._store.dispatch(new UpdateStudent({ id: this.data.student.id, data }));
+    this._actionsSubject.asObservable().pipe(
+      filter((action: Action) => action.type === StudentActionTypes.UpdateStudentSuccess),
+      first())
+      .subscribe(() => {
+        this._dialogRef.close();
+      });
   }
 
 }

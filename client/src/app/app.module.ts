@@ -1,6 +1,10 @@
+import { registerLocaleData } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { NgModule } from '@angular/core';
-import { MatButtonModule, MatIconModule } from '@angular/material';
+import localeFr from '@angular/common/locales/fr';
+import localeFrExtra from '@angular/common/locales/extra/fr';
+import { LOCALE_ID, NgModule } from '@angular/core';
+import { DateAdapter, MatButtonModule, MatIconModule, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material';
+import { MatMomentDateModule, MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from '@angular/material-moment-adapter';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FuseProgressBarModule, FuseSidebarModule, FuseThemeOptionsModule } from '@fuse/components';
@@ -15,6 +19,9 @@ import { AuthenticationService } from './core/services/authentication.service';
 import { LayoutModule } from './layout/layout.module';
 import { AppStoreModule } from './store/store.module';
 
+
+registerLocaleData(localeFr, 'fr', localeFrExtra);
+
 @NgModule({
   declarations: [
     AppComponent
@@ -28,6 +35,7 @@ import { AppStoreModule } from './store/store.module';
     // Material
     MatButtonModule,
     MatIconModule,
+    MatMomentDateModule,
 
     // Fuse modules
     FuseModule.forRoot(fuseConfig),
@@ -43,7 +51,11 @@ import { AppStoreModule } from './store/store.module';
     AppRoutingModule,
   ],
   providers: [
-    { provide: AUTH_AUTHENTICATION_SERVICE, useClass: AuthenticationService }
+    { provide: LOCALE_ID, useValue: 'fr' },
+    { provide: AUTH_AUTHENTICATION_SERVICE, useClass: AuthenticationService },
+    { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' },
+    { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
+    { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS }
   ],
   bootstrap: [AppComponent]
 })

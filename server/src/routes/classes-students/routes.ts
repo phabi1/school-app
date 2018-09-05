@@ -33,6 +33,24 @@ const routes: ServerRoute[] = [
       handler: (req, h) => new StudentsController().dispatch(req, h),
     },
   },
+  {
+    path: "/classes/students/picture/{pictureId}",
+    method: "GET",
+    options: {
+      handler: (req, h) => new StudentsController().dispatch(req, h, "getPicture"),
+    },
+  },
+  {
+    path: "/classes/students/picture",
+    method: "POST",
+    options: {
+      payload: {
+        output: "stream",
+        allow: "multipart/form-data",
+      },
+      handler: (req, h) => new StudentsController().dispatch(req, h, "uploadPicture"),
+    },
+  },
 ];
 
 export = routes;

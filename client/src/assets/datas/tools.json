@@ -15,6 +15,10 @@
     {
       "title": "Jours du mois",
       "url": "/generators/calendar-month"
+    },
+    {
+      "title": "Trombinoscope",
+      "url": "/generators/trombinoscope"
     }
   ]
 }

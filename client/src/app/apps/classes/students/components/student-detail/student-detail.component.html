@@ -1,20 +1,20 @@
-<div fxLayout="row" fxLayoutAlign="space-between center">
-  <div class="p-24 pr-0">
-    {{ fullname }}
-  </div>
-  <div>
-    <button mat-icon-button>
-      <mat-icon [matMenuTriggerFor]="studentMenu">
-        more_vert
-      </mat-icon>
-    </button>
-    <mat-menu #studentMenu="matMenu">
-      <button mat-menu-item (click)="action.emit({type: 'update', item: student})">Update</button>
-      <button mat-menu-item (click)="action.emit({type: 'delete', item: student})">Delete</button>
-    </mat-menu>
-  </div>
+<div>
+  <button mat-icon-button>
+    <mat-icon [matMenuTriggerFor]="studentMenu">
+      more_vert
+    </mat-icon>
+  </button>
+  <mat-menu #studentMenu="matMenu">
+    <button mat-menu-item (click)="action.emit({type: 'update', item: student})">{{ 'commons.buttons.update' |
+      translate }}</button>
+    <button mat-menu-item (click)="action.emit({type: 'delete', item: student})">{{ 'commons.buttons.delete' |
+      translate }}</button>
+  </mat-menu>
 </div>
 <div class="p-24">
+  <div fxLayout="row" fxLayoutAlign="center start">
+    <app-student-picture></app-student-picture>
+  </div>
   <div fxLayout="row">
     <div fxFlex class="info">
       <div class="label">Prénom</div>
@@ -32,7 +32,7 @@
 
   <div *ngIf="student.birthday" class="info">
     <div class="label">Date de naissance</div>
-    <div>{{ student.birthday }}</div>
+    <div>{{ student.birthday | date }}</div>
   </div>
 </div>
 <div *ngIf="student.notes">

@@ -30,6 +30,9 @@ const manifest: Glue.Manifest = {
         },
       },
       {
+        plugin: "inert",
+      },
+      {
         plugin: "./plugins/db",
         options: {
           uri: "mongodb://dev:dev@localhost:27017/school?authSource=admin",

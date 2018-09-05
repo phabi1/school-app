@@ -1,9 +1,49 @@
 {
 	"classesStudents": {
+		"add": {
+			"form": {
+				"fields": {
+					"birthday": {
+						"placeholder": ""
+					},
+					"firstname": {
+						"placeholder": ""
+					},
+					"lastname": {
+						"placeholder": ""
+					},
+					"sex": {
+						"boy": {
+							"label": ""
+						},
+						"girl": {
+							"label": ""
+						}
+					},
+					"shortname": {
+						"placeholder": ""
+					}
+				}
+			}
+		},
+		"buttons": {
+			"add": ""
+		},
 		"details": {
 			"messages": {
 				"unselected": "Sélectionner un élève pour voir sa fiche"
 			}
+		},
+		"list": {
+			"messages": {
+				"empty": ""
+			}
+		},
+		"title": ""
+	},
+	"commons": {
+		"buttons": {
+			"add": ""
 		}
 	}
 }

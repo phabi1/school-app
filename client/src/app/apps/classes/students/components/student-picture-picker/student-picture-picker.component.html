@@ -1,0 +1,18 @@
+<div class="student-picture-picker" fxLayout="column" fxLayoutAlign="start center">
+  <div class="drop-container" ngFileDrop [options]="options" (uploadOutput)="onUploadOutput($event)" [uploadInput]="uploadInput"
+    [ngClass]="{ 'is-drop-over': dragOver }">
+    <label class="upload-button" fxLayout="column" fxLayoutAlign="center center">
+      <input type="file" ngFileSelect [options]="options" (uploadOutput)="onUploadOutput($event)" [uploadInput]="uploadInput"
+        multiple>
+        <img *ngIf="picture" [src]="picture" />
+        <img *ngIf="!picture" src="/assets/images/students/placeholders/default.png" />
+    </label>
+  </div>
+  <div>
+    
+  </div>
+  <div class="actions" fxLayout="row">
+    <!-- <button type="button" mat-icon-button (click)=""><mat-icon>edit</mat-icon></button> -->
+    <button type="button" mat-icon-button (click)="delete()"><mat-icon>delete</mat-icon></button>
+  </div>
+</div>

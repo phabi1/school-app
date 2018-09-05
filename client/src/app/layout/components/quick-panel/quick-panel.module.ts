@@ -20,6 +20,4 @@ import { QuickPanelComponent } from 'app/layout/components/quick-panel/quick-pan
         QuickPanelComponent
     ]
 })
-export class QuickPanelModule
-{
-}
+export class QuickPanelModule {}

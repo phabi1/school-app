@@ -1,0 +1,23 @@
+.student-picture-picker {
+  .drop-container {
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    border: 1px solid;
+    width: 150px;
+    height: 150px;
+  }
+
+  .upload-button {
+    display: inline-block;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-weight: 600;
+    padding: 0 2px;
+
+    input {
+      display: none;
+    }
+  }
+}

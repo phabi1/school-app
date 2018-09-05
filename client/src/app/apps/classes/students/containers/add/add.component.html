@@ -1,16 +1,19 @@
 <form [formGroup]="form" fxLayout="column" (ngSubmit)="add()">
+  <app-classes-students-student-picture-picker (urlChanged)="onUrlChanged($event)"></app-classes-students-student-picture-picker>
   <mat-form-field>
-  <mat-select placeholder="Level" formControlName="grade" required>
-    <mat-option *ngFor="let item of levelOptions$ | async" [value]="item.data">
-      {{item.label}}
-    </mat-option>
-  </mat-select>
+    <mat-select placeholder="Level" formControlName="grade" required>
+      <mat-option *ngFor="let item of levelOptions$ | async" [value]="item.data">
+        {{item.label}}
+      </mat-option>
+    </mat-select>
   </mat-form-field>
   <mat-form-field>
-    <input matInput formControlName="lastname" placeholder="{{ 'classesStudents.add.form.fields.lastname.placeholder' | translate }}" required>
+    <input matInput formControlName="lastname" placeholder="{{ 'classesStudents.add.form.fields.lastname.placeholder' | translate }}"
+      required>
   </mat-form-field>
   <mat-form-field>
-    <input matInput formControlName="firstname" placeholder="{{ 'classesStudents.add.form.fields.firstname.placeholder' | translate }}" required>
+    <input matInput formControlName="firstname" placeholder="{{ 'classesStudents.add.form.fields.firstname.placeholder' | translate }}"
+      required>
   </mat-form-field>
   <mat-form-field>
     <input matInput formControlName="shortname" placeholder="{{ 'classesStudents.add.form.fields.shortname.placeholder' | translate }}">
@@ -20,7 +23,10 @@
     <mat-radio-button value="FEMALE">{{ 'classesStudents.add.form.fields.sex.girl.label' | translate }}</mat-radio-button>
   </mat-radio-group>
   <mat-form-field>
-    <input matInput formControlName="birthday" placeholder="{{ 'classesStudents.add.form.fields.birthday.placeholder' | translate }}">
+    <input matInput formControlName="birthday" placeholder="{{ 'classesStudents.add.form.fields.birthday.placeholder' | translate }}"
+      [matDatepicker]="birthdayPicker">
+    <mat-datepicker-toggle matSuffix [for]="birthdayPicker"></mat-datepicker-toggle>
+    <mat-datepicker #birthdayPicker></mat-datepicker>
   </mat-form-field>
   <button mat-raised-button color="accent" [disabled]="form.invalid">{{ 'commons.buttons.add' | translate }}</button>
 </form>

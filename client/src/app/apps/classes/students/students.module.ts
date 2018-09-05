@@ -15,6 +15,7 @@ import {
   MatRadioModule,
   MatSelectModule,
   MatRippleModule,
+  MatDatepickerModule,
 } from '@angular/material';
 import { FuseSidebarModule } from '@fuse/components';
 import { EffectsModule } from '@ngrx/effects';
@@ -35,6 +36,9 @@ import { StudentItemComponent } from './components/student-item/student-item.com
 import { StudentDetailComponent } from './components/student-detail/student-detail.component';
 import { UpdateComponent } from './containers/update/update.component';
 import { GradeEffects } from './effects/grade.effects';
+import { StudentPicturePickerComponent } from './components/student-picture-picker/student-picture-picker.component';
+import { NgxUploaderModule } from 'ngx-uploader';
+import { StudentPictureModule } from '../../../ui/student-picture/student-picture.module';
 
 export function translateLoaderFactory (httpClient: HttpClient): TranslateLoader {
   return new TranslateHttpLoader(httpClient, '/assets/i18/classes-students/');
@@ -64,10 +68,13 @@ export function translateLoaderFactory (httpClient: HttpClient): TranslateLoader
     MatRadioModule,
     MatSelectModule,
     MatRippleModule,
+    MatDatepickerModule,
     StudentsRoutingModule,
     FuseSidebarModule,
+    StudentPictureModule,
     StoreModule.forFeature('students', reducers),
     EffectsModule.forFeature([StudentsEffects, GradeEffects]),
+    NgxUploaderModule,
   ],
   entryComponents: [
     AddComponent,
@@ -81,7 +88,8 @@ export function translateLoaderFactory (httpClient: HttpClient): TranslateLoader
     StudentListComponent,
     StudentItemComponent,
     StudentDetailComponent,
-    UpdateComponent
+    UpdateComponent,
+    StudentPicturePickerComponent
   ],
   providers: [
     ResolveGuard,

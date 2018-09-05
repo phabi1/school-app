@@ -21,7 +21,7 @@ export const navigation: FuseNavigation[] = [
                 translate: 'navigation.myClass.tools',
                 type     : 'item',
                 icon     : 'setting',
-                url      : '/apps/classes/tools',
+                url      : '/apps/tools',
             }
         ]
     }

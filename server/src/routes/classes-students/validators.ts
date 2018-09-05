@@ -12,6 +12,7 @@ export const createValidator = {
     sex: Joi.string().valid("MALE", "FEMALE").optional(),
     birthday: Joi.date().optional(),
     notes: Joi.string().optional(),
+    pictureUrl: Joi.string().optional(),
   },
 };
 
@@ -21,12 +22,12 @@ export const updateValidator = {
     id: Joi.string().required(),
   },
   payload: {
-    firstname: Joi.string().required(),
-    lastname: Joi.string().required(),
-    shortname: Joi.string().optional(),
-    grade: Joi.string().required(),
+    firstname: Joi.string().optional(),
+    lastname: Joi.string().optional(),
+    shortname: Joi.string().allow(null).optional(),
+    grade: Joi.string().optional(),
     sex: Joi.string().valid("MALE", "FEMALE").optional(),
-    birthday: Joi.date().optional(),
-    notes: Joi.string().optional(),
+    birthday: Joi.date().allow(null).optional(),
+    notes: Joi.string().allow(null).optional(),
   },
 };
