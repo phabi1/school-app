@@ -9,7 +9,8 @@
       </mat-icon>
     </button>
     <mat-menu #studentMenu="matMenu">
-      <button mat-menu-item (click)="action.emit({action: 'update', item: student})">Update</button>
+      <button mat-menu-item (click)="action.emit({type: 'update', item: student})">Update</button>
+      <button mat-menu-item (click)="action.emit({type: 'delete', item: student})">Delete</button>
     </mat-menu>
   </div>
 </div>

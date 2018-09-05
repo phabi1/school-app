@@ -7,20 +7,20 @@
   </mat-select>
   </mat-form-field>
   <mat-form-field>
-    <input matInput formControlName="lastname" placeholder="Lastname" required>
+    <input matInput formControlName="lastname" placeholder="{{ 'classesStudents.add.form.fields.lastname.placeholder' | translate }}" required>
   </mat-form-field>
   <mat-form-field>
-    <input matInput formControlName="firstname" placeholder="Firstname" required>
+    <input matInput formControlName="firstname" placeholder="{{ 'classesStudents.add.form.fields.firstname.placeholder' | translate }}" required>
   </mat-form-field>
   <mat-form-field>
-    <input matInput formControlName="shortname" placeholder="Shortname">
+    <input matInput formControlName="shortname" placeholder="{{ 'classesStudents.add.form.fields.shortname.placeholder' | translate }}">
   </mat-form-field>
   <mat-radio-group formControlName="sex">
-    <mat-radio-button value="MALE">Garçon</mat-radio-button>
-    <mat-radio-button value="FEMALE">Fille</mat-radio-button>
+    <mat-radio-button value="MALE">{{ 'classesStudents.add.form.fields.sex.boy.label' | translate }}</mat-radio-button>
+    <mat-radio-button value="FEMALE">{{ 'classesStudents.add.form.fields.sex.girl.label' | translate }}</mat-radio-button>
   </mat-radio-group>
   <mat-form-field>
-    <input matInput formControlName="birthday" placeholder="Birthday">
+    <input matInput formControlName="birthday" placeholder="{{ 'classesStudents.add.form.fields.birthday.placeholder' | translate }}">
   </mat-form-field>
-  <button mat-raised-button color="accent" [disabled]="form.invalid">Add</button>
+  <button mat-raised-button color="accent" [disabled]="form.invalid">{{ 'commons.buttons.add' | translate }}</button>
 </form>

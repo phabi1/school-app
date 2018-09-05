@@ -13,7 +13,8 @@ import {
   MatIconModule,
   MatMenuModule,
   MatRadioModule,
-  MatSelectModule
+  MatSelectModule,
+  MatRippleModule,
 } from '@angular/material';
 import { FuseSidebarModule } from '@fuse/components';
 import { EffectsModule } from '@ngrx/effects';
@@ -62,6 +63,7 @@ export function translateLoaderFactory (httpClient: HttpClient): TranslateLoader
     MatMenuModule,
     MatRadioModule,
     MatSelectModule,
+    MatRippleModule,
     StudentsRoutingModule,
     FuseSidebarModule,
     StoreModule.forFeature('students', reducers),
