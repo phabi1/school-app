@@ -4,6 +4,7 @@ var fc2json = require('gulp-file-contents-to-json');
 var through = require('through2');
 var PluginError = require('plugin-error');
 var Vinyl = require('vinyl');
+var KebabCase = require('kebab-case');
 
 var vfsBefore = "this.pdfMake = this.pdfMake || {}; this.pdfMake.vfs = ";
 var vfsAfter = ";";
@@ -35,14 +36,14 @@ gulp.task('i18n-split', function () {
 var i18nSplit = function () {
   return through.obj(function (file, encoding, callback) {
     if (file.isBuffer()) {
-			console.log(file);
-			var locale = file.name.substr(0, file.name.indexOf('.'));
+      var basename = file.path.substring(file.path.lastIndexOf('\\') + 1);
+      var locale = basename.substring(0, basename.indexOf('.'));
       var data = JSON.parse(file.contents);
       for (var key in data) {
         if (data.hasOwnProperty(key)) {
           var translations = data[key];
           var translationFile = new Vinyl();
-          translationFile.path = './' + key + '/' + locale + '.json';
+          translationFile.path = './' + KebabCase(key) + '/' + locale + '.json';
           translationFile.contents = Buffer.from(
             JSON.stringify({
                 [key]: translations
