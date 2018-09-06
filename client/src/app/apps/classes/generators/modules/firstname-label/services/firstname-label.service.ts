@@ -1,23 +1,29 @@
 import { Injectable } from '@angular/core';
-import * as _ from 'lodash';
+import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
-import { StudentsService } from '../../../../core/services/students.service';
-import { PdfCreatorService } from '../../../../core/services/pdf-creator.service';
-import { ClassService } from '../../../../core/services/class.service';
-import { Level } from '../../../../core/models/level.model';
+import { Level } from '../../../../../../core/models/level.model';
+import { ClassService } from '../../../../../../core/services/class.service';
+import { PdfCreatorService } from '../../../../../../core/services/pdf-creator.service';
+import { StudentsService } from '../../../../../../core/services/students.service';
+import { getCurrentClassId } from '../../../../../../store/selectors/class.selectors';
 
 @Injectable()
 export class FirstnameLabelService {
 
+  private _currentClassId: string;
+
   constructor(
     private _classService: ClassService,
     private _pdfCreator: PdfCreatorService,
+    private _store: Store<any>,
     private _studentsService: StudentsService,
-  ) { }
+  ) {
+    this._store.pipe(select(getCurrentClassId)).subscribe((currentClassId) => this._currentClassId = currentClassId);
+  }
 
   getLevels(): Observable<Level[]> {
-    return this._classService.getLevels();
+    return this._classService.getLevels(this._currentClassId);
   }
 
   generate(options?: {

@@ -17,10 +17,6 @@ const routes: Routes = [
     loadChildren: './auth/auth.routing#AuthRoutingModule',
   },
   {
-    path: 'generators',
-    loadChildren: './generators/generators.routing#GeneratorRoutingModule',
-  },
-  {
     path: '404',
     loadChildren: './not-found/not-found.module#NotFoundModule'
   },

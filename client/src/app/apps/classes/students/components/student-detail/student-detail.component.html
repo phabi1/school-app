@@ -1,4 +1,4 @@
-<div>
+<div class="actions">
   <button mat-icon-button>
     <mat-icon [matMenuTriggerFor]="studentMenu">
       more_vert
@@ -11,8 +11,8 @@
       translate }}</button>
   </mat-menu>
 </div>
-<div class="p-24">
-  <div fxLayout="row" fxLayoutAlign="center start">
+<div class="p-24" fxFlex>
+  <div class="mb-24" fxLayout="row" fxLayoutAlign="center start">
     <app-student-picture [url]="student.pictureUrl" size="150"></app-student-picture>
   </div>
   <div fxLayout="row">

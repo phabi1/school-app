@@ -2,9 +2,9 @@ import { Inject, Injectable } from '@angular/core';
 import { DOCUMENT } from '@angular/platform-browser';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import * as CanvasJS from '../../../../../canvasjs.min';
-import { PdfCreatorService } from '../../../../core/services/pdf-creator.service';
-import { StudentsService } from '../../../../core/services/students.service';
+import * as CanvasJS from '../../../../../../../canvasjs.min';
+import { PdfCreatorService } from '../../../../../../core/services/pdf-creator.service';
+import { StudentsService } from '../../../../../../core/services/students.service';
 
 @Injectable({
   providedIn: 'root'

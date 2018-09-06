@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as moment from 'moment';
 import { CalendarMonthService } from '../services/calendar-month.service';
-import { DateService } from '../../../../core/services/date.service';
+import { DateService } from '../../../../../../core/services/date.service';
 
 @Component({
   selector: 'app-calendar-month',

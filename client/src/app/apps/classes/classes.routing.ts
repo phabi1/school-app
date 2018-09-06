@@ -9,7 +9,15 @@ const routes: Routes = [
     canActivate: [ClassSelectGuard],
     children: [
       { path: 'edit', loadChildren: './edit/edit.module#EditModule' },
-      { path: 'students', loadChildren: './students/students.module#StudentsModule' }
+      { path: 'students', loadChildren: './students/students.module#StudentsModule' },
+      {
+        path: 'tools',
+        loadChildren: './tools/tools.module#ToolsModule',
+      },
+      {
+        path: 'generators',
+        loadChildren: './generators/generators.routing#GeneratorRoutingModule',
+    },
     ],
   }
 ];

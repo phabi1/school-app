@@ -2,5 +2,8 @@
   <div>
     <app-student-picture [url]="item.pictureUrl" size="40"></app-student-picture>
   </div>
-  <div class="ml-16">{{ fullname }}</div>
+  <div class="ml-16">
+    <div class="fullname text-truncate">{{ fullname }}</div>
+    <div>{{ item.sex }}</div>
+  </div>
 </div>

@@ -34,5 +34,12 @@ export class NavigationUpdatorService {
         item.url = '/apps/classes/' + currentClassId + '/students';
       });
     });
+    this.register('tools', (item) => {
+      return this._store.pipe(
+        select(getCurrentClassId)
+      ).subscribe((currentClassId) => {
+        item.url = '/apps/classes/' + currentClassId + '/tools';
+      });
+    });
   }
 }

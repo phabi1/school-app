@@ -19,9 +19,9 @@ export class StudentsController extends RestControllerBase {
   protected async createAction(payload: any) {
     const c = await this.ensureClass((this.req as any).params.classId);
 
-    if (payload.pictureUrl) {
-      const newPath = fileService.move(payload.pictureUrl, Path.join("private", "students", "pictures"));
-      payload.pictureUrl = newPath;
+    if (payload.picture) {
+      const newPath = fileService.move(payload.picture, "private://students/pictures");
+      payload.picture = newPath;
     }
 
     const student = await classService.addStudentInClass(c, payload);

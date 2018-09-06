@@ -14,18 +14,17 @@ export class ClassService {
     private _httpClient: HttpClient
   ) { }
 
-  public getLevels(): Observable<Level[]> {
-    return this._httpClient.get<any>('/assets/datas/class.json').pipe(
-      map((res) => res.levels)
+  public getLevels(classId: string): Observable<Level[]> {
+    return this._httpClient.get<any>('/api/classes/' + classId).pipe(
+      map((res) => res.grades)
     );
   }
 
-  public getStudents(): Observable<Student[]> {
-    return this._httpClient.get<any>('/assets/datas/class.json').pipe(
-      map(res => res.students.map((el) => {
+  public getStudents(classId: string): Observable<Student[]> {
+    return this._httpClient.get<any>('/api/classes/' + classId + '/students').pipe(
+      map(res => res.map((el) => {
         const obj = { ...el };
-        const [day, month, year] = el.birthday.split('-');
-        obj.birthday = new Date(+year, +month, +day);
+        obj.birthday = new Date(el.birthday);
         return obj;
       }))
     );

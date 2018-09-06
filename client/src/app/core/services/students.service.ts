@@ -4,18 +4,29 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Student } from '../models/student.model';
 import { ClassService } from './class.service';
+import { Store, select } from '@ngrx/store';
+import { getCurrentClassId } from '../../store/selectors/class.selectors';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StudentsService {
 
+  private _currentClassId: string;
+
   constructor(
     private _classService: ClassService,
-  ) { }
+    private _store: Store<any>,
+  ) {
+    this._store
+      .pipe(
+        select(getCurrentClassId)
+      )
+      .subscribe((currentClassId) => this._currentClassId = currentClassId);
+  }
 
   getStudents(): Observable<Student[]> {
-    return this._classService.getStudents();
+    return this._classService.getStudents(this._currentClassId);
   }
 }
 

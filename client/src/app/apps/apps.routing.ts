@@ -22,10 +22,6 @@ const routes: Routes = [
         path: 'classes',
         loadChildren: './classes/classes.routing#ClassesRoutingModule',
       },
-      {
-        path: 'tools',
-        loadChildren: './tools/tools.module#ToolsModule',
-      },
     ],
   }
 ];

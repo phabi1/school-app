@@ -2,23 +2,23 @@
   "tools": [
     {
       "title": "Etiquette prénom",
-      "url": "/generators/firstname-label"
+      "url": "/apps/classes/{classId}/generators/firstname-label"
     },
     {
       "title": "Grille de présence",
-      "url": "/generators/attendance-grid"
+      "url": "/apps/classes/{classId}/generators/attendance-grid"
     },
     {
       "title": "Grille d'évaluation",
-      "url": "/generators/evaluate-grid"
+      "url": "/apps/classes/{classId}/generators/evaluate-grid"
     },
     {
       "title": "Jours du mois",
-      "url": "/generators/calendar-month"
+      "url": "/apps/classes/{classId}/generators/calendar-month"
     },
     {
       "title": "Trombinoscope",
-      "url": "/generators/trombinoscope"
+      "url": "/apps/classes/{classId}/generators/trombinoscope"
     }
   ]
 }

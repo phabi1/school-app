@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
-import { Student } from '../../../../core/models/student.model';
-import { PdfCreatorService, writeTextRotate } from '../../../../core/services/pdf-creator.service';
-import { sortByFirstname, StudentsService, formatFirstname } from '../../../../core/services/students.service';
+import { Student } from '../../../../../../core/models/student.model';
+import { PdfCreatorService, writeTextRotate } from '../../../../../../core/services/pdf-creator.service';
+import { sortByFirstname, StudentsService, formatFirstname } from '../../../../../../core/services/students.service';
 
 @Injectable()
 export class AttendanceGridService {
