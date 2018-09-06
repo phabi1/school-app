@@ -11,6 +11,9 @@ export class StudentListComponent implements OnInit {
   @Input()
   items: Student[];
 
+  @Input()
+  currentItem: Student;
+
   @Output() itemClicked = new EventEmitter<Student>();
 
   constructor() { }

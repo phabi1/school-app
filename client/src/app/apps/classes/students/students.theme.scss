@@ -1,4 +1,6 @@
 @mixin classes-students-theme($theme) {
+
+  $background: map-get($theme, background);
   $foreground: map-get($theme, foreground);
 
   app-classes-students-student-list {
@@ -6,6 +8,10 @@
 
       app-classes-students-student-item {
         border-bottom-color: map-get($foreground, divider);
+
+        &.current-student {
+          background: map-get($background, hover);
+        }
       }
   }
 }

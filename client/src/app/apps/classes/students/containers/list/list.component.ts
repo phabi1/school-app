@@ -5,7 +5,7 @@ import { tap } from 'rxjs/operators';
 import { Go } from '../../../../../store/actions/router.actions';
 import { getCurrentClassId } from '../../../../../store/selectors/class.selectors';
 import { Student } from '../../models/student.model';
-import { selectAll } from '../../selectors/student.selectors';
+import { selectAll, getCurrentStudent } from '../../selectors/student.selectors';
 
 @Component({
   selector: 'app-classes-students-list',
@@ -16,6 +16,7 @@ import { selectAll } from '../../selectors/student.selectors';
 export class ListComponent implements OnInit, OnDestroy {
 
   public students$: Observable<Student[]>;
+  public currentStudent$: Observable<Student>;
 
   private _currentClassId: string;
   private _currentClassIdChange: Subscription;
@@ -26,6 +27,8 @@ export class ListComponent implements OnInit, OnDestroy {
     this.students$ = this._store.pipe(
       select(selectAll),
     );
+
+    this.currentStudent$ = this._store.pipe(select(getCurrentStudent));
   }
 
   ngOnInit(): void {

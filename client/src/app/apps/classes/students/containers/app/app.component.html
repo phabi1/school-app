@@ -2,7 +2,10 @@
   <div class="top-bg accent"></div>
   <fuse-sidebar class="sidebar" position="left" lockedOpen="gt-md">
     <div fxLayout="column" fxLayoutAlign="space-between start" class="header accent p-24 pb-4">
-
+      <div class="logo" fxFlex fxLayout="row" fxLayoutAlign="start center">
+        <mat-icon class="logo-icon s-32">people</mat-icon>
+        <span class="logo-text">{{ 'classesStudents.title' | translate }}</span>
+    </div>
     </div>
     <div class="content" fusePerfectScrollbar>
       <div class="p-24">
@@ -11,9 +14,21 @@
     </div>
   </fuse-sidebar>
   <div class="center">
-    <div class="header accent" fxLayout="column" fxLayoutAlign="center space-between">
-      <h2 class="m-0">{{ 'classesStudents.title' | translate }}</h2>
-    </div>
+    <div class="header" fxLayout="row" fxLayoutAlign="start center">
+
+      <div class="search-wrapper" fxFlex fxLayout="row" fxLayoutAlign="start center">
+
+          <button mat-icon-button class="sidebar-toggle" fxHide.gt-md
+                  (click)="toggleSidebar('mail-ngrx-main-sidebar')">
+              <mat-icon>menu</mat-icon>
+          </button>
+
+          <div class="search" flex fxLayout="row" fxLayoutAlign="start center">
+              <mat-icon>search</mat-icon>
+              <input [formControl]="searchInput" [placeholder]="'classesStudents.search.placeholder' | translate" fxFlex>
+          </div>
+      </div>
+  </div>
     <div class="content-card">
       <div class="toolbar p-24"></div>
       <div class="content" fxLayout="row">

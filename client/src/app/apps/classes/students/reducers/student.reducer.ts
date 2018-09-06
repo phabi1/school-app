@@ -6,6 +6,7 @@ export interface State extends EntityState<Student> {
   loading: boolean;
   loaded: boolean;
   currentStudentId?: string;
+  searchText: string;
 }
 
 export const adapter: EntityAdapter<Student> = createEntityAdapter<Student>();
@@ -13,6 +14,7 @@ export const adapter: EntityAdapter<Student> = createEntityAdapter<Student>();
 export const initialState: State = adapter.getInitialState({
   loading: false,
   loaded: false,
+  searchText: '',
 });
 
 export function reducer(
@@ -66,6 +68,13 @@ export function reducer(
 
     case StudentActionTypes.SetCurrentStudent: {
       return { ...state, currentStudentId: action.payload.id };
+    }
+
+    case StudentActionTypes.SetSearchText: {
+      return {
+        ...state,
+        searchText: action.payload.text
+      };
     }
 
     default: {

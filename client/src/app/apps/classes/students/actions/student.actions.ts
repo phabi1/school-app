@@ -20,6 +20,7 @@ export enum StudentActionTypes {
   DeleteStudents = '[Student] Delete Students',
   ClearStudents = '[Student] Clear Students',
   SetCurrentStudent = '[Student] Set Current Student',
+  SetSearchText = '[Student] Set Search Text',
 }
 
 export class LoadStudents implements Action {
@@ -114,6 +115,11 @@ export class SetCurrentStudent implements Action {
   constructor(public payload: { id: string }) { }
 }
 
+export class SetSearchText implements Action {
+  readonly type = StudentActionTypes.SetSearchText;
+  constructor(public payload: { text: string }) { }
+}
+
 export type StudentActions =
   LoadStudents
   | LoadStudentsSuccess
@@ -131,4 +137,5 @@ export type StudentActions =
   | DeleteStudent
   | DeleteStudents
   | ClearStudents
-  | SetCurrentStudent;
+  | SetCurrentStudent
+  | SetSearchText;
