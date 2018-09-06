@@ -1,5 +1,4 @@
 import Boom from "boom";
-import { ResponseToolkit } from "hapi";
 import * as Path from "path";
 import { RestControllerBase } from "../../core/controller/rest";
 import { models } from "../../models";
@@ -8,7 +7,7 @@ import { IStudentDocument } from "../../models/student";
 import { classService } from "../../services/class";
 import { fileService } from "../../services/file";
 import { uploader } from "../../services/uploader";
-import { UPLOAD_DIR } from "../../utils";
+import { TMP_DIR } from "../../utils";
 
 export class StudentsController extends RestControllerBase {
 
@@ -37,9 +36,9 @@ export class StudentsController extends RestControllerBase {
       throw Boom.notFound();
     }
 
-    if (payload.pictureUrl) {
-      const newPath = fileService.move(payload.pictureUrl, "private/students/pictures");
-      payload.pictureUrl = newPath;
+    if (payload.picture) {
+      const newPath = fileService.move(payload.picture, "private://students/pictures");
+      payload.picture = newPath;
     }
 
     student = await classService.updateStudentInClass(c, student, payload);
@@ -60,19 +59,11 @@ export class StudentsController extends RestControllerBase {
 
   }
 
-  protected async getPictureAction() {
-    const pictureId = (this.req as any).params.pictureId;
-    if (!pictureId) {
-      throw Boom.notFound();
-    }
-    return (this.h as ResponseToolkit).file(Path.join(UPLOAD_DIR, "students", "pictures", pictureId));
-  }
-
   protected async uploadPictureAction() {
     try {
       const data = (this.req as any).payload as any;
       const file = data.file;
-      const fileDetails = await uploader(file, { dest: Path.join(UPLOAD_DIR) });
+      const fileDetails = await uploader(file, { dest: "temporary://" });
       return fileDetails;
     } catch (err) {
       throw Boom.badRequest(err.message, err);

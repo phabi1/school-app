@@ -1,3 +1,6 @@
-<div>
-  <div matLine>{{ fullname }}</div>
+<div fxLayout="row" fxLayoutAlign="start center">
+  <div>
+    <app-student-picture [url]="item.pictureUrl" size="40"></app-student-picture>
+  </div>
+  <div class="ml-16">{{ fullname }}</div>
 </div>

@@ -1,32 +1,32 @@
 <form [formGroup]="form" fxLayout="column" (ngSubmit)="update()">
-  <app-classes-students-student-picture-picker [defaultUrl]="data.student.pictureUrl"></app-classes-students-student-picture-picker>
+  <app-classes-students-student-picture-picker [defaultUrl]="data.student.pictureUrl" (urlChanged)="onUrlChanged($event)"></app-classes-students-student-picture-picker>
   <mat-form-field>
-    <mat-select placeholder="Level" formControlName="grade" required>
+    <mat-select placeholder="{{ 'classesStudents.update.form.fields.grade.placeholder' | translate }}" formControlName="grade" required>
       <mat-option *ngFor="let option of gradeOptions$ | async" [value]="option.data">
         {{option.label}}
       </mat-option>
     </mat-select>
   </mat-form-field>
   <mat-form-field>
-    <input matInput formControlName="lastname" placeholder="Lastname" required>
+    <input matInput formControlName="lastname" placeholder="{{ 'classesStudents.update.form.fields.lastname.placeholder' | translate }}" required>
   </mat-form-field>
   <mat-form-field>
-    <input matInput formControlName="firstname" placeholder="Firstname" required>
+    <input matInput formControlName="firstname" placeholder="{{ 'classesStudents.update.form.fields.firstname.placeholder' | translate }}" required>
   </mat-form-field>
   <mat-form-field>
-    <input matInput formControlName="shortname" placeholder="Shortname">
+    <input matInput formControlName="shortname" placeholder="{{ 'classesStudents.update.form.fields.shortname.placeholder' | translate }}">
   </mat-form-field>
   <mat-radio-group formControlName="sex">
-    <mat-radio-button value="MALE">Garçon</mat-radio-button>
-    <mat-radio-button value="FEMALE">Fille</mat-radio-button>
+    <mat-radio-button value="MALE">{{ 'classesStudents.update.form.fields.sex.boy.label' | translate }}</mat-radio-button>
+    <mat-radio-button value="FEMALE">{{ 'classesStudents.update.form.fields.sex.girl.label' | translate }}</mat-radio-button>
   </mat-radio-group>
   <mat-form-field>
-    <input matInput formControlName="birthday" placeholder="Birthday" [matDatepicker]="birthdayPicker">
+    <input matInput formControlName="birthday" placeholder="{{ 'classesStudents.update.form.fields.birthday.placeholder' | translate }}" [matDatepicker]="birthdayPicker">
     <mat-datepicker-toggle matSuffix [for]="birthdayPicker"></mat-datepicker-toggle>
     <mat-datepicker #birthdayPicker></mat-datepicker>
   </mat-form-field>
   <mat-form-field>
-    <textarea matInput formControlName="notes" placeholder="notes"></textarea>
+    <textarea matInput formControlName="notes" placeholder="{{ 'classesStudents.update.form.fields.notes.placeholder' | translate }}"></textarea>
   </mat-form-field>
-  <button mat-raised-button color="accent" [disabled]="form.invalid">Save</button>
+  <button mat-raised-button color="accent" [disabled]="form.invalid">{{ 'commons.buttons.save' | translate }}</button>
 </form>

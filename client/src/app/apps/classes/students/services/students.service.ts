@@ -52,6 +52,7 @@ export class StudentsService {
       birthday: data.birthday || null,
       grade: data.grade || null,
       notes: data.notes || null,
+      picture: data.picture || null,
       pictureUrl: data.pictureUrl || null,
     };
     return obj;

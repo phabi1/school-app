@@ -1,5 +1,6 @@
 import * as Fs from "fs";
 import * as Path from "path";
+import Sharp from "sharp";
 import Uuid from "uuid";
 import { fileService } from "./file";
 
@@ -9,9 +10,9 @@ export interface IFileUploaderOptions {
 
 export interface IFileDetails {
   originalName: string;
-  fileName: string;
-  destination: string;
+  filename: string;
   path: string;
+  url: string;
   mimeType: string;
   size: number;
 }
@@ -24,12 +25,15 @@ export async function uploader(file: any, options: IFileUploaderOptions) {
 
 function _fileHandler(file: any, options: IFileUploaderOptions): Promise<any> {
   const originalName = file.hapi.filename;
-  const fileName = Uuid.v1();
+
+  const extension = Path.extname(originalName);
+  const filename = Uuid.v1() + extension;
 
   fileService.prepareDirectory(options.dest);
+  const uri = options.dest + filename;
+  const filepath = fileService.getFilePath(uri);
+  const fileStream = Fs.createWriteStream(filepath);
 
-  const path = Path.join(options.dest, fileName);
-  const fileStream = Fs.createWriteStream(path);
   return new Promise((resolve, reject) => {
 
     file.on("error", (err: any) => { reject(err); });
@@ -39,11 +43,11 @@ function _fileHandler(file: any, options: IFileUploaderOptions): Promise<any> {
     file.on("end", (err: any) => {
       const fileDetails: IFileDetails = {
         originalName,
-        fileName,
+        filename,
         mimeType: file.hapi.headers["content-type"],
-        destination: options.dest,
-        path,
-        size: Fs.statSync(path).size,
+        path: uri,
+        url: fileService.createExternalUrl(uri),
+        size: fileService.getFileSize(uri),
       };
       resolve(fileDetails);
     });

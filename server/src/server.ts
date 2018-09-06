@@ -45,6 +45,7 @@ const manifest: Glue.Manifest = {
           routes: "dist/routes/**/routes.js",
         },
       },
+      "./plugins/files",
     ],
   },
 };

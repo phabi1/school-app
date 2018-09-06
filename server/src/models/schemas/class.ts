@@ -1,4 +1,6 @@
-import { Schema, SchemaType, SchemaTypes } from "mongoose";
+import { Schema, SchemaTypes } from "mongoose";
+import { fileService } from "../../services/file";
+import { IStudentDocument } from "../student";
 
 const studentSchema = new Schema({
     firstname: {
@@ -27,10 +29,23 @@ const studentSchema = new Schema({
     notes: {
         type: SchemaTypes.String,
     },
-    pictureUrl: {
+    picture: {
         type: SchemaTypes.String,
     },
-}, { timestamps: true, toJSON: { virtuals: true } });
+}, {
+        timestamps: true,
+        toJSON: {
+            virtuals: true,
+            transform: (doc: IStudentDocument, ret: any) => {
+                if (doc.picture) {
+                    ret.pictureUrl = fileService.createExternalUrl(doc.picture);
+                } else {
+                    ret.pictureUrl = null;
+                }
+                return ret;
+            },
+        },
+    });
 
 const groupSchema = new Schema({
     name: {

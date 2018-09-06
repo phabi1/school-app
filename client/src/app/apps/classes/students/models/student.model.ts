@@ -7,5 +7,6 @@ export interface Student {
   birthday: Date;
   notes: string;
   grade: string;
+  picture: string;
   pictureUrl: string;
 }

@@ -19,7 +19,11 @@ export class StudentPicturePickerComponent {
 
   @Input()
   set defaultUrl(url: string) {
-    this.picture = '/api/' + url;
+    if (url) {
+      this.picture = url;
+    } else {
+      this.picture = null;
+    }
   }
 
   @Output() urlChanged = new EventEmitter<string>();
@@ -57,13 +61,14 @@ export class StudentPicturePickerComponent {
       this.dragOver = false;
     } else if (output.type === 'done') {
       const response = output.file.response;
-      this.picture = '/api/classes/students/picture/' + response.fileName;
+      this.picture = response.url;
       this.urlChanged.emit(output.file.response.path);
     }
   }
 
   delete(): void {
     this.picture = null;
+    this.urlChanged.emit(null);
   }
 
 }

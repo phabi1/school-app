@@ -1,5 +1,5 @@
 <form [formGroup]="form" fxLayout="column" (ngSubmit)="add()">
-  <app-classes-students-student-picture-picker (urlChanged)="onUrlChanged($event)"></app-classes-students-student-picture-picker>
+  <app-classes-students-student-picture-picker [defaultUrl]="null" (urlChanged)="onUrlChanged($event)"></app-classes-students-student-picture-picker>
   <mat-form-field>
     <mat-select placeholder="Level" formControlName="grade" required>
       <mat-option *ngFor="let item of levelOptions$ | async" [value]="item.data">

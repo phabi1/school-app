@@ -8,4 +8,5 @@ export interface IStudentDocument extends Document {
   shortname?: string;
   sex?: "MALE" | "FEMALE" | "UNKNOW";
   birthday?: Date;
+  picture?: string;
 }

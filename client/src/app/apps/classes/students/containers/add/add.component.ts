@@ -31,7 +31,7 @@ export class AddComponent implements OnInit {
     );
 
     this.form = this._formBuilder.group({
-      pictureUrl: [null],
+      picture: [null],
       firstname: [null, Validators.required],
       shortname: [null],
       lastname: [null, Validators.required],

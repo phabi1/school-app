@@ -29,5 +29,6 @@ export const updateValidator = {
     sex: Joi.string().valid("MALE", "FEMALE").optional(),
     birthday: Joi.date().allow(null).optional(),
     notes: Joi.string().allow(null).optional(),
+    picture: Joi.string().allow(null).optional(),
   },
 };

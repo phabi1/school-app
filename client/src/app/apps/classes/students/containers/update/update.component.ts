@@ -41,11 +41,16 @@ export class UpdateComponent implements OnInit {
       shortname: [student.shortname],
       sex: [student.sex],
       birthday: [student.birthday],
-      notes: [student.notes]
+      notes: [student.notes],
+      picture: [student.picture]
     });
   }
 
   ngOnInit() {
+  }
+
+  onUrlChanged(event: string): void {
+    this.form.get('picture').setValue(event);
   }
 
   update(): void {
