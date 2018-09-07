@@ -1,0 +1,22 @@
+.example-section {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  height: 60px;
+}
+
+.example-margin {
+  margin: 0 10px;
+}
+
+:host {
+  .student-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    .student-item {
+      flex: 1 0 33%;
+    }
+  }
+}
