@@ -1,1 +1,7 @@
-<app-classes-students-student-list fxFlex [items]="students$ | async" [currentItem]="currentStudent$ | async" (itemClicked)="onItemClicked($event)"></app-classes-students-student-list> 
+<app-classes-students-student-list fxFlex 
+[items]="students$ | async" 
+[selectedItems]="selectedStudents$ | async" 
+[currentItem]="currentStudent$ | async" 
+(itemClicked)="onItemClicked($event)"
+(itemSelected)="onItemSelected($event)"
+></app-classes-students-student-list> 

@@ -9,7 +9,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "buildFonts": "./node_modules/pdfmake/node_modules/.bin/gulp buildFonts",
-    "i18n": "ngx-translate-extract --input ./src --output ./src/assets/i18n/fr.json ./src/assets/i18n/en.json --clean --sort --format namespaced-json && gulp i18n-split"
+    "i18n": "ngx-translate-extract --input ./src --output ./src/assets/i18n/fr.json ./src/assets/i18n/en.json --clean --sort --format namespaced-json"
   },
   "private": true,
   "dependencies": {

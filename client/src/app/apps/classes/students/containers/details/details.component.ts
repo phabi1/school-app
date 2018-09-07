@@ -5,6 +5,7 @@ import { Student } from '../../models/student.model';
 import { getCurrentStudent } from '../../selectors/student.selectors';
 import { MatDialog } from '@angular/material';
 import { UpdateComponent } from '../update/update.component';
+import { ShowUpdateForm, ConfirmDeleteStudents } from '../../actions/student.actions';
 
 @Component({
   selector: 'app-classes-students-details',
@@ -17,7 +18,6 @@ export class DetailsComponent implements OnInit {
   public currentStudent$: Observable<Student>;
 
   constructor(
-    private _dialog: MatDialog,
     private _store: Store<any>
   ) {
     this.currentStudent$ = this._store.pipe(select(getCurrentStudent));
@@ -37,11 +37,11 @@ export class DetailsComponent implements OnInit {
   }
 
   protected updateStudent(student: Student): void {
-    const dialogRef = this._dialog.open(UpdateComponent, { data: { student } });
+    this._store.dispatch(new ShowUpdateForm({ student }));
   }
 
   protected deleteStudent(student: Student): void {
-
+    this._store.dispatch(new ConfirmDeleteStudents({ students: [student] }));
   }
 
 }

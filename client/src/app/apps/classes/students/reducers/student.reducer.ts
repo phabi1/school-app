@@ -5,6 +5,7 @@ import { Student } from '../models/student.model';
 export interface State extends EntityState<Student> {
   loading: boolean;
   loaded: boolean;
+  selectedStudentIds: string[];
   currentStudentId?: string;
   searchText: string;
 }
@@ -14,6 +15,7 @@ export const adapter: EntityAdapter<Student> = createEntityAdapter<Student>();
 export const initialState: State = adapter.getInitialState({
   loading: false,
   loaded: false,
+  selectedStudentIds: [],
   searchText: '',
 });
 
@@ -50,7 +52,7 @@ export function reducer(
       return adapter.removeOne(action.payload.id, state);
     }
 
-    case StudentActionTypes.DeleteStudents: {
+    case StudentActionTypes.DeleteStudentsSuccess: {
       return adapter.removeMany(action.payload.ids, state);
     }
 
@@ -75,6 +77,24 @@ export function reducer(
         ...state,
         searchText: action.payload.text
       };
+    }
+
+    case StudentActionTypes.SelectAllStudents: {
+      return { ...state, selectedStudentIds: [...state.ids as string[]] };
+    }
+
+    case StudentActionTypes.DeselectAllStudents: {
+      return { ...state, selectedStudentIds: [] };
+    }
+
+    case StudentActionTypes.ToggleSelectionStudent: {
+      let selectedStudentIds: string[] = [...state.selectedStudentIds];
+      if (selectedStudentIds.find(id => action.payload.id === id) !== undefined) {
+        selectedStudentIds = selectedStudentIds.filter((id) => action.payload.id !== id);
+      } else {
+        selectedStudentIds.push(action.payload.id);
+      }
+      return { ...state, selectedStudentIds };
     }
 
     default: {

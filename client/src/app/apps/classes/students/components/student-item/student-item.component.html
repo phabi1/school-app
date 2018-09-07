@@ -1,5 +1,6 @@
 <div fxLayout="row" fxLayoutAlign="start center">
-  <div>
+  <mat-checkbox [checked]="selected" (change)="onSelectChange()" (click)="$event.stopPropagation();"></mat-checkbox>
+  <div class="ml-16">
     <app-student-picture [url]="item.pictureUrl" size="40"></app-student-picture>
   </div>
   <div class="ml-16">

@@ -1,0 +1,12 @@
+<div fxLayout="column" fxLayoutAlign="space-between start" class="header accent p-24 pb-4">
+  <div class="logo" fxFlex fxLayout="row" fxLayoutAlign="start center">
+    <mat-icon class="logo-icon s-32">people</mat-icon>
+    <span class="logo-text">{{ 'classesStudents.title' | translate }}</span>
+  </div>
+</div>
+<div class="content" fusePerfectScrollbar>
+  <div class="p-24">
+    <button mat-raised-button color="accent" class="w-100-p" (click)="addStudent()">{{ 'classesStudents.buttons.add' |
+      translate }}</button>
+  </div>
+</div>

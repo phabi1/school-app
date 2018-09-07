@@ -17,21 +17,21 @@
   </div>
   <div fxLayout="row">
     <div fxFlex class="info">
-      <div class="label">Prénom</div>
+      <div class="label">{{ 'classesStudents.details.labels.firstname' | translate }}</div>
       <div>{{ student.firstname }}</div>
     </div>
     <div fxFlex class="info">
-      <div class="label">Nom de famille</div>
+      <div class="label">{{ 'classesStudents.details.labels.lastname' | translate }}</div>
       <div>{{ student.lastname }}</div>
     </div>
   </div>
   <div *ngIf="student.shortname" class="info">
-    <div class="label">Prénom court</div>
+    <div class="label">{{ 'classesStudents.details.labels.shortname' | translate }}</div>
     <div>{{ student.shortname }}</div>
   </div>
 
   <div *ngIf="student.birthday" class="info">
-    <div class="label">Date de naissance</div>
+    <div class="label">{{ 'classesStudents.details.labels.birthday' | translate }}</div>
     <div>{{ student.birthday | date }}</div>
   </div>
 </div>

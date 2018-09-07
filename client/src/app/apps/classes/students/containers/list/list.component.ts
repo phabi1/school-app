@@ -1,11 +1,11 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
-import { tap } from 'rxjs/operators';
 import { Go } from '../../../../../store/actions/router.actions';
 import { getCurrentClassId } from '../../../../../store/selectors/class.selectors';
 import { Student } from '../../models/student.model';
-import { selectAll, getCurrentStudent } from '../../selectors/student.selectors';
+import { getCurrentStudent, getStudentResults, getSelectedStudents } from '../../selectors/student.selectors';
+import { ToggleSelectionStudent } from '../../actions/student.actions';
 
 @Component({
   selector: 'app-classes-students-list',
@@ -16,6 +16,7 @@ import { selectAll, getCurrentStudent } from '../../selectors/student.selectors'
 export class ListComponent implements OnInit, OnDestroy {
 
   public students$: Observable<Student[]>;
+  public selectedStudents$: Observable<Student[]>;
   public currentStudent$: Observable<Student>;
 
   private _currentClassId: string;
@@ -24,10 +25,8 @@ export class ListComponent implements OnInit, OnDestroy {
   constructor(
     private _store: Store<any>,
   ) {
-    this.students$ = this._store.pipe(
-      select(selectAll),
-    );
-
+    this.students$ = this._store.pipe(select(getStudentResults));
+    this.selectedStudents$ = this._store.pipe(select(getSelectedStudents));
     this.currentStudent$ = this._store.pipe(select(getCurrentStudent));
   }
 
@@ -47,6 +46,10 @@ export class ListComponent implements OnInit, OnDestroy {
 
   onItemClicked(event: Student) {
     this._store.dispatch(new Go({ path: ['/apps/classes/' + this._currentClassId + '/students/' + event.id] }));
+  }
+
+  onItemSelected(event: Student) {
+    this._store.dispatch(new ToggleSelectionStudent({ id: event.id }));
   }
 
 }

@@ -1,9 +1,11 @@
+<h1 mat-dialog-title>{{ 'classesStudents.add.title' | translate }}</h1>
+<div mat-dialog-content>
 <form [formGroup]="form" fxLayout="column" (ngSubmit)="add()">
   <app-classes-students-student-picture-picker [defaultUrl]="null" (urlChanged)="onUrlChanged($event)"></app-classes-students-student-picture-picker>
   <mat-form-field>
-    <mat-select placeholder="Level" formControlName="grade" required>
-      <mat-option *ngFor="let item of levelOptions$ | async" [value]="item.data">
-        {{item.label}}
+    <mat-select placeholder="{{ 'classesStudents.add.form.fields.grade.placeholder' | translate }}" formControlName="grade" required>
+      <mat-option *ngFor="let option of gradeOptions$ | async" [value]="option.data">
+        {{option.label}}
       </mat-option>
     </mat-select>
   </mat-form-field>
@@ -28,5 +30,8 @@
     <mat-datepicker-toggle matSuffix [for]="birthdayPicker"></mat-datepicker-toggle>
     <mat-datepicker #birthdayPicker></mat-datepicker>
   </mat-form-field>
-  <button mat-raised-button color="accent" [disabled]="form.invalid">{{ 'commons.buttons.add' | translate }}</button>
 </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button color="accent" [disabled]="form.invalid" (click)="add()">{{ 'commons.buttons.add' | translate }}</button>
+</div>

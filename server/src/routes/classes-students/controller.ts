@@ -46,6 +46,18 @@ export class StudentsController extends RestControllerBase {
     return student;
   }
 
+  protected async deleteAction(id: string): Promise<IStudentDocument> {
+    const c = await this.ensureClass((this.req as any).params.classId);
+    let student = c.students.id(id);
+    if (!student) {
+      throw Boom.notFound();
+    }
+
+    student = await classService.deleteStudentInClass(c, student);
+
+    return student;
+  }
+
   protected async ensureClass(id: string): Promise<IClassDocument> {
     try {
       const c = await models.class.findById(id);

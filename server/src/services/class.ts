@@ -41,7 +41,7 @@ class ClassService {
     return student;
   }
 
-  public async removeStudentInClass(c: IClassDocument, student: IStudentDocument): Promise<IStudentDocument> {
+  public async deleteStudentInClass(c: IClassDocument, student: IStudentDocument): Promise<IStudentDocument> {
     c.students.pull(student);
     await c.save();
     return student;

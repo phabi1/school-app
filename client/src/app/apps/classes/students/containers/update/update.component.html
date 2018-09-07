@@ -1,3 +1,5 @@
+<h1 mat-dialog-title>{{ 'classesStudents.update.title' | translate }}</h1>
+<div mat-dialog-content>
 <form [formGroup]="form" fxLayout="column" (ngSubmit)="update()">
   <app-classes-students-student-picture-picker [defaultUrl]="data.student.pictureUrl" (urlChanged)="onUrlChanged($event)"></app-classes-students-student-picture-picker>
   <mat-form-field>
@@ -28,5 +30,8 @@
   <mat-form-field>
     <textarea matInput formControlName="notes" placeholder="{{ 'classesStudents.update.form.fields.notes.placeholder' | translate }}"></textarea>
   </mat-form-field>
-  <button mat-raised-button color="accent" [disabled]="form.invalid">{{ 'commons.buttons.save' | translate }}</button>
 </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button color="accent" [disabled]="form.invalid" (click)="update()">{{ 'commons.buttons.save' | translate }}</button>
+</div>

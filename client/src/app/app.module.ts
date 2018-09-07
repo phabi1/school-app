@@ -1,7 +1,7 @@
 import { registerLocaleData } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
-import localeFr from '@angular/common/locales/fr';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import localeFrExtra from '@angular/common/locales/extra/fr';
+import localeFr from '@angular/common/locales/fr';
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { DateAdapter, MatButtonModule, MatIconModule, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material';
 import { MatMomentDateModule, MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from '@angular/material-moment-adapter';
@@ -10,7 +10,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FuseProgressBarModule, FuseSidebarModule, FuseThemeOptionsModule } from '@fuse/components';
 import { FuseModule } from '@fuse/fuse.module';
 import { FuseSharedModule } from '@fuse/shared.module';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { fuseConfig } from 'app/app.config';
 import { AUTH_AUTHENTICATION_SERVICE } from 'ngrx-auth-store';
 import { AppComponent } from './app.component';
@@ -22,6 +23,10 @@ import { AppStoreModule } from './store/store.module';
 
 registerLocaleData(localeFr, 'fr', localeFrExtra);
 
+export function createTranslateLoaderFactory (httpClient: HttpClient): TranslateLoader {
+  return new TranslateHttpLoader(httpClient, '/assets/i18n/', '.json');
+}
+
 @NgModule({
   declarations: [
     AppComponent
@@ -30,7 +35,13 @@ registerLocaleData(localeFr, 'fr', localeFrExtra);
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    TranslateModule.forRoot(),
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: createTranslateLoaderFactory,
+        deps: [HttpClient]
+      }
+    }),
 
     // Material
     MatButtonModule,

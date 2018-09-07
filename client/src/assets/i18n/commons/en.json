@@ -1,7 +1,10 @@
 {
 	"commons": {
 		"buttons": {
-			"add": ""
+			"add": "",
+			"delete": "",
+			"save": "",
+			"update": ""
 		}
 	}
 }

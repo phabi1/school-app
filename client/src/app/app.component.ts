@@ -34,7 +34,6 @@ export class AppComponent implements OnInit, OnDestroy {
     private _fuseNavigationService: FuseNavigationService,
     private _fuseSidebarService: FuseSidebarService,
     private _fuseSplashScreenService: FuseSplashScreenService,
-    private _fuseTranslationLoaderService: FuseTranslationLoaderService,
     private _translateService: TranslateService,
     private _platform: Platform,
     private _navigationUpdatorService: NavigationUpdatorService,
@@ -50,9 +49,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
     // Set the default language
     this._translateService.setDefaultLang('en');
-
-    // Set the navigation translations
-    // this._fuseTranslationLoaderService.loadTranslations(navigationEnglish, navigationTurkish);
 
     // Use a language
     this._translateService.use('fr');

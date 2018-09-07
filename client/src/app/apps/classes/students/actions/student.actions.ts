@@ -18,9 +18,27 @@ export enum StudentActionTypes {
   UpdateStudents = '[Student] Update Students',
   DeleteStudent = '[Student] Delete Student',
   DeleteStudents = '[Student] Delete Students',
+  DeleteStudentsSuccess = '[Student] Delete Students Success',
+  DeleteStudentsFailure = '[Student] Delete Students Failure',
   ClearStudents = '[Student] Clear Students',
   SetCurrentStudent = '[Student] Set Current Student',
   SetSearchText = '[Student] Set Search Text',
+  ShowAddForm = '[Student] Show Add Form',
+  ShowUpdateForm = '[Student] Show Update Form',
+  ConfirmDeleteStudents = '[Student] Confirm Delete Students',
+  SelectAllStudents = '[Student] Select All Students',
+  DeselectAllStudents = '[Student] Deselect All Students',
+  ToggleSelectionStudent = '[Student] Toggle Selection Student',
+}
+
+export class ShowAddForm implements Action {
+  readonly type = StudentActionTypes.ShowAddForm;
+  constructor(public payload: { student: Student }) { }
+}
+
+export class ShowUpdateForm implements Action {
+  readonly type = StudentActionTypes.ShowUpdateForm;
+  constructor(public payload: { student: Student }) { }
 }
 
 export class LoadStudents implements Action {
@@ -105,6 +123,16 @@ export class DeleteStudents implements Action {
 
   constructor(public payload: { ids: string[] }) { }
 }
+export class DeleteStudentsSuccess implements Action {
+  readonly type = StudentActionTypes.DeleteStudentsSuccess;
+
+  constructor(public payload: { ids: string[] }) { }
+}
+export class DeleteStudentsFailure implements Action {
+  readonly type = StudentActionTypes.DeleteStudentsFailure;
+
+  constructor(public payload: { error: any }) { }
+}
 
 export class ClearStudents implements Action {
   readonly type = StudentActionTypes.ClearStudents;
@@ -118,6 +146,24 @@ export class SetCurrentStudent implements Action {
 export class SetSearchText implements Action {
   readonly type = StudentActionTypes.SetSearchText;
   constructor(public payload: { text: string }) { }
+}
+
+export class ConfirmDeleteStudents implements Action {
+  readonly type = StudentActionTypes.ConfirmDeleteStudents;
+  constructor(public payload: { students: Student[] }) { }
+}
+
+export class SelectAllStudents implements Action {
+  readonly type = StudentActionTypes.SelectAllStudents;
+}
+
+export class DeselectAllStudents implements Action {
+  readonly type = StudentActionTypes.DeselectAllStudents;
+}
+
+export class ToggleSelectionStudent implements Action {
+  readonly type = StudentActionTypes.ToggleSelectionStudent;
+  constructor(public payload: { id: string }) { }
 }
 
 export type StudentActions =
@@ -136,6 +182,14 @@ export type StudentActions =
   | UpdateStudents
   | DeleteStudent
   | DeleteStudents
+  | DeleteStudentsSuccess
+  | DeleteStudentsFailure
   | ClearStudents
   | SetCurrentStudent
-  | SetSearchText;
+  | SetSearchText
+  | ShowAddForm
+  | ShowUpdateForm
+  | ConfirmDeleteStudents
+  | SelectAllStudents
+  | DeselectAllStudents
+  | ToggleSelectionStudent;

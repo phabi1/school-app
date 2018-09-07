@@ -4,30 +4,34 @@
 			"form": {
 				"fields": {
 					"birthday": {
-						"placeholder": ""
+						"placeholder": "Date de naissance"
 					},
 					"firstname": {
-						"placeholder": ""
+						"placeholder": "Prénom"
+					},
+					"grade": {
+						"placeholder": "Niveau"
 					},
 					"lastname": {
-						"placeholder": ""
+						"placeholder": "Nom de famille"
 					},
 					"sex": {
 						"boy": {
-							"label": ""
+							"label": "Garçon"
 						},
 						"girl": {
-							"label": ""
+							"label": "Fille"
 						}
 					},
 					"shortname": {
-						"placeholder": ""
+						"placeholder": "Surnom"
 					}
 				}
-			}
+			},
+			"title": "Ajout d'un élève"
 		},
 		"buttons": {
-			"add": ""
+			"add": "Ajouter un élève"
 		},
 		"details": {
 			"messages": {
@@ -36,14 +40,53 @@
 		},
 		"list": {
 			"messages": {
-				"empty": ""
+				"empty": "Il n'y a aucun élève"
 			}
 		},
-		"title": ""
+		"search": {
+			"placeholder": "Rechercher un élève"
+		},
+		"title": "Elèves",
+		"update": {
+			"form": {
+				"fields": {
+					"birthday": {
+						"placeholder": "Date de naissance"
+					},
+					"firstname": {
+						"placeholder": "Prénom"
+					},
+					"grade": {
+						"placeholder": "Niveau"
+					},
+					"lastname": {
+						"placeholder": "Nom de famille"
+					},
+					"notes": {
+						"placeholder": "Notes"
+					},
+					"sex": {
+						"boy": {
+							"label": "Garçon"
+						},
+						"girl": {
+							"label": "Fille"
+						}
+					},
+					"shortname": {
+						"placeholder": "Surnom"
+					}
+				}
+			},
+			"title": "Modification d'un élève"
+		}
 	},
 	"commons": {
 		"buttons": {
-			"add": ""
+			"add": "Ajouter",
+			"delete": "Supprimer",
+			"save": "Enregistrer",
+			"update": "Modifier"
 		}
 	}
 }

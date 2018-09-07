@@ -9,6 +9,9 @@
 					"firstname": {
 						"placeholder": ""
 					},
+					"grade": {
+						"placeholder": ""
+					},
 					"lastname": {
 						"placeholder": ""
 					},
@@ -24,7 +27,8 @@
 						"placeholder": ""
 					}
 				}
-			}
+			},
+			"title": ""
 		},
 		"buttons": {
 			"add": ""
@@ -39,11 +43,50 @@
 				"empty": ""
 			}
 		},
-		"title": ""
+		"search": {
+			"placeholder": ""
+		},
+		"title": "",
+		"update": {
+			"form": {
+				"fields": {
+					"birthday": {
+						"placeholder": ""
+					},
+					"firstname": {
+						"placeholder": ""
+					},
+					"grade": {
+						"placeholder": ""
+					},
+					"lastname": {
+						"placeholder": ""
+					},
+					"notes": {
+						"placeholder": ""
+					},
+					"sex": {
+						"boy": {
+							"label": ""
+						},
+						"girl": {
+							"label": ""
+						}
+					},
+					"shortname": {
+						"placeholder": ""
+					}
+				}
+			},
+			"title": ""
+		}
 	},
 	"commons": {
 		"buttons": {
-			"add": ""
+			"add": "",
+			"delete": "",
+			"save": "",
+			"update": ""
 		}
 	}
 }

@@ -16,11 +16,12 @@ import {
   MatSelectModule,
   MatRippleModule,
   MatDatepickerModule,
+  MatCheckboxModule,
 } from '@angular/material';
 import { FuseSidebarModule } from '@fuse/components';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AddComponent } from './containers/add/add.component';
 import { AppComponent } from './containers/app/app.component';
@@ -39,9 +40,11 @@ import { GradeEffects } from './effects/grade.effects';
 import { StudentPicturePickerComponent } from './components/student-picture-picker/student-picture-picker.component';
 import { NgxUploaderModule } from 'ngx-uploader';
 import { StudentPictureModule } from '../../../ui/student-picture/student-picture.module';
+import { ConfirmDeleteComponent } from './containers/confirm-delete/confirm-delete.component';
+import { SidebarComponent } from './containers/sidebar/sidebar.component';
 
-export function translateLoaderFactory (httpClient: HttpClient): TranslateLoader {
-  return new TranslateHttpLoader(httpClient, '/assets/i18/classes-students/');
+export function translateLoaderFactory(httpClient: HttpClient): TranslateLoader {
+  return new TranslateHttpLoader(httpClient, '/assets/i18/classes-students/', '.json');
 }
 
 @NgModule({
@@ -50,13 +53,14 @@ export function translateLoaderFactory (httpClient: HttpClient): TranslateLoader
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
-    TranslateModule.forChild({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: translateLoaderFactory,
-        deps: [HttpClient]
-      }
-    }),
+    TranslateModule,
+    // TranslateModule.forChild({
+    //   loader: {
+    //     provide: TranslateLoader,
+    //     useFactory: translateLoaderFactory,
+    //     deps: [HttpClient]
+    //   }
+    // }),
     MatButtonModule,
     MatTableModule,
     MatDialogModule,
@@ -69,6 +73,7 @@ export function translateLoaderFactory (httpClient: HttpClient): TranslateLoader
     MatSelectModule,
     MatRippleModule,
     MatDatepickerModule,
+    MatCheckboxModule,
     StudentsRoutingModule,
     FuseSidebarModule,
     StudentPictureModule,
@@ -79,6 +84,7 @@ export function translateLoaderFactory (httpClient: HttpClient): TranslateLoader
   entryComponents: [
     AddComponent,
     UpdateComponent,
+    ConfirmDeleteComponent
   ],
   declarations: [
     ListComponent,
@@ -89,11 +95,19 @@ export function translateLoaderFactory (httpClient: HttpClient): TranslateLoader
     StudentItemComponent,
     StudentDetailComponent,
     UpdateComponent,
-    StudentPicturePickerComponent
+    StudentPicturePickerComponent,
+    ConfirmDeleteComponent,
+    SidebarComponent
   ],
   providers: [
     ResolveGuard,
     StudentsService
   ]
 })
-export class StudentsModule { }
+export class StudentsModule {
+  constructor(
+    private _translateService: TranslateService,
+  ) {
+    // this._translateService.use('fr');
+  }
+}

@@ -1,17 +1,37 @@
 @mixin classes-students-theme($theme) {
-
   $background: map-get($theme, background);
   $foreground: map-get($theme, foreground);
+
+  app-classes-students-app {
+    .center {
+      .header {
+        .search-wrapper {
+          background: map-get($background, card);
+
+          .sidebar-toggle {
+            border-right-color: map-get($foreground, divider);
+          }
+
+          .search {
+            input {
+              background: map-get($background, card);
+              color: map-get($foreground, text);
+            }
+          }
+        }
+      }
+    }
+  }
 
   app-classes-students-student-list {
     border-right-color: map-get($foreground, divider);
 
-      app-classes-students-student-item {
-        border-bottom-color: map-get($foreground, divider);
+    app-classes-students-student-item {
+      border-bottom-color: map-get($foreground, divider);
 
-        &.current-student {
-          background: map-get($background, hover);
-        }
+      &.current-student {
+        background: map-get($background, hover);
       }
+    }
   }
 }

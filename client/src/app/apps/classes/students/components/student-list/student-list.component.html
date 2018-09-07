@@ -3,5 +3,10 @@
 </div>
 
 <div class="student-list">
-  <app-classes-students-student-item matRipple *ngFor="let item of items" [item]="item" [ngClass]="{'current-student':item?.id == currentItem?.id}" (click)="itemClicked.emit(item)"></app-classes-students-student-item>
+  <app-classes-students-student-item matRipple *ngFor="let item of items" 
+  [item]="item" 
+  [selected]="isSelected(item)" 
+  [ngClass]="{'current-student':item?.id == currentItem?.id}"
+  (selectedChange)="itemSelected.emit(item)" 
+  (click)="itemClicked.emit(item)"></app-classes-students-student-item>
 </div>

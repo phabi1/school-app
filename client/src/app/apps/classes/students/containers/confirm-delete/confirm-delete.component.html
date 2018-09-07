@@ -1,0 +1,9 @@
+<h1 mat-dialog-title>{{ 'classesStudents.confirmDelete.title' | translate }}</h1>
+<div mat-dialog-content>
+  <div *ngIf="data.students.length == 1">{{ 'classesStudents.confirmDelete.messages.one' | translate }}</div>
+  <div *ngIf="data.students.length > 1">{{ 'classesStudents.confirmDelete.messages.multiple' | translate }}</div>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button color="accent" (click)="delete()">{{ 'commons.buttons.delete' | translate }}</button>
+  <button mat-button mat-dialog-close>{{ 'commons.buttons.cancel' | translate }}</button>
+</div>

@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
+import { MatDialog } from '@angular/material';
 import { Store, select } from '@ngrx/store';
-import { Observable, of } from 'rxjs';
-import { catchError, map, switchMap } from 'rxjs/operators';
+import { Observable, of, forkJoin } from 'rxjs';
+import { catchError, map, switchMap, tap, mergeAll } from 'rxjs/operators';
 import { getCurrentClassId } from '../../../../store/selectors/class.selectors';
 import {
   LoadStudentsFailure,
@@ -13,9 +14,18 @@ import {
   AddStudent,
   UpdateStudentFailure,
   UpdateStudentSuccess,
-  UpdateStudent
+  UpdateStudent,
+  ShowAddForm,
+  ShowUpdateForm,
+  ConfirmDeleteStudents,
+  DeleteStudents,
+  DeleteStudentsSuccess,
+  DeleteStudentsFailure
 } from '../actions/student.actions';
+import { AddComponent } from '../containers/add/add.component';
+import { UpdateComponent } from '../containers/update/update.component';
 import { StudentsService } from '../services/students.service';
+import { ConfirmDeleteComponent } from '../containers/confirm-delete/confirm-delete.component';
 
 
 @Injectable()
@@ -49,8 +59,47 @@ export class StudentsEffects {
     )),
   );
 
+  @Effect({ dispatch: false })
+  showAddForm$ = this.actions$.pipe(
+    ofType(StudentActionTypes.ShowAddForm),
+    tap((action: ShowAddForm) => {
+      this._dialog.open(AddComponent, { data: action.payload });
+    })
+  );
+
+  @Effect({ dispatch: false })
+  showUpdateForm$ = this.actions$.pipe(
+    ofType(StudentActionTypes.ShowUpdateForm),
+    tap((action: ShowUpdateForm) => {
+      this._dialog.open(UpdateComponent, { data: action.payload });
+    })
+  );
+
+  @Effect({ dispatch: false })
+  confirmDelete$ = this.actions$.pipe(
+    ofType(StudentActionTypes.ConfirmDeleteStudents),
+    tap((action: ConfirmDeleteStudents) => {
+      this._dialog.open(ConfirmDeleteComponent, { data: action.payload });
+    })
+  );
+
+  @Effect()
+  deletes$ = this.actions$.pipe(
+    ofType(StudentActionTypes.DeleteStudents),
+    switchMap((action: DeleteStudents) => {
+      const actions = [];
+      action.payload.ids.forEach((id) => actions.push(this._studentsService.deleteStudent(this.classId, id)));
+      return forkJoin(actions).pipe(
+        map(() => action.payload.ids)
+      );
+    }),
+    map((ids) => new DeleteStudentsSuccess({ ids })),
+    catchError((err) => of(new DeleteStudentsFailure({ error: err })))
+  );
+
   constructor(
     private actions$: Actions,
+    private _dialog: MatDialog,
     private _store: Store<any>,
     private _studentsService: StudentsService
   ) {

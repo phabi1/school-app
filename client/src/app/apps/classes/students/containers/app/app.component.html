@@ -1,17 +1,7 @@
 <div class="page-layout carded left-sidebar inner-scroll">
   <div class="top-bg accent"></div>
   <fuse-sidebar class="sidebar" position="left" lockedOpen="gt-md">
-    <div fxLayout="column" fxLayoutAlign="space-between start" class="header accent p-24 pb-4">
-      <div class="logo" fxFlex fxLayout="row" fxLayoutAlign="start center">
-        <mat-icon class="logo-icon s-32">people</mat-icon>
-        <span class="logo-text">{{ 'classesStudents.title' | translate }}</span>
-    </div>
-    </div>
-    <div class="content" fusePerfectScrollbar>
-      <div class="p-24">
-        <button mat-raised-button color="accent" class="w-100-p" (click)="addStudent()">{{ 'classesStudents.buttons.add' | translate }}</button>
-      </div>
-    </div>
+    <app-classes-students-sidebar></app-classes-students-sidebar>
   </fuse-sidebar>
   <div class="center">
     <div class="header" fxLayout="row" fxLayoutAlign="start center">
@@ -30,7 +20,18 @@
       </div>
   </div>
     <div class="content-card">
-      <div class="toolbar p-24"></div>
+      <div class="toolbar px-24 py-8">
+        <div class="student-selection">
+          <mat-checkbox [checked]="hasSelectedStudents" [indeterminate]="isIndeterminate" (click)="toggleSelectAll($event)"></mat-checkbox>
+        </div>
+        <div class="toolbar-separator" *ngIf="hasSelectedStudents"></div>
+        <button mat-icon-button (click)="deleteSelectedStudents()" *ngIf="hasSelectedStudents">
+            <mat-icon class="secondary-text">delete</mat-icon>
+        </button>
+        <button mat-icon-button (click)="printSelectedStudents()" *ngIf="hasSelectedStudents">
+            <mat-icon class="secondary-text">print</mat-icon>
+        </button>
+      </div>
       <div class="content" fxLayout="row">
         <app-classes-students-list fusePerfectScrollbar fxFlex></app-classes-students-list>
         <app-classes-students-details fusePerfectScrollbar fxFlex></app-classes-students-details>
