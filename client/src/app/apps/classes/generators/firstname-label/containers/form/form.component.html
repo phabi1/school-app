@@ -26,8 +26,13 @@
 
         <form fxLayout="column" fxLayoutAlign="start start" [formGroup]="form" (ngSubmit)="generate()">
           <h2>{{ 'firstnameLabel.form.fields.layout.title' | translate }}</h2>
-          <mat-radio-group formControlName="layout" class="mb-8">
-            <mat-radio-button *ngFor="let layout of layouts$ | async" [value]="layout.id">{{ layout.title }}</mat-radio-button>
+          <mat-radio-group formControlName="layout" class="mb-8 layout-list">
+            <mat-radio-button *ngFor="let layout of layouts$ | async" [value]="layout.id">
+              <span fxLayout="column" fxLayoutAlign="start center">
+                <span><img [attr.src]="layout.imageUrl" [attr.alt]="layout.title" /></span>
+                <span>{{ layout.title }}</span>
+              </span>
+            </mat-radio-button>
           </mat-radio-group>
           <h2>{{ 'firstnameLabel.form.field.students.title' | translate }}</h2>
           <div class="hint-text pb-8">{{ 'firstnameLabel.form.fields.students.hint' | translate }}</div>
@@ -37,7 +42,8 @@
             </div>
           </div>
           <div class="mt-16">
-            <button mat-raised-button color="accent" [disabled]="form.invalid">{{ 'commons.buttons.generate' | translate }}</button>
+            <button mat-raised-button color="accent" [disabled]="form.invalid">{{ 'commons.buttons.generate' |
+              translate }}</button>
           </div>
         </form>
       </div>

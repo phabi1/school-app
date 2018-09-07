@@ -1,15 +1,6 @@
-.example-section {
-  display: flex;
-  align-content: center;
-  align-items: center;
-  height: 60px;
-}
-
-.example-margin {
-  margin: 0 10px;
-}
-
 :host {
+  
+
   .student-list {
     display: flex;
     flex-direction: row;
@@ -19,4 +10,13 @@
       flex: 1 0 33%;
     }
   }
+}
+
+.layout-list {
+    
+  label {
+    display: flex !important;
+    flex-direction: column-reverse;
+  }
+
 }

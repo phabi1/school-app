@@ -1,19 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { getRouterState } from '../../../../../../store/selectors/router.selectors';
 import { Generate } from '../../actions/form.actions';
 import { Layout } from '../../models/layout.model';
+import { Student } from '../../models/student.model';
 import { selectAll as getLayouts } from '../../selectors/layout.selectors';
 import { selectAll as getStudents } from '../../selectors/student.selectors';
-import { Student } from '../../models/student.model';
 
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
-  styleUrls: ['./form.component.scss']
+  styleUrls: ['./form.component.scss'],
 })
 export class FormComponent implements OnInit {
+
+  private initialStudentIds: string[];
 
   public form: FormGroup;
 
@@ -34,6 +37,15 @@ export class FormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this._store.pipe(select(getRouterState)).subscribe((state) => {
+      let initialStudentIds = [];
+      if (state.state.route.queryParams.s) {
+        initialStudentIds = state.state.route.queryParams.s.split(',');
+      }
+      this.initialStudentIds = initialStudentIds;
+    });
+
     this.createForm();
 
     this.students$

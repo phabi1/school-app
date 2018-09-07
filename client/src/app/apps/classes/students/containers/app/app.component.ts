@@ -105,14 +105,17 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   deleteSelectedStudents() {
-    this._store.dispatch(new ConfirmDeleteStudents({ students: this.selectedStudents}));
+    this._store.dispatch(new ConfirmDeleteStudents({ students: this.selectedStudents }));
   }
   printSelectedStudents() {
     this._store.pipe(
       select(getCurrentClassId),
       first(),
     ).subscribe((currentClassId) => {
-      this._store.dispatch(new Go({path: ['/apps/classes/' + currentClassId + '/generators/firstname-label']}));
+      this._store.dispatch(new Go({
+        path: ['/apps/classes/' + currentClassId + '/generators/firstname-label'],
+        queryParams: { s: this.selectedStudents.map(s => s.id).join(',') }
+      }));
     });
   }
 

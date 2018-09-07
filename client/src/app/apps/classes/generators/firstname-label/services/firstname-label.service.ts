@@ -22,14 +22,17 @@ export class FirstnameLabelService {
       {
         id: 'layout1',
         title: 'Modèle 1',
+        imageUrl: '/assets/images/firstname-labels/layout1.png'
       },
       {
         id: 'layout2',
         title: 'Modèle 2',
+        imageUrl: '/assets/images/firstname-labels/layout2.png'
       },
       {
         id: 'layout3',
         title: 'Modèle 3',
+        imageUrl: '/assets/images/firstname-labels/layout3.png'
       },
     ]);
   }
