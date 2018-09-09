@@ -1,15 +1,13 @@
 import { ServerRoute } from "hapi";
 
-import {AuthController } from "./controller";
-
-const controller = new AuthController();
+import * as controller from "./controller";
 
 const routes: ServerRoute[] = [
   {
     path: "/auth/signin",
     method: "POST",
     options: {
-      handler: (req, h) => controller.signin(req, h),
+      handler: controller.signin,
       auth: false,
     },
   },

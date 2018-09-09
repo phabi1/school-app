@@ -1,5 +1,5 @@
 import { ServerRoute } from "hapi";
-import { StudentsController } from "./controller";
+import * as controller from "./controller";
 import { createValidator, updateValidator } from "./validators";
 
 const routes: ServerRoute[] = [
@@ -7,14 +7,14 @@ const routes: ServerRoute[] = [
     path: "/classes/{classId}/students",
     method: "GET",
     options: {
-      handler: (req, h) => new StudentsController().dispatch(req, h),
+      handler: controller.getStudents,
     },
   },
   {
     path: "/classes/{classId}/students",
     method: "POST",
     options: {
-      handler: (req, h) => new StudentsController().dispatch(req, h),
+      handler: controller.createStudent,
       validate: createValidator,
     },
   },
@@ -22,7 +22,7 @@ const routes: ServerRoute[] = [
     path: "/classes/{classId}/students/{id}",
     method: "PUT",
     options: {
-      handler: (req, h) => new StudentsController().dispatch(req, h),
+      handler: controller.getStudents,
       validate: updateValidator,
     },
   },
@@ -30,14 +30,14 @@ const routes: ServerRoute[] = [
     path: "/classes/{classId}/students/{id}",
     method: "DELETE",
     options: {
-      handler: (req, h) => new StudentsController().dispatch(req, h),
+      handler: controller.deleteStudent,
     },
   },
   {
-    path: "/classes/students/picture/{pictureId}",
+    path: "/classes/students/picture/{studentId}",
     method: "GET",
     options: {
-      handler: (req, h) => new StudentsController().dispatch(req, h, "getPicture"),
+      handler: controller.getStudentPicture,
     },
   },
   {
@@ -48,7 +48,7 @@ const routes: ServerRoute[] = [
         output: "stream",
         allow: "multipart/form-data",
       },
-      handler: (req, h) => new StudentsController().dispatch(req, h, "uploadPicture"),
+      handler: controller.uploadStudentPicture,
     },
   },
 ];

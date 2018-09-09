@@ -1,22 +1,18 @@
-:host {
-  
+.student-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 
-  .student-list {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-
-    .student-item {
-      flex: 1 0 33%;
-    }
+  .student-item {
+    flex: 1 0 33%;
   }
 }
 
 .layout-list {
     
-  label {
+  label.mat-radio-label {
     display: flex !important;
-    flex-direction: column-reverse;
+    flex-direction: column-reverse !important;
   }
 
 }

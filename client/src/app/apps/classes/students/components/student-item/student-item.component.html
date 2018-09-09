@@ -1,10 +1,11 @@
 <div fxLayout="row" fxLayoutAlign="start center">
   <mat-checkbox [checked]="selected" (change)="onSelectChange()" (click)="$event.stopPropagation();"></mat-checkbox>
-  <div class="ml-16">
-    <app-student-picture [url]="item.pictureUrl" size="40"></app-student-picture>
+  <div class="ml-16" fxLayout="row">
+    <app-student-picture class="avatar mr-16" [studentId]="item.id" size="40"></app-student-picture>
+    <div>
+      <div class="fullname text-truncate">{{ fullname }}</div>
+      <div>{{ item.sex }}</div>
+    </div>
   </div>
-  <div class="ml-16">
-    <div class="fullname text-truncate">{{ fullname }}</div>
-    <div>{{ item.sex }}</div>
-  </div>
+
 </div>

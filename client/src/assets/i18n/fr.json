@@ -33,7 +33,20 @@
 		"buttons": {
 			"add": "Ajouter un élève"
 		},
+		"confirmDelete": {
+			"messages": {
+				"multiple": "Etes-vous sûre de vouloir supprimer ces élèves ?",
+				"one": "Etes-vous sûre de vouloir supprimer cet élève ?"
+			},
+			"title": "Confimation de suppression"
+		},
 		"details": {
+			"labels": {
+				"birthday": "Date de naissance",
+				"firstname": "Prénom",
+				"lastname": "Nom de famille",
+				"shortname": "Surnom"
+			},
 			"messages": {
 				"unselected": "Sélectionner un élève pour voir sa fiche"
 			}
@@ -84,9 +97,30 @@
 	"commons": {
 		"buttons": {
 			"add": "Ajouter",
+			"cancel": "Annuler",
 			"delete": "Supprimer",
+			"generate": "Générer",
 			"save": "Enregistrer",
 			"update": "Modifier"
 		}
+	},
+	"firstnameLabel": {
+		"description": "Indiquez les informations suivantes",
+		"form": {
+			"field": {
+				"students": {
+					"title": "Elèves"
+				}
+			},
+			"fields": {
+				"layout": {
+					"title": "Modèle"
+				},
+				"students": {
+					"hint": "Rien sélectionner pour prendre tous les élèves"
+				}
+			}
+		},
+		"title": "Etiquettes prénoms"
 	}
 }

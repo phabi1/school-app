@@ -1,18 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { getRouterState } from '../../../../../../store/selectors/router.selectors';
 import { Generate } from '../../actions/form.actions';
 import { Layout } from '../../models/layout.model';
 import { Student } from '../../models/student.model';
 import { selectAll as getLayouts } from '../../selectors/layout.selectors';
 import { selectAll as getStudents } from '../../selectors/student.selectors';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class FormComponent implements OnInit {
 
@@ -30,6 +31,7 @@ export class FormComponent implements OnInit {
 
   constructor(
     private _formBuilder: FormBuilder,
+    private _route: ActivatedRoute,
     private _store: Store<any>
   ) {
     this.layouts$ = this._store.pipe(select(getLayouts));
@@ -38,10 +40,10 @@ export class FormComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this._store.pipe(select(getRouterState)).subscribe((state) => {
+    this._route.queryParams.subscribe((queryParams) => {
       let initialStudentIds = [];
-      if (state.state.route.queryParams.s) {
-        initialStudentIds = state.state.route.queryParams.s.split(',');
+      if (queryParams.s) {
+        initialStudentIds = queryParams.s.split(',');
       }
       this.initialStudentIds = initialStudentIds;
     });
@@ -51,7 +53,10 @@ export class FormComponent implements OnInit {
     this.students$
       .subscribe((students) => {
         this.students = students;
-        const arr = students.map((student) => this._formBuilder.control(false));
+        const arr = students.map((student) => {
+          const selected = this.initialStudentIds.includes(student.id);
+          return this._formBuilder.control(selected);
+        });
         this.form.setControl('students', this._formBuilder.array(arr));
       });
   }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewEncapsulation, ChangeDetectionStrategy, OnChanges, SimpleChanges } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, SimpleChanges, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-student-picture',
@@ -7,14 +7,12 @@ import { Component, OnInit, Input, ViewEncapsulation, ChangeDetectionStrategy, O
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class StudentPictureComponent implements OnInit, OnChanges {
+export class StudentPictureComponent implements OnChanges {
 
   public pictureUrl: string;
   public imgStyle: any;
 
-  @Input() url: string;
-
-  @Input() sex: string;
+  @Input() studentId: string;
 
   @Input() size: number;
 
@@ -22,28 +20,17 @@ export class StudentPictureComponent implements OnInit, OnChanges {
     this.size = 50;
   }
 
-  ngOnInit() {
-  }
-
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['size']) {
       this.updateImageStyle();
     }
-    if (changes['url']) {
-      this.updateUrl();
+    if (changes['studentId']) {
+      this.updateId();
     }
   }
 
-  private updateUrl(): void {
-    let url = this.url;
-    if (!url) {
-      if (this.sex === 'FEMALE') {
-        url = '/assets/images/students/placeholders/girl.png';
-      } else {
-        url = '/assets/images/students/placeholders/boy.png';
-      }
-    }
-    this.pictureUrl = url;
+  private updateId(): void {
+    this.pictureUrl = '/api/classes/students/picture/' + this.studentId;
   }
 
   private updateImageStyle(): void {

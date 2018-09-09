@@ -1,5 +1,4 @@
 import Boom from "boom";
-import { Request, ResponseToolkit } from "hapi";
 import { ControllerBase } from "./base";
 
 export abstract class RestControllerBase extends ControllerBase {
@@ -9,20 +8,20 @@ export abstract class RestControllerBase extends ControllerBase {
   private action: string | null = null;
   private identifierKey: string = "id";
 
-  public dispatch(req: Request, h: ResponseToolkit, action?: string) {
+  public dispatch(action?: string) {
     if (action) {
       this.action = action;
     }
-    return super.dispatch(req, h);
+    return super.dispatch();
   }
 
-  protected async onDispatch(req: Request, h: ResponseToolkit) {
+  protected async onDispatch() {
     if (this.action) {
       return this[this.action + "Action"]();
     } else {
-      const method = req.method.toUpperCase();
+      const method = this.req.method.toUpperCase();
 
-      const identifier = (req.params as any)[this.identifierKey];
+      const identifier = (this.req.params as any)[this.identifierKey];
 
       switch (method) {
         case "GET":
@@ -32,9 +31,9 @@ export abstract class RestControllerBase extends ControllerBase {
             return await this.listAction();
           }
         case "POST":
-          return await this.createAction(req.payload);
+          return await this.createAction(this.req.payload);
         case "PUT":
-          return await this.updateAction(identifier, req.payload);
+          return await this.updateAction(identifier, this.req.payload);
         case "DELETE":
           return await this.deleteAction(identifier);
         default:

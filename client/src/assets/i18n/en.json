@@ -33,7 +33,20 @@
 		"buttons": {
 			"add": ""
 		},
+		"confirmDelete": {
+			"messages": {
+				"multiple": "",
+				"one": ""
+			},
+			"title": ""
+		},
 		"details": {
+			"labels": {
+				"birthday": "",
+				"firstname": "",
+				"lastname": "",
+				"shortname": ""
+			},
 			"messages": {
 				"unselected": ""
 			}
@@ -84,9 +97,30 @@
 	"commons": {
 		"buttons": {
 			"add": "",
+			"cancel": "",
 			"delete": "",
+			"generate": "",
 			"save": "",
 			"update": ""
 		}
+	},
+	"firstnameLabel": {
+		"description": "",
+		"form": {
+			"field": {
+				"students": {
+					"title": ""
+				}
+			},
+			"fields": {
+				"layout": {
+					"title": ""
+				},
+				"students": {
+					"hint": ""
+				}
+			}
+		},
+		"title": ""
 	}
 }

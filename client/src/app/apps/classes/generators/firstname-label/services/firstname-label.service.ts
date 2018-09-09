@@ -34,6 +34,16 @@ export class FirstnameLabelService {
         title: 'Modèle 3',
         imageUrl: '/assets/images/firstname-labels/layout3.png'
       },
+      {
+        id: 'layout4',
+        title: 'Modèle 4',
+        imageUrl: '/assets/images/firstname-labels/layout3.png'
+      },
+      {
+        id: 'layout5',
+        title: 'Modèle 5',
+        imageUrl: '/assets/images/firstname-labels/layout3.png'
+      },
     ]);
   }
 
@@ -86,6 +96,12 @@ export class FirstnameLabelService {
         break;
       case 'layout3':
         definition = this.renderLayout2(names, layout.options);
+        break;
+      case 'layout4':
+        definition = this.renderLayout3(names, layout.options);
+        break;
+        case 'layout5':
+        definition = this.renderLayout4(names, layout.options);
         break;
       default:
         break;
@@ -212,6 +228,143 @@ export class FirstnameLabelService {
           layout: 'noBorders'
         }
       ]
+    };
+
+    return docDefinitions;
+  }
+  private renderLayout3(names: string[], options: {}): any {
+    const maxColumns = 2;
+
+    const body = [];
+    let row = null;
+    for (let index = 0; index < names.length; index++) {
+
+      if (!row) {
+        row = [];
+      }
+
+      const name = names[index];
+
+      let fontSize = 40;
+      let margin = [0, 5];
+
+      const length = name.length;
+      if (length >= 10) {
+        fontSize = 20;
+        margin = [0, 23];
+      } else if (length > 6 && length < 10) {
+        fontSize = 30;
+        margin = [0, 16];
+      } else {
+        fontSize = 40;
+        margin = [0, 11];
+      }
+
+      row.push({ text: name.toUpperCase(), fontSize, margin, alignment: 'center' });
+
+      if ((index + 1) % maxColumns === 0) {
+        body.push(row);
+        row = null;
+      }
+    }
+
+    if (row && row.length < maxColumns) {
+      for (let i = row.length; i < maxColumns; i++) {
+        row.push('');
+      }
+      body.push(row);
+    }
+
+    const widths = [];
+    for (let i = 0; i < maxColumns; i++) {
+      widths.push('*');
+    }
+
+    const docDefinitions: any = {
+      pageOrientation: 'landscape',
+      pageMargins: [80, 20],
+      content: [
+        {
+          table: {
+            dontBreakRows: true,
+            widths,
+            body
+          },
+        },
+      ],
+    };
+
+    return docDefinitions;
+  }
+
+  private renderLayout4(names: string[], options: {}): any {
+
+const letters = [];
+names.forEach((name) => {
+  for (let l = 0; l < name.length; l++) {
+    const letter = name[l];
+    letters.push(letter);
+  }
+});
+
+    const maxColumns = 15;
+
+    const body = [];
+    let row = null;
+    for (let index = 0; index < letters.length; index++) {
+
+      if (!row) {
+        row = [];
+      }
+
+      const name = letters[index];
+
+      let fontSize = 40;
+      let margin = [0, 5];
+
+      const length = name.length;
+      if (length >= 10) {
+        fontSize = 20;
+        margin = [0, 23];
+      } else if (length > 6 && length < 10) {
+        fontSize = 30;
+        margin = [0, 16];
+      } else {
+        fontSize = 40;
+        margin = [0, 11];
+      }
+
+      row.push({ text: name.toUpperCase(), fontSize, margin, alignment: 'center' });
+
+      if ((index + 1) % maxColumns === 0) {
+        body.push(row);
+        row = null;
+      }
+    }
+
+    if (row && row.length < maxColumns) {
+      for (let i = row.length; i < maxColumns; i++) {
+        row.push('');
+      }
+      body.push(row);
+    }
+
+    const widths = [];
+    for (let i = 0; i < maxColumns; i++) {
+      widths.push('*');
+    }
+
+    const docDefinitions: any = {
+      pageOrientation: 'landscape',
+      content: [
+        {
+          table: {
+            dontBreakRows: true,
+            widths,
+            body
+          },
+        },
+      ],
     };
 
     return docDefinitions;
