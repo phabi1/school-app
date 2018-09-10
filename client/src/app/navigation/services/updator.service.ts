@@ -27,10 +27,27 @@ export class NavigationUpdatorService {
   }
 
   public registerAll() {
+    this.register('classe', (item) => {
+      return this._store.pipe(
+        select(getCurrentClassId)
+      ).subscribe((currentClassId) => {
+        if (currentClassId) {
+          item.hidden = false;
+        } else {
+          item.hidden = true;
+        }
+        item.url = '/apps/classes/' + currentClassId + '/edit';
+      });
+    });
     this.register('students', (item) => {
       return this._store.pipe(
         select(getCurrentClassId)
       ).subscribe((currentClassId) => {
+        if (currentClassId) {
+          item.hidden = false;
+        } else {
+          item.hidden = true;
+        }
         item.url = '/apps/classes/' + currentClassId + '/students';
       });
     });
@@ -38,8 +55,14 @@ export class NavigationUpdatorService {
       return this._store.pipe(
         select(getCurrentClassId)
       ).subscribe((currentClassId) => {
+        if (currentClassId) {
+          item.hidden = false;
+        } else {
+          item.hidden = true;
+        }
         item.url = '/apps/classes/' + currentClassId + '/tools';
       });
     });
   }
 }
+
