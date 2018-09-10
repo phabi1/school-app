@@ -1,10 +1,20 @@
 import * as Glue from "glue";
 import { Server } from "hapi";
+import Nconf from "nconf";
 import { ROOT_DIR } from "./utils";
+
+Nconf.argv().env().file(
+  { file: "config/configuration.development.json" },
+);
 
 const manifest: Glue.Manifest = {
   server: {
     port: 3000,
+    routes: {
+      cors: {
+        origin: "ignore",
+      },
+    },
   },
   register: {
     plugins: [

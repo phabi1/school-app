@@ -5,6 +5,7 @@ import { AuthActionTypes, Identity, getIdentity } from 'ngrx-auth-store';
 import { map, switchMap, first } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 import { Store, select } from '@ngrx/store';
+import { ProfileService } from '../services/profile.service';
 
 @Injectable()
 export class ProfileEffects {
@@ -20,17 +21,19 @@ export class ProfileEffects {
     ofType(ProfileActionTypes.Refresh),
     switchMap(() => this.getIdentity().pipe(
       switchMap((identity: Identity) => {
-        let data: any = null;
         if (identity) {
-          data = { uid: 1, names: { firstname: 'Coralie', lastname: 'Heilles' }, email: 'cocodile77@live.fr' };
+          return this._profileService.getProfile();
+        } else {
+          return of(null);
         }
-        return of(new Refreshed({ data }));
-      })
-    ))
+      }),
+    )),
+    map((data) => new Refreshed({ data }))
   );
 
   constructor(
     private actions$: Actions,
+    private _profileService: ProfileService,
     private _store: Store<any>
   ) { }
 

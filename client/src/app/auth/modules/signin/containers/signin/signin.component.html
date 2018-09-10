@@ -1,13 +1,45 @@
-<div>
-  <h1>Sign in</h1>
-  <form fxLayout="column" fxLayoutAlign="start start" [formGroup]="form" (ngSubmit)="signin()">
-    <mat-form-field>
-      <input matInput formControlName="email" placeholder="Email" required>
-    </mat-form-field>
-    <mat-form-field>
-      <input type="password" matInput formControlName="password" placeholder="Password" required>
-    </mat-form-field>
-    <button *ngIf="!(processing$ | async)" mat-raised-button color="accent" [disabled]="form.invalid">Signin</button>
-    <mat-spinner *ngIf="processing$ | async" diameter="32" color="accent"></mat-spinner>
-  </form>
+<div id="login" fxLayout="column">
+
+  <div id="login-form-wrapper" fxLayout="column" fxLayoutAlign="center center">
+
+    <div id="login-form" [@animate]="{value:'*',params:{duration:'300ms',y:'100px'}}">
+
+      <div class="logo">
+        <img src="assets/images/logos/fuse.svg">
+      </div>
+
+      <div class="title">LOGIN TO YOUR ACCOUNT</div>
+
+      <form fxLayout="column" fxLayoutAlign="start start" [formGroup]="form" (ngSubmit)="signin()">
+        <mat-form-field>
+          <input matInput formControlName="email" placeholder="Email" required>
+        </mat-form-field>
+        <mat-form-field>
+          <input type="password" matInput formControlName="password" placeholder="Password" required>
+        </mat-form-field>
+        <button *ngIf="!(processing$ | async)" mat-raised-button color="accent" [disabled]="form.invalid">Signin</button>
+        <mat-spinner *ngIf="processing$ | async" diameter="32" color="accent"></mat-spinner>
+      </form>
+
+      <div class="separator">
+        <span class="text">OR</span>
+      </div>
+
+      <button mat-raised-button class="google">
+        Log in with Google
+      </button>
+
+      <button mat-raised-button class="facebook">
+        Log in with Facebook
+      </button>
+
+      <div class="register" fxLayout="column" fxLayoutAlign="center center">
+        <span class="text">Don't have an account?</span>
+        <a class="link" [routerLink]="'/pages/auth/register'">Create an account</a>
+      </div>
+
+    </div>
+
+  </div>
+
 </div>

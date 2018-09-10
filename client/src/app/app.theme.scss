@@ -73,7 +73,8 @@ $typography: mat-typography-config(
 // @ Component theming
 // -----------------------------------------------------------------------------------------------------
 
-// Import app and page component themes here to enable theming for them
+// Import app and page component themes here to enable theming for theme
+@import "src/app/auth/modules/signin/signin.theme";
 @import "src/app/layout/components/chat-panel/chat-panel.theme";
 @import "src/app/layout/components/toolbar/toolbar.theme";
 @import "src/app/apps/classes/students/students.theme";
@@ -85,6 +86,7 @@ $typography: mat-typography-config(
     @include chat-panel-theme($theme);
     @include toolbar-theme($theme);
     @include classes-students-theme($theme);
+    @include signin-theme($theme);
 }
 
 // -----------------------------------------------------------------------------------------------------

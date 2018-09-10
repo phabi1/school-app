@@ -1,5 +1,5 @@
 import { registerLocaleData } from '@angular/common';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import localeFrExtra from '@angular/common/locales/extra/fr';
 import localeFr from '@angular/common/locales/fr';
 import { LOCALE_ID, NgModule } from '@angular/core';
@@ -19,11 +19,12 @@ import { AppRoutingModule } from './app.routing';
 import { AuthenticationService } from './core/services/authentication.service';
 import { LayoutModule } from './layout/layout.module';
 import { AppStoreModule } from './store/store.module';
+import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
 
 
 registerLocaleData(localeFr, 'fr', localeFrExtra);
 
-export function createTranslateLoaderFactory (httpClient: HttpClient): TranslateLoader {
+export function createTranslateLoaderFactory(httpClient: HttpClient): TranslateLoader {
   return new TranslateHttpLoader(httpClient, '/assets/i18n/', '.json');
 }
 
@@ -66,7 +67,8 @@ export function createTranslateLoaderFactory (httpClient: HttpClient): Translate
     { provide: AUTH_AUTHENTICATION_SERVICE, useClass: AuthenticationService },
     { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' },
     { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
-    { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS }
+    { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

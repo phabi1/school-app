@@ -25,7 +25,9 @@
     "jsonwebtoken": "^8.3.0",
     "mongoose": "^5.2.9",
     "nconf": "^0.10.0",
+    "njwt": "^0.4.0",
     "pdfmake": "^0.1.38",
+    "query-string": "^6.1.0",
     "sharp": "^0.20.8",
     "uuid": "^3.3.2"
   },

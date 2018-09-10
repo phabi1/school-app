@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 
 const routes: Routes = [
   { path: 'signin', loadChildren: './modules/signin/signin.module#SigninModule' },
-  { path: 'signin', loadChildren: './modules/signout/signout.module#SignoutModule' },
+  { path: 'signout', loadChildren: './modules/signout/signout.module#SignoutModule' },
 ];
 
 @NgModule({

@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { fuseAnimations } from '@fuse/animations';
+import { FuseConfigService } from '@fuse/services/config.service';
 import { ActionsSubject, select, Store } from '@ngrx/store';
 import { Redirect } from 'ngrx-auth-store';
 import { Observable } from 'rxjs';
@@ -10,7 +12,9 @@ import { getProcessing } from '../../selectors/signin.selectors';
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
-  styleUrls: ['./signin.component.scss']
+  styleUrls: ['./signin.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+  animations   : fuseAnimations
 })
 export class SigninComponent implements OnInit {
 
@@ -18,13 +22,29 @@ export class SigninComponent implements OnInit {
   public form: FormGroup;
 
   constructor(
-    private actionsSubject: ActionsSubject,
-    private formBuilder: FormBuilder,
-    private store: Store<any>
+    private _actionsSubject: ActionsSubject,
+    private _formBuilder: FormBuilder,
+    private _fuseConfigService: FuseConfigService,
+    private _store: Store<any>
   ) {
-    this.processing$ = this.store.pipe(select(getProcessing));
 
-    this.form = this.formBuilder.group({
+    this._fuseConfigService.setConfig({
+      layout: {
+        toolbar: {
+          hidden: true,
+        },
+        navbar: {
+          hidden: true,
+        },
+        footer: {
+          hidden: true,
+        }
+      }
+    });
+
+    this.processing$ = this._store.pipe(select(getProcessing));
+
+    this.form = this._formBuilder.group({
       email: [null, Validators.compose([Validators.required])],
       password: [null, Validators.required]
     });
@@ -39,12 +59,12 @@ export class SigninComponent implements OnInit {
       email: values.email,
       password: values.password
     };
-    this.store.dispatch(new Signin({ credentials }));
+    this._store.dispatch(new Signin({ credentials }));
 
-    this.actionsSubject.asObservable().pipe(
+    this._actionsSubject.asObservable().pipe(
       filter((action) => action.type === SigninActionTypes.SigninSuccess),
       first(),
-    ).subscribe(() => this.store.dispatch(new Redirect()));
+    ).subscribe(() => this._store.dispatch(new Redirect()));
   }
 
 }

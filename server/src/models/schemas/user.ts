@@ -4,8 +4,8 @@ import { IUserDocument } from "../user";
 
 export const userSchema = new Schema({
   names: {
-    firstname: { type: SchemaTypes.String },
-    lastname: { type: SchemaTypes.String },
+    firstname: { type: SchemaTypes.String, default: "" },
+    lastname: { type: SchemaTypes.String, default: "" },
   },
   name: {
     type: SchemaTypes.String,
@@ -26,7 +26,15 @@ export const userSchema = new Schema({
     required: true,
     default: () => generateSalt(),
   },
-}, { timestamps: true });
+}, {
+    timestamps: true,
+    toJSON: {
+      transform: (doc, res) => {
+        delete res.salt;
+        delete res.pass;
+      },
+    },
+  });
 
 function generateSalt(length: number = 16): string {
   return Crypto.randomBytes(Math.ceil(length / 2))

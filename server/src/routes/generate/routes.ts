@@ -3,8 +3,8 @@ import * as controller from "./controller";
 
 const routes: ServerRoute[] = [
   {
-    path: "/generate/trombinoscope",
-    method: "GET",
+    path: "/generate/{generator}",
+    method: "POST",
     options: {
       handler: controller.trombinoscope,
       auth: false,

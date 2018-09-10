@@ -1,6 +1,7 @@
 import { Server } from "hapi";
 import { Options, ValidationResult } from "hapi-auth-jwt2";
-import { UserModel } from "../../models/user";
+import Nconf from "nconf";
+import { models } from "../../models";
 
 export async function register(server: Server) {
 
@@ -10,7 +11,10 @@ export async function register(server: Server) {
 
   const validateFunc = async (decoded: any): Promise<ValidationResult> => {
 
-    const user = await UserModel.findById(decoded.id);
+    // tslint:disable-next-line:no-console
+    console.log(decoded);
+
+    const user = await models.user.findById(decoded.uid);
 
     if (!user) {
       return { isValid: false };
@@ -19,14 +23,17 @@ export async function register(server: Server) {
   };
 
   const options: Options = {
-    key: "secret",
+    key: Nconf.get("secret"),
+    tokenType: "Bearer",
     validate: validateFunc,
     verifyOptions: {
-      algorithms: ["H256"],
+      algorithms: ["HS256"],
     },
   };
 
   server.auth.strategy("jwt", "jwt", options);
+
+  server.auth.default("jwt");
 }
 
 export const name = "auth-jwt2";
