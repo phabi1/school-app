@@ -38,6 +38,9 @@
           </div>
           <h2>{{ 'firstnameLabel.form.field.students.title' | translate }}</h2>
           <div class="hint-text pb-8">{{ 'firstnameLabel.form.fields.students.hint' | translate }}</div>
+          <mat-chip-list [compareWith]="compareGrades" [multiple]="true" class="mb-8">
+            <mat-chip *ngFor="let grade of grades$ | async" [selected]="grade.selected" (click)="toggleSelectGrade(grade)">{{ grade.title }}</mat-chip>
+          </mat-chip-list>
           <div class="student-list mb-8">
             <div class="student-item" *ngFor="let ctrl of studentControls.controls; let index = index">
               <mat-checkbox [formControl]="ctrl">{{ students[index].firstname + ' ' + students[index].lastname }}</mat-checkbox>

@@ -3,9 +3,20 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { PdfCreatorService } from '../../../../../core/services/pdf-creator.service';
-import { StudentsService, sortByFirstname } from '../../../../../core/services/students.service';
+import { StudentsService } from '../../../../../core/services/students.service';
 import { Layout } from '../models/layout.model';
 import { Student } from '../models/student.model';
+import { Grade } from '../models/grade.model';
+
+function sortByFirstname(a: Student, b: Student): number {
+  if (a.firstname < b.firstname) {
+    return -1;
+  } else if (a.firstname > b.firstname) {
+    return 1;
+  } else {
+    return 0;
+  }
+}
 
 @Injectable()
 export class FirstnameLabelService {
@@ -50,6 +61,16 @@ export class FirstnameLabelService {
   getStudents(classId: string): Observable<Student[]> {
     return this._httpClient.get<Student[]>('/api/classes/' + classId + '/students').pipe(
       map((res) => res.sort(sortByFirstname)),
+    );
+  }
+
+  getGrades(classId: string): Observable<Grade[]> {
+    return this._httpClient.get<any>('/api/classes/' + classId).pipe(
+      map((res) => {
+        return res.grades.map(grade => {
+          return { id: grade.id, title: grade.title, selected: false };
+        });
+      }),
     );
   }
 
@@ -100,7 +121,7 @@ export class FirstnameLabelService {
       case 'layout4':
         definition = this.renderLayout3(names, layout.options);
         break;
-        case 'layout5':
+      case 'layout5':
         definition = this.renderLayout4(names, layout.options);
         break;
       default:
@@ -299,13 +320,13 @@ export class FirstnameLabelService {
 
   private renderLayout4(names: string[], options: {}): any {
 
-const letters = [];
-names.forEach((name) => {
-  for (let l = 0; l < name.length; l++) {
-    const letter = name[l];
-    letters.push(letter);
-  }
-});
+    const letters = [];
+    names.forEach((name) => {
+      for (let l = 0; l < name.length; l++) {
+        const letter = name[l];
+        letters.push(letter);
+      }
+    });
 
     const maxColumns = 15;
 

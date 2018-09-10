@@ -3,4 +3,5 @@ export interface Student {
   firstname: string;
   lastname: string;
   shortname?: string;
+  grade: string;
 }

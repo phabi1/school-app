@@ -12,3 +12,11 @@ export const {
   selectAll,
   selectTotal,
 } = adapter.getSelectors(getState);
+
+export const getSelectedIds = createSelector(getState, state => state.selectedIds);
+
+export const getSelectedStudents = createSelector(
+  selectEntities,
+  getSelectedIds,
+  (entities, selectedIds) => selectedIds.map((id) => entities[id])
+);

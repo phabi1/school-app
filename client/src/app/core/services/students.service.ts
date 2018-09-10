@@ -1,11 +1,9 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { getCurrentClassId } from '../../store/selectors/class.selectors';
 import { Student } from '../models/student.model';
 import { ClassService } from './class.service';
-import { Store, select } from '@ngrx/store';
-import { getCurrentClassId } from '../../store/selectors/class.selectors';
 
 @Injectable({
   providedIn: 'root'

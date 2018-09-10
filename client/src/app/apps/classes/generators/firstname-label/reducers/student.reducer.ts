@@ -1,15 +1,18 @@
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { Student } from '../models/student.model';
 import { StudentActions, StudentActionTypes } from '../actions/student.actions';
+import { GradeActionTypes, GradeActions } from '../actions/grade.actions';
 
 export interface State extends EntityState<Student> {
   loaded: boolean;
+  selectedIds: string[];
 }
 
 export const adapter: EntityAdapter<Student> = createEntityAdapter<Student>();
 
 export const initialState: State = adapter.getInitialState({
-  loaded: false
+  loaded: false,
+  selectedIds: [],
 });
 
 export function reducer(
@@ -26,6 +29,10 @@ export function reducer(
     case StudentActionTypes.ClearStudents: {
       state = adapter.removeAll(state);
       return { ...state, loaded: false };
+    }
+
+    case StudentActionTypes.SetSelectedStudents: {
+      return {...state, selectedIds: [...action.payload.ids]};
     }
 
     default: {
