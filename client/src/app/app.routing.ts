@@ -13,8 +13,12 @@ const routes: Routes = [
     loadChildren: './apps/apps.routing#AppsRoutingModule',
   },
   {
-    path: 'auth',
-    loadChildren: './auth/auth.routing#AuthRoutingModule',
+    path: 'signin',
+    loadChildren: './auth/signin/signin.module#SigninModule',
+  },
+  {
+    path: 'signout',
+    loadChildren: './auth/signout/signout.module#SignoutModule',
   },
   {
     path: '404',

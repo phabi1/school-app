@@ -36,7 +36,7 @@ export class AuthenticationService implements IAuthenticationService {
 
         const payload: any = jwtDecode(token);
         const identity = {
-          uid: payload.id,
+          uid: payload.uid,
         };
         return { valid: true, token, identity };
       }),
@@ -44,6 +44,11 @@ export class AuthenticationService implements IAuthenticationService {
         throw new Error('');
       })
     );
+  }
+
+  public signout(): Observable<boolean> {
+    localStorage.removeItem('token');
+    return of(true);
   }
 
   refresh(refreshToken?: string): Observable<AuthenticationResult> {

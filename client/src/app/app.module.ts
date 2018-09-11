@@ -3,7 +3,7 @@ import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common
 import localeFrExtra from '@angular/common/locales/extra/fr';
 import localeFr from '@angular/common/locales/fr';
 import { LOCALE_ID, NgModule } from '@angular/core';
-import { DateAdapter, MatButtonModule, MatIconModule, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material';
+import { DateAdapter, MatButtonModule, MatIconModule, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatSnackBarModule } from '@angular/material';
 import { MatMomentDateModule, MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from '@angular/material-moment-adapter';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -47,6 +47,7 @@ export function createTranslateLoaderFactory(httpClient: HttpClient): TranslateL
     // Material
     MatButtonModule,
     MatIconModule,
+    MatSnackBarModule,
     MatMomentDateModule,
 
     // Fuse modules

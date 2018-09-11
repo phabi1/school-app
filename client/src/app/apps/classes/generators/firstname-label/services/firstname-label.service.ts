@@ -1,11 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'environments/environment';
-import * as queryString from 'query-string';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { PdfCreatorService } from '../../../../../core/services/pdf-creator.service';
-import { StudentsService } from '../../../../../core/services/students.service';
 import { Grade } from '../models/grade.model';
 import { Layout } from '../models/layout.model';
 import { Student } from '../models/student.model';
@@ -25,8 +22,6 @@ export class FirstnameLabelService {
 
   constructor(
     private _httpClient: HttpClient,
-    private _pdfCreator: PdfCreatorService,
-    private _studentsService: StudentsService,
   ) {
   }
 

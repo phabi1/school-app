@@ -11,6 +11,7 @@ import { ProfileEffects } from './effects/profile.effects';
 import { RouterEffects } from './effects/router.effects';
 import * as fromStore from './reducers';
 import { CustomSerializer } from './utils/router';
+import { NotifyEffects } from './effects/notify.effects';
 
 @NgModule({
   imports: [
@@ -21,10 +22,10 @@ import { CustomSerializer } from './utils/router';
     }),
     EffectsModule.forRoot([]),
     AuthStoreModule.forRoot({
-      signInUrl: '/auth/signin'
+      signInUrl: '/signin'
     }),
     StoreDevtoolsModule.instrument({ logOnly: !environment.production }),
-    EffectsModule.forFeature([ProfileEffects, RouterEffects, ClassEffects]),
+    EffectsModule.forFeature([ProfileEffects, RouterEffects, ClassEffects, NotifyEffects]),
   ],
   declarations: [],
   providers: [

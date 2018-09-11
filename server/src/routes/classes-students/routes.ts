@@ -38,6 +38,7 @@ const routes: ServerRoute[] = [
     method: "GET",
     options: {
       handler: controller.getStudentPicture,
+      auth: false,
     },
   },
   {
