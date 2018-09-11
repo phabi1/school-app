@@ -7,7 +7,8 @@ const routes: Routes = [
   { path: 'firstname-label', loadChildren: './firstname-label/firstname-label.module#FirstnameLabelModule' },
   { path: 'evaluate-grid', loadChildren: './evaluate-grid/evaluate-grid.module#EvaluateGridModule' },
   { path: 'attendance-grid', loadChildren: './attendance-grid/attendance-grid.module#AttendanceGridModule' },
-  { path: 'month-pyramid', loadChildren: './month-pyramid/month-pyramid.module#MonthPyramidModule' }
+  { path: 'month-pyramid', loadChildren: './month-pyramid/month-pyramid.module#MonthPyramidModule' },
+  { path: 'trombinoscope', loadChildren: './trombinoscope/trombinoscope.module#TrombinoscopeModule' }
 ];
 
 @NgModule({

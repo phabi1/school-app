@@ -25,3 +25,7 @@ export function generatePdf(docDefinition: any): Promise<any> {
     }
   });
 }
+
+export function cmToPoints(cm: number) {
+  return cm * 12 * 6 * 0.39;
+}

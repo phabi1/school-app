@@ -5,7 +5,7 @@ import { Generate } from '../../actions/trombinoscope.actions';
 @Component({
   selector: 'app-trombinoscope',
   templateUrl: './trombinoscope.component.html',
-  styleUrls: ['./trombinoscope.component.css']
+  styleUrls: ['./trombinoscope.component.scss']
 })
 export class TrombinoscopeComponent implements OnInit {
 

@@ -1,30 +1,30 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
+import { select, Store } from '@ngrx/store';
 import { of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
-import { GenerateFailure, GenerateSuccess, TrombinoscopeActionTypes } from '../actions/trombinoscope.actions';
-import { TrombinoscopeService } from '../services/trombinoscope.service';
-import { Store, select } from '@ngrx/store';
 import { getCurrentClassId } from '../../../../../store/selectors/class.selectors';
+import { GenerateFailure, GenerateSuccess, MonthPyramidActionTypes } from '../actions/month-pyramid.actions';
+import { MonthPyramidService } from '../services/month-pyramid.service';
 
 @Injectable()
-export class TrombinoscopeEffects {
+export class MonthPyramidEffects {
 
   private _currentClassId: string;
 
   @Effect()
   generate$ = this.actions$.pipe(
-    ofType(TrombinoscopeActionTypes.Generate),
-    switchMap(() => this._trombinoscopeService.generate(this._currentClassId).pipe(
+    ofType(MonthPyramidActionTypes.Generate),
+    switchMap(() => this._monthPyramidService.generate(this._currentClassId).pipe(
       map(() => new GenerateSuccess()),
-      catchError(() => of(new GenerateFailure())),
+      catchError((err) => of(new GenerateFailure({error: err})))
     ))
   );
 
   constructor(
     private actions$: Actions,
-    private _trombinoscopeService: TrombinoscopeService,
-    private _store: Store<any>
+    private _monthPyramidService: MonthPyramidService,
+    private _store: Store<any>,
   ) {
     this._store.pipe(select(getCurrentClassId)).subscribe((currentClassId) => this._currentClassId = currentClassId);
   }

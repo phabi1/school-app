@@ -19,6 +19,10 @@
     {
       "title": "Trombinoscope",
       "url": "/apps/classes/{classId}/generators/trombinoscope"
+    },
+    {
+      "title": "Pyramide des ages",
+      "url": "/apps/classes/{classId}/generators/month-pyramid"
     }
   ]
 }

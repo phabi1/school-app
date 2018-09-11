@@ -1,13 +1,15 @@
 import * as Path from "path";
+import Sharp from "sharp";
 import { models } from "../models";
 import { fileService } from "../services/file";
 import { generatePdf } from "../services/pdf";
+import { IGeneratorResult } from "./interface";
 
 export default class TrombinoscopeGenerator {
 
   public async generate(options: {
     classId: string,
-  }) {
+  }): Promise<IGeneratorResult> {
     const docDefinition: any = {
       pageSize: "A4",
       pageOrientation: "landscape",
@@ -39,9 +41,18 @@ export default class TrombinoscopeGenerator {
         row = [];
       }
 
+      let image;
+      if (student.picture) {
+        image = fileService.getFilePath(student.picture);
+        const buffer = await Sharp(image).resize(200, 200).crop(Sharp.gravity.center).toBuffer();
+        image = "data:image/jpeg;base64," + buffer.toString("base64");
+      } else {
+        image = student.sex === "FEMALE" ? "girl" : "boy";
+      }
+
       row.push([
         {
-          image: student.sex === "FEMALE" ? "girl" : "boy",
+          image,
           fit: [100, 100],
         },
         { text: student.firstname, alignment: "center" },
@@ -63,7 +74,8 @@ export default class TrombinoscopeGenerator {
 
     docDefinition.content.push({ table });
 
-    return generatePdf(docDefinition);
+    const content = await generatePdf(docDefinition);
+    return { content };
   }
 
 }

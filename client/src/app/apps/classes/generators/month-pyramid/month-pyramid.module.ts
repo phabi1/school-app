@@ -6,6 +6,10 @@ import { MatButtonModule } from '@angular/material';
 import { FormComponent } from './containers/form/form.component';
 import { MonthPyramidService } from './services/month-pyramid.service';
 import { MonthPyramidRoutingModule } from './month-pyramid.routing';
+import { StoreModule } from '@ngrx/store';
+import * as fromMonthPyramid from './reducers/month-pyramid.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { MonthPyramidEffects } from './effects/month-pyramid.effects';
 
 @NgModule({
   imports: [
@@ -13,7 +17,9 @@ import { MonthPyramidRoutingModule } from './month-pyramid.routing';
     FormsModule,
     MatButtonModule,
     FlexLayoutModule,
-    MonthPyramidRoutingModule
+    MonthPyramidRoutingModule,
+    StoreModule.forFeature('monthPyramid', fromMonthPyramid.reducer),
+    EffectsModule.forFeature([MonthPyramidEffects])
   ],
   declarations: [FormComponent],
   providers: [

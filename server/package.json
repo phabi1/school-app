@@ -12,6 +12,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "canvas": "^1.6.12",
+    "chart.js": "^2.7.2",
+    "chartjs-node": "^1.7.1",
     "commander": "^2.17.1",
     "glue": "^5.0.0",
     "good": "^8.1.1",
