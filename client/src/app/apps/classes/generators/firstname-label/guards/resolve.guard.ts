@@ -29,7 +29,7 @@ export class ResolveGuard implements CanActivate {
       tap(() => {
         let ids = [];
         if (next.queryParams.s) {
-          ids = next.queryParams.s.split('s');
+          ids = next.queryParams.s.split(',');
         }
         this._store.dispatch(new SetSelectedStudents({ ids }));
       }),
