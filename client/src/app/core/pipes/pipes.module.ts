@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FirstnamePipe } from './firstname.pipe';
 import { LastnamePipe } from './lastname.pipe';
 import { SexPipe } from './sex.pipe';
+import { FullnamePipe } from './fullname.pipe';
 
 @NgModule({
   imports: [
@@ -11,12 +12,14 @@ import { SexPipe } from './sex.pipe';
   exports: [
     SexPipe,
     FirstnamePipe,
-    LastnamePipe
+    LastnamePipe,
+    FullnamePipe
   ],
   declarations: [
     SexPipe,
     FirstnamePipe,
-    LastnamePipe
+    LastnamePipe,
+    FullnamePipe
   ]
 })
 export class PipesModule { }

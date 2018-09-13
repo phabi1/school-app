@@ -18,11 +18,11 @@
   <div fxLayout="row">
     <div fxFlex class="info">
       <div class="label">{{ 'classesStudents.details.labels.firstname' | translate }}</div>
-      <div>{{ student.firstname }}</div>
+      <div>{{ student.firstname | firstname }}</div>
     </div>
     <div fxFlex class="info">
       <div class="label">{{ 'classesStudents.details.labels.lastname' | translate }}</div>
-      <div>{{ student.lastname }}</div>
+      <div>{{ student.lastname | lastname }}</div>
     </div>
   </div>
   <div *ngIf="student.shortname" class="info">
