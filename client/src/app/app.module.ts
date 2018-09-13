@@ -21,7 +21,6 @@ import { LayoutModule } from './layout/layout.module';
 import { AppStoreModule } from './store/store.module';
 import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
 
-
 registerLocaleData(localeFr, 'fr', localeFrExtra);
 
 export function createTranslateLoaderFactory(httpClient: HttpClient): TranslateLoader {
@@ -30,7 +29,7 @@ export function createTranslateLoaderFactory(httpClient: HttpClient): TranslateL
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,

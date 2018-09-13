@@ -22,7 +22,7 @@ const routes: ServerRoute[] = [
     path: "/classes/{classId}/students/{id}",
     method: "PUT",
     options: {
-      handler: controller.getStudents,
+      handler: controller.updateStudent,
       validate: updateValidator,
     },
   },
@@ -50,6 +50,7 @@ const routes: ServerRoute[] = [
         allow: "multipart/form-data",
       },
       handler: controller.uploadStudentPicture,
+      auth: false,
     },
   },
 ];

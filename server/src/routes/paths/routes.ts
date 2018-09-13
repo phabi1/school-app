@@ -11,6 +11,7 @@ const routes: ServerRoute[] = [
         const path = (req.params as any).path;
         return h.file(Path.join(TMP_DIR, path));
       },
+      auth: false,
     },
   },
   {
@@ -21,6 +22,7 @@ const routes: ServerRoute[] = [
         const path = (req.params as any).path;
         return h.file(Path.join(PUBLIC_DIR, path));
       },
+      auth: false,
     },
   },
   {
@@ -31,6 +33,7 @@ const routes: ServerRoute[] = [
         const path = (req.params as any).path;
         return h.file(Path.join(PRIVATE_DIR, path));
       },
+      auth: false,
     },
   },
 ];

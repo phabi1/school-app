@@ -24,14 +24,14 @@ export default class MonthPyramidGenerator implements IGenerator {
           backgroundColor: "rgba(188, 220, 255, 0.5)",
           borderColor: "#bcdcff",
           borderWidth: 1,
-          data: datas.boy,
+          data: datas.sex.boy,
         },
         {
           label: "Fille",
           backgroundColor: "rgba(255, 188, 220, 0.5)",
           borderColor: "#ffbcdc",
           borderWidth: 1,
-          data: datas.girl,
+          data: datas.sex.girl,
         },
       ],
     };
@@ -43,9 +43,9 @@ export default class MonthPyramidGenerator implements IGenerator {
         scales: {
           yAxes: [{
             ticks: {
-              min: 0,
-              max: 20,
-              stepSize: 2,
+              min: datas.min,
+              max: datas.max + 1,
+              stepSize: 1,
             },
           }],
         },
@@ -86,20 +86,22 @@ export default class MonthPyramidGenerator implements IGenerator {
     ];
   }
 
-  private async getDatas(classId: string): Promise<{ [key: string]: number[] }> {
+  private async getDatas(classId: string): Promise<{ min: number, max: number, sex: { [key: string]: number[] } }> {
 
     const c = await models.class.findById(classId);
-
+    const data = {
+      boy: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      girl: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    };
+  
     if (!c) {
       throw new Error("Class not found");
     }
 
     const students = c.students;
 
-    const data = {
-      boy: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      girl: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    };
+    const min = 0;
+    let max = 0;
 
     students.forEach((student) => {
 
@@ -110,8 +112,10 @@ export default class MonthPyramidGenerator implements IGenerator {
       const month = student.birthday.getMonth();
       const sex = student.sex === "MALE" ? "boy" : "girl";
       data[sex][month]++;
+
+      max = Math.max(max, data[sex][month]);
     });
 
-    return data;
+    return { min, max, sex: data };
   }
 }

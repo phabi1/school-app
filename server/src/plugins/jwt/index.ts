@@ -11,9 +11,6 @@ export async function register(server: Server) {
 
   const validateFunc = async (decoded: any): Promise<ValidationResult> => {
 
-    // tslint:disable-next-line:no-console
-    console.log(decoded);
-
     const user = await models.user.findById(decoded.uid);
 
     if (!user) {

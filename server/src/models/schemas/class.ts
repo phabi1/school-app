@@ -55,6 +55,8 @@ const groupSchema = new Schema({
 });
 
 export const classSchema = new Schema({
+    start: { type: SchemaTypes.Date, required: true },
+    end: { type: SchemaTypes.Date, required: true },
     grades: [
         {
             type: SchemaTypes.ObjectId,

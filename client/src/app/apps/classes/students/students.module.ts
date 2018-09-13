@@ -42,6 +42,7 @@ import { NgxUploaderModule } from 'ngx-uploader';
 import { StudentPictureModule } from '../../../ui/student-picture/student-picture.module';
 import { ConfirmDeleteComponent } from './containers/confirm-delete/confirm-delete.component';
 import { SidebarComponent } from './containers/sidebar/sidebar.component';
+import { PipesModule } from '../../../core/pipes/pipes.module';
 
 export function translateLoaderFactory(httpClient: HttpClient): TranslateLoader {
   return new TranslateHttpLoader(httpClient, '/assets/i18/classes-students/', '.json');
@@ -80,6 +81,7 @@ export function translateLoaderFactory(httpClient: HttpClient): TranslateLoader 
     StoreModule.forFeature('students', reducers),
     EffectsModule.forFeature([StudentsEffects, GradeEffects]),
     NgxUploaderModule,
+    PipesModule,
   ],
   entryComponents: [
     AddComponent,

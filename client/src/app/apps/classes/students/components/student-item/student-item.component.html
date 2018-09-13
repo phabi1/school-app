@@ -4,7 +4,7 @@
     <app-student-picture class="avatar mr-16" [studentId]="item.id" size="40"></app-student-picture>
     <div>
       <div class="fullname text-truncate">{{ fullname }}</div>
-      <div>{{ item.sex }}</div>
+      <div>{{ item.sex | sex }}</div>
     </div>
   </div>
 

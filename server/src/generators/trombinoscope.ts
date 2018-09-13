@@ -4,6 +4,7 @@ import { models } from "../models";
 import { fileService } from "../services/file";
 import { generatePdf } from "../services/pdf";
 import { IGeneratorResult } from "./interface";
+import { IGradeDocument } from "../models/grade";
 
 export default class TrombinoscopeGenerator {
 
@@ -20,10 +21,25 @@ export default class TrombinoscopeGenerator {
       },
     };
 
-    const c = await models.class.findById(options.classId);
+    const c = await models.class.findById(options.classId).populate("grades");
     if (!c) {
       throw Error("Class not found");
     }
+
+    const title = ["Trombinoscope"];
+
+    // Grades
+    for (const grade of c.grades) {
+      title.push((grade as IGradeDocument).title);
+    }
+
+    // Years
+    title.push(c.start.getFullYear().toString());
+    title.push(c.end.getFullYear().toString());
+
+    docDefinition.content.push({
+      text: title.join(" - "), style: ["header"],
+    });
 
     const students = [...c.students];
 
@@ -55,7 +71,7 @@ export default class TrombinoscopeGenerator {
           image,
           fit: [100, 100],
         },
-        { text: student.firstname, alignment: "center" },
+        { text: student.firstname.toUpperCase(), alignment: "center", margins: [4, 2] },
       ]);
 
       if (index > 0 && index % maxColumns === 0) {
