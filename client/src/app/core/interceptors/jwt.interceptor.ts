@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { getToken } from 'ngrx-auth-store';
 import { catchError } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { Signout } from '../../auth/signout/actions/signout.actions';
 import { Go } from '../../store/actions/router.actions';
 
@@ -29,9 +29,9 @@ export class JwtInterceptor implements HttpInterceptor {
               return this.handle401Error(err);
 
           }
-          return Observable.throw(err);
+          return throwError(err);
         } else {
-          return Observable.throw(err);
+          return throwError(err);
         }
       })
     );
@@ -52,6 +52,6 @@ export class JwtInterceptor implements HttpInterceptor {
 
   private signout(): Observable<never> {
     this._store.dispatch(new Go({ path: ['/signout'] }));
-    return Observable.throw('');
+    return throwError('');
   }
 }

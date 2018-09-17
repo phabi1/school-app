@@ -1,0 +1,6 @@
+<div>
+  <div *ngFor="let group of _groups; let last = last">
+    <ng-container *ngIf="group._implicitContent" [ngTemplateOutlet]="group._implicitContent"></ng-container>
+    <mat-divider *ngIf="!last"></mat-divider>
+  </div>
+</div>

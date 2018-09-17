@@ -1,10 +1,11 @@
 import * as Path from "path";
 import Sharp from "sharp";
 import { models } from "../models";
+import { IGradeDocument } from "../models/grade";
+import { IStudentDocument } from "../models/student";
 import { fileService } from "../services/file";
 import { generatePdf } from "../services/pdf";
 import { IGeneratorResult } from "./interface";
-import { IGradeDocument } from "../models/grade";
 
 export default class TrombinoscopeGenerator {
 
@@ -21,7 +22,9 @@ export default class TrombinoscopeGenerator {
       },
     };
 
-    const c = await models.class.findById(options.classId).populate("grades");
+    const c = await models.class.findById(options.classId)
+      .populate("grades")
+      .populate("students.grade");
     if (!c) {
       throw Error("Class not found");
     }
@@ -42,6 +45,29 @@ export default class TrombinoscopeGenerator {
     });
 
     const students = [...c.students];
+    const studentsSorted: IStudentDocument[] = [];
+    const grades: any = {};
+    students.forEach((student) => {
+      const grade = student.grade as IGradeDocument;
+      if (!grades[grade.id]) {
+        grades[grade.id] = [];
+      }
+      grades[grade.id].push(student);
+    });
+
+    grades.keys().forEach((gradeId: string) => {
+      grades[gradeId].sort((a: IStudentDocument, b: IStudentDocument) => {
+        if (a.firstname < b.firstname) {
+          return -1;
+        } else if (a.firstname > b.firstname) {
+          return 1;
+        } else {
+          return 0;
+        }
+      }).forEach((element: IStudentDocument) => {
+        studentsSorted.push(element);
+      });
+    });
 
     const table: any = {
       widths: "*",
@@ -52,7 +78,7 @@ export default class TrombinoscopeGenerator {
 
     let row: any[] | null = [];
     let index = 1;
-    for (const student of students) {
+    for (const student of studentsSorted) {
       if (!row) {
         row = [];
       }

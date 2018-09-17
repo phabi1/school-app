@@ -1,0 +1,12 @@
+.bloc {
+  
+  padding: 24px;
+
+  .bloc-header {
+    flex: 1 0 calc(25% - 16px);
+  }
+
+  .bloc-content {
+    flex: 1 0 calc(75% - 16px);
+  }
+}

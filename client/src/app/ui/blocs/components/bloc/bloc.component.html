@@ -1,0 +1,17 @@
+<ng-template>
+  <div class="bloc" fxLayout.gt-xs="row" fxLayoutGap.gt-xs="16px">
+    <div class="bloc-header">
+      <div *ngIf="!titleTemplate" class="bloc-title mat-title">
+        {{ title }}
+      </div>
+      <ng-container *ngIf="titleTemplate" [ngTemplateOutlet]="titleTemplate.template"></ng-container>
+      <div *ngIf="!descriptionTemplate" class="bloc-description">
+        {{ description }}
+      </div>
+      <ng-container *ngIf="descriptionTemplate" [ngTemplateOutlet]="descriptionTemplate.template"></ng-container>
+    </div>
+    <div class="bloc-content">
+      <ng-content></ng-content>
+    </div>
+  </div>
+</ng-template>

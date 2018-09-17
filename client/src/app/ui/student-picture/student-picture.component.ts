@@ -12,7 +12,7 @@ export class StudentPictureComponent implements OnChanges {
   public pictureUrl: string;
   public imgStyle: any;
 
-  @Input() studentId: string;
+  @Input() url: string;
 
   @Input() size: number;
 
@@ -24,13 +24,13 @@ export class StudentPictureComponent implements OnChanges {
     if (changes['size']) {
       this.updateImageStyle();
     }
-    if (changes['studentId']) {
-      this.updateId();
+    if (changes['url']) {
+      this.updateUrl();
     }
   }
 
-  private updateId(): void {
-    this.pictureUrl = '/api/classes/students/picture/' + this.studentId;
+  private updateUrl(): void {
+    this.pictureUrl = this.url;
   }
 
   private updateImageStyle(): void {

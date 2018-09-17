@@ -34,14 +34,6 @@ const routes: ServerRoute[] = [
     },
   },
   {
-    path: "/classes/students/picture/{studentId}",
-    method: "GET",
-    options: {
-      handler: controller.getStudentPicture,
-      auth: false,
-    },
-  },
-  {
     path: "/classes/students/picture",
     method: "POST",
     options: {

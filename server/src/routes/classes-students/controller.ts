@@ -39,7 +39,7 @@ export async function updateStudent(req: Request): Promise<IStudentDocument> {
   }
 
   if (payload.picture) {
-    const newPath = fileService.move(payload.picture, "private://students/pictures");
+    const newPath = fileService.move(payload.picture, "public://students/pictures");
     payload.picture = newPath;
   }
 
@@ -60,39 +60,6 @@ export async function deleteStudent(req: Request): Promise<IStudentDocument> {
   student = await classService.deleteStudentInClass(c, student);
 
   return student;
-}
-
-export async function getStudentPicture(req: Request, h: ResponseToolkit) {
-  const params = req.params;
-  const studentId = params.studentId;
-
-  const c = await models.class.findOne({ "students._id": new Types.ObjectId(studentId) });
-  if (!c) {
-    throw Boom.notFound();
-  }
-  const student = c.students.id(studentId);
-  if (!student) {
-    throw Boom.notFound();
-  }
-
-  let picture = student.picture;
-  if (!picture) {
-    switch (student.sex) {
-      case "MALE":
-        picture = "public://students/pictures/boy.png";
-        break;
-      case "FEMALE":
-        picture = "public://students/pictures/girl.png";
-        break;
-
-      default:
-        picture = "public://students/pictures/default.png";
-        break;
-    }
-  }
-
-  const filepath = fileService.getFilePath(picture);
-  return h.file(filepath);
 }
 
 export async function uploadStudentPicture(req: Request) {

@@ -32,6 +32,8 @@ export const getSelectedStudents = createSelector(selectEntities, getSelectedStu
 
 export const getSearchText = createSelector(getState, state => state.searchText);
 
+export const getDisplayName = createSelector(getState, state => state.displayName);
+
 export const getStudentResults = createSelector(selectEntities, getSearchText, (entities, searchText) => {
   return FuseUtils.filterArrayByString(Object.keys(entities).map((id) => entities[id]), searchText);
 });

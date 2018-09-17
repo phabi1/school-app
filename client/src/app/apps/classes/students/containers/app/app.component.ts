@@ -3,12 +3,12 @@ import { FormControl } from '@angular/forms';
 import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
 import { select, Store } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged, takeUntil, first } from 'rxjs/operators';
-import { DeselectAllStudents, SelectAllStudents, SetSearchText, ConfirmDeleteStudents } from '../../actions/student.actions';
-import { Student } from '../../models/student.model';
-import { getSearchText, getSelectedStudents, getStudentResults } from '../../selectors/student.selectors';
+import { debounceTime, distinctUntilChanged, first, takeUntil } from 'rxjs/operators';
 import { Go } from '../../../../../store/actions/router.actions';
 import { getCurrentClassId } from '../../../../../store/selectors/class.selectors';
+import { ConfirmDeleteStudents, DeselectAllStudents, SelectAllStudents, SetSearchText } from '../../actions/student.actions';
+import { Student } from '../../models/student.model';
+import { getSearchText, getSelectedStudents, getStudentResults } from '../../selectors/student.selectors';
 
 @Component({
   selector: 'app-classes-students-app',

@@ -27,7 +27,7 @@ export class NavigationUpdatorService {
   }
 
   public registerAll() {
-    this.register('classe', (item) => {
+    this.register('room', (item) => {
       return this._store.pipe(
         select(getCurrentClassId)
       ).subscribe((currentClassId) => {

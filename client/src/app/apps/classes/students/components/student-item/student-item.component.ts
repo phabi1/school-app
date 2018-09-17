@@ -12,15 +12,16 @@ export class StudentItemComponent {
   item: Student;
 
   @Input()
+  displayName: string;
+
+  @Input()
   selected: boolean;
 
   @Output() selectedChange = new EventEmitter<void>();
 
-  get fullname() {
-    return this.item.firstname + ' ' + this.item.lastname;
+  constructor() {
+    this.displayName = 'firstname_lastname';
   }
-
-  constructor() { }
 
   onSelectChange(): void {
     this.selectedChange.emit();

@@ -1,5 +1,5 @@
 import { Document, Model, model, Types } from "mongoose";
-import { IGradeDocument, LevelModel } from "./grade";
+import { IGradeDocument} from "./grade";
 import { classSchema } from "./schemas/class";
 import { ISchoolDocument } from "./school";
 import { IStudentDocument } from "./student";

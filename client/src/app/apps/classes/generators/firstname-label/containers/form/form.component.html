@@ -43,7 +43,7 @@
           </mat-chip-list>
           <div class="student-list mb-8">
             <div class="student-item" *ngFor="let ctrl of studentControls.controls; let index = index">
-              <mat-checkbox [formControl]="ctrl">{{ students[index].firstname + ' ' + students[index].lastname }}</mat-checkbox>
+              <mat-checkbox [formControl]="ctrl">{{ students[index] | fullname }}</mat-checkbox>
             </div>
           </div>
           <div class="mt-16">

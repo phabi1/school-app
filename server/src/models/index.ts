@@ -1,11 +1,12 @@
 import { ClassModel } from "./class";
-import { LevelModel } from "./grade";
+import { GradeModel } from "./grade";
 import { schoolModel } from "./school";
 import { UserModel } from "./user";
 
 export const models = {
+  grades: GradeModel,
   school: schoolModel,
   class: ClassModel,
-  level: LevelModel,
+  level: GradeModel,
   user: UserModel,
 };

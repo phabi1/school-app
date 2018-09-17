@@ -13,7 +13,7 @@
 </div>
 <div class="p-24" fxFlex>
   <div class="mb-24" fxLayout="row" fxLayoutAlign="center start">
-    <app-student-picture [studentId]="student.id" size="150"></app-student-picture>
+    <app-student-picture [url]="student.picture | imaginator:'avatar_medium'" size="150"></app-student-picture>
   </div>
   <div fxLayout="row">
     <div fxFlex class="info">

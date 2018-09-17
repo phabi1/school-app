@@ -18,6 +18,9 @@ export class StudentListComponent implements OnInit {
   @Input()
   currentItem: Student;
 
+  @Input()
+  displayName: string;
+
   @Output() itemClicked = new EventEmitter<Student>();
 
   @Output() itemSelected = new EventEmitter<Student>();

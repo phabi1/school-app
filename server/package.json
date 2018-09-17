@@ -27,6 +27,7 @@
     "inert": "^5.1.0",
     "jsonwebtoken": "^8.3.0",
     "mongoose": "^5.2.9",
+    "mongoose-tree": "^0.2.2",
     "nconf": "^0.10.0",
     "njwt": "^0.4.0",
     "pdfmake": "^0.1.38",

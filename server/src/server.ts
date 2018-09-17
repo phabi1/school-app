@@ -56,6 +56,7 @@ const manifest: Glue.Manifest = {
         },
       },
       "./plugins/files",
+      "./plugins/imaginator",
     ],
   },
 };

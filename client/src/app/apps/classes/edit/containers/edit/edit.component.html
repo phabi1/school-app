@@ -1,3 +1,18 @@
-<p>
-  edit works!
-</p>
+<div class="page-layout carded fullwidth">
+  <div class="top-bg accent"></div>
+  <div class="center">
+    <div class="header accent py-24" fxLayout="row" fxLayoutAlign="start center">
+      <h1 class="m-0">{{ 'classEdit.title' | translate }}</h1>
+    </div>
+    <div class="content-card">
+      <div class="toolbar"></div>
+      <div class="content">
+        <app-bloc-group>
+          <app-bloc title="Grades">
+            <app-classes-edit-grades></app-classes-edit-grades>
+          </app-bloc>
+        </app-bloc-group>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,5 +1,8 @@
 import { Schema, SchemaTypes } from "mongoose";
 
+// tslint:disable-next-line:no-var-requires
+const MongooseTree = require("mongoose-tree");
+
 export const gradeSchema = new Schema({
   title: {
     type: SchemaTypes.String,
@@ -10,4 +13,10 @@ export const gradeSchema = new Schema({
     required: true,
     unique: true,
   },
+  weight: {
+    type: SchemaTypes.Number,
+    default: 0,
+  },
 }, { timestamps: true, toJSON: { virtuals: true } });
+
+gradeSchema.plugin(MongooseTree);

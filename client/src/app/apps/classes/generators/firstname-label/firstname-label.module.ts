@@ -6,6 +6,7 @@ import { MatButtonModule, MatCheckboxModule, MatChipsModule, MatFormFieldModule,
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { TranslateModule } from '@ngx-translate/core';
+import { PipesModule } from '../../../../core/pipes/pipes.module';
 import { FormComponent } from './containers/form/form.component';
 import { FormEffects } from './effects/form.effects';
 import { GradeEffects } from './effects/grade.effects';
@@ -29,6 +30,7 @@ import { FirstnameLabelService } from './services/firstname-label.service';
     MatRadioModule,
     MatChipsModule,
     TranslateModule,
+    PipesModule,
     FirstnameLabelRoutingModule,
     StoreModule.forFeature('firstnameLabel', fromFirstnameLabel.reducers),
     EffectsModule.forFeature([FormEffects, LayoutEffects, StudentEffects, GradeEffects]),

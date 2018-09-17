@@ -10,6 +10,9 @@ const fonts = {
   ScriptCOL: {
     normal: `${ASSETS_DIR}/fonts/SCRIPTCO.TTF`,
   },
+  AcceseditionsscriptOStandard: {
+    normal: `${ASSETS_DIR}/fonts/access/AcceseditionsscriptO-Standard.otf`,
+  },
 };
 
 export = fonts;

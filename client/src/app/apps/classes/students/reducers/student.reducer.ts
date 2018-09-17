@@ -8,6 +8,7 @@ export interface State extends EntityState<Student> {
   selectedStudentIds: string[];
   currentStudentId?: string;
   searchText: string;
+  displayName: string;
 }
 
 export const adapter: EntityAdapter<Student> = createEntityAdapter<Student>();
@@ -17,6 +18,7 @@ export const initialState: State = adapter.getInitialState({
   loaded: false,
   selectedStudentIds: [],
   searchText: '',
+  displayName: 'firstname_lastname'
 });
 
 export function reducer(
